@@ -9,7 +9,7 @@ import {
 import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('ministries')
-class Ministries {
+class Ministry {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -40,4 +40,4 @@ class Ministries {
   member: User;
 }
 
-export default Ministries;
+export default Ministry;

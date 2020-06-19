@@ -1,6 +1,8 @@
-import { getRepository } from 'typeorm';
+import { injectable, inject } from 'tsyringe';
+
 import AppError from '@shared/errors/AppError';
-import Ministries from '@modules/ministries/infra/typeorm/entities/Ministries';
+import Ministry from '@modules/ministries/infra/typeorm/entities/Ministry';
+import IMinistrieRepository from '../repositories/IMinistriesRepository';
 
 interface IRequest {
   name: string;
@@ -11,7 +13,13 @@ interface IRequest {
   members_id?: string;
 }
 
+@injectable()
 class CreateMinistriesService {
+  constructor(
+    @inject('MinistriesRepositoy')
+    private ministriesRepository: IMinistrieRepository,
+  ) {}
+
   public async execute({
     name,
     local,
@@ -19,22 +27,16 @@ class CreateMinistriesService {
     hour,
     leaders_id,
     members_id,
-  }: IRequest): Promise<Ministries> {
-    const ministriesRepository = getRepository(Ministries);
-
-    if (!name) {
-      throw new AppError('Name is mandatory.');
-    }
-
-    const checkMinistriesExists = await ministriesRepository.findOne({
-      where: { name },
-    });
+  }: IRequest): Promise<Ministry> {
+    const checkMinistriesExists = await this.ministriesRepository.findByName(
+      name,
+    );
 
     if (checkMinistriesExists) {
       throw new AppError('Ministries already used.');
     }
 
-    const ministries = ministriesRepository.create({
+    const ministries = await this.ministriesRepository.create({
       name,
       local,
       date,
@@ -42,8 +44,6 @@ class CreateMinistriesService {
       leaders_id,
       members_id,
     });
-
-    await ministriesRepository.save(ministries);
 
     return ministries;
   }
