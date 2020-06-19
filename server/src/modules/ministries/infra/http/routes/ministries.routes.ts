@@ -1,10 +1,7 @@
 import { Router } from 'express';
-import CreateMinistriesService from '../services/CreateMinistriesService';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import CreateMinistriesService from '@modules/ministries/services/CreateMinistriesService';
 
 const ministriesRouter = Router();
-
-ministriesRouter.use(ensureAuthenticated);
 
 ministriesRouter.post('/', async (request, response) => {
   const { name } = request.body;

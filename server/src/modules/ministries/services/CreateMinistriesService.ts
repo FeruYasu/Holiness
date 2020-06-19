@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
-import Ministries from '../models/Ministries';
-
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
+import Ministries from '@modules/ministries/infra/typeorm/entities/Ministries';
 
 interface IRequest {
   name: string;
