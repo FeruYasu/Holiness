@@ -1,16 +1,10 @@
 import { Router } from 'express';
-import CreateMinistriesService from '@modules/ministries/services/CreateMinistriesService';
+import MinistriesController from '../controllers/MinistriesController';
 
 const ministriesRouter = Router();
+const ministriesController = new MinistriesController();
 
-ministriesRouter.post('/', async (request, response) => {
-  const { name } = request.body;
-
-  const createMinistry = new CreateMinistriesService();
-
-  const ministry = await createMinistry.execute({ name });
-
-  return response.json(ministry);
-});
+ministriesRouter.post('/', ministriesController.create);
+ministriesRouter.put('/', ministriesController.update);
 
 export default ministriesRouter;

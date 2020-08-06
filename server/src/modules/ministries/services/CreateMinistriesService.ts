@@ -2,22 +2,22 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import Ministry from '@modules/ministries/infra/typeorm/entities/Ministry';
-import IMinistrieRepository from '../repositories/IMinistriesRepository';
+import IMinistriesRepository from '../repositories/IMinistriesRepository';
 
 interface IRequest {
   name: string;
+  leaders_id: string;
   local?: string;
   date?: Date;
   hour?: Date;
-  leaders_id?: string;
   members_id?: string;
 }
 
 @injectable()
 class CreateMinistriesService {
   constructor(
-    @inject('MinistriesRepositoy')
-    private ministriesRepository: IMinistrieRepository,
+    @inject('MinistriesRepository')
+    private ministriesRepository: IMinistriesRepository,
   ) {}
 
   public async execute({

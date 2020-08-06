@@ -5,7 +5,7 @@ export default class CreateNotification1591132004959
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'notifications',
+        name: 'announcements',
         columns: [
           {
             name: 'id',
@@ -57,6 +57,6 @@ export default class CreateNotification1591132004959
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('notifications');
+    await queryRunner.dropTable('announcements');
   }
 }

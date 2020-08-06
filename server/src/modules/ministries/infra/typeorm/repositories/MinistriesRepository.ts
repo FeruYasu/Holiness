@@ -12,10 +12,8 @@ class MinistriesRepository implements IMinistriesRepository {
     this.ormRepository = getRepository(Ministry);
   }
 
-  public async create({
-    name,
-  }: ICreateMinistryDTO): Promise<Ministry> {
-    const user = this.ormRepository.create({  name });
+  public async create({ name }: ICreateMinistryDTO): Promise<Ministry> {
+    const user = this.ormRepository.create({ name });
 
     await this.ormRepository.save(user);
 
@@ -27,12 +25,10 @@ class MinistriesRepository implements IMinistriesRepository {
   }
 
   public async findByName(name: string): Promise<Ministry | undefined> {
-    const user = this.ormRepository.findOne({ where: name });
+    const user = this.ormRepository.findOne({ where: { name } });
 
     return user;
   }
-
-
 }
 
 export default MinistriesRepository;
