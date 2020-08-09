@@ -10,6 +10,7 @@ import uploadConfig from '@config/upload';
 
 import { Exclude, Expose } from 'class-transformer';
 import MinistryLeaders from '@modules/ministries/infra/typeorm/entities/MinistryLeaders';
+import MinistryMembers from '@modules/ministries/infra/typeorm/entities/MinistryMembers';
 
 @Entity('users')
 class User {
@@ -37,6 +38,15 @@ class User {
     },
   )
   ministries_leaders: MinistryLeaders[];
+
+  @OneToMany(
+    () => MinistryMembers,
+    ministriesmembers => ministriesmembers.leader,
+    {
+      cascade: true,
+    },
+  )
+  ministries_members: MinistryMembers[];
 
   @CreateDateColumn()
   @Exclude()

@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 import MinistryLeaders from '@modules/ministries/infra/typeorm/entities/MinistryLeaders';
 import { Exclude } from 'class-transformer';
+import MinistryMembers from './MinistryMembers';
 
 @Entity('ministries')
 class Ministry {
@@ -29,6 +30,15 @@ class Ministry {
     },
   )
   ministries_leaders: MinistryLeaders[];
+
+  @OneToMany(
+    () => MinistryMembers,
+    menistriesmembers => menistriesmembers.ministry,
+    {
+      cascade: true,
+    },
+  )
+  ministries_members: MinistryMembers[];
 }
 
 export default Ministry;

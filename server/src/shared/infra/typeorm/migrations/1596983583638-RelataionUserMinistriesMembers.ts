@@ -5,12 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class RelationUserMinistriesLeaders1596971904635
+export default class RelataionUserMinistriesMembers1596983583638
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'ministries_leaders',
+        name: 'ministries_members',
         columns: [
           {
             name: 'id',
@@ -44,7 +44,7 @@ export default class RelationUserMinistriesLeaders1596971904635
     );
 
     await queryRunner.createForeignKey(
-      'ministries_leaders',
+      'ministries_members',
       new TableForeignKey({
         name: 'userIdForeignKey',
         columnNames: ['user_id'],
@@ -56,7 +56,7 @@ export default class RelationUserMinistriesLeaders1596971904635
     );
 
     await queryRunner.createForeignKey(
-      'ministries_leaders',
+      'ministries_members',
       new TableForeignKey({
         name: 'ministryIdForeignKey',
         columnNames: ['ministry_id'],
@@ -69,8 +69,8 @@ export default class RelationUserMinistriesLeaders1596971904635
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('ministries_leaders', 'userIdForeignKey');
-    await queryRunner.dropForeignKey('ministries_leaders', 'ministry_id');
-    await queryRunner.dropTable('ministries_leaders');
+    await queryRunner.dropForeignKey('ministries_members', 'userIdForeignKey');
+    await queryRunner.dropForeignKey('ministries_members', 'ministry_id');
+    await queryRunner.dropTable('ministries_members');
   }
 }
