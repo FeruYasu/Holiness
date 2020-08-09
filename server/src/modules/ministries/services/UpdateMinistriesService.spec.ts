@@ -1,8 +1,5 @@
-import AppError from '@shared/errors/AppError';
-
 import FakeMinistriesRepository from '../repositories/fakes/FakeMinistriesRepository';
 import UpdateMinistriesService from './UpdateMinistriesService';
-import CreateMinistriesService from './CreateMinistriesService';
 
 let fakeMinistriesRepository: FakeMinistriesRepository;
 let updateMinistries: UpdateMinistriesService;

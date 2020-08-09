@@ -19,18 +19,27 @@ class MinistriessRepository implements IMinistriessRepository {
   }
 
   public async save(ministry: Ministry): Promise<Ministry> {
-    const findIndex = this.ministries.findIndex(findMinistry => findMinistry.id === ministry.id);
+    const findIndex = this.ministries.findIndex(
+      findMinistry => findMinistry.id === ministry.id,
+    );
 
     this.ministries[findIndex] = ministry;
     return ministry;
   }
 
   public async findByName(name: string): Promise<Ministry | undefined> {
-    const findMinistries = await this.ministries.find(user => user.name === name);
+    const findMinistries = await this.ministries.find(
+      user => user.name === name,
+    );
 
     return findMinistries;
   }
 
+  public async listAll(): Promise<Ministry[] | undefined> {
+    const ministriesList = await this.ministries;
+
+    return ministriesList;
+  }
 }
 
 export default MinistriessRepository;

@@ -12,22 +12,42 @@ class MinistriesRepository implements IMinistriesRepository {
     this.ormRepository = getRepository(Ministry);
   }
 
-  public async create({ name }: ICreateMinistryDTO): Promise<Ministry> {
-    const user = this.ormRepository.create({ name });
+  public async create({
+    name,
+    leaders,
+  }: ICreateMinistryDTO): Promise<Ministry> {
+    const ministry = this.ormRepository.create({
+      name,
+      ministries_leaders: leaders,
+    });
 
-    await this.ormRepository.save(user);
+    await this.ormRepository.save(ministry);
 
-    return user;
+    return ministry;
   }
 
-  public async save(user: Ministry): Promise<Ministry> {
-    return this.ormRepository.save(user);
+  public async save(ministry: Ministry): Promise<Ministry> {
+    return this.ormRepository.save(ministry);
   }
 
   public async findByName(name: string): Promise<Ministry | undefined> {
-    const user = this.ormRepository.findOne({ where: { name } });
+    const ministry = this.ormRepository.findOne({ where: { name } });
 
-    return user;
+    return ministry;
+  }
+
+  public async listAll(): Promise<Ministry[] | undefined> {
+    const ministriesList = this.ormRepository.find({
+      relations: ['ministries_leaders', 'ministries_leaders.leader'],
+    });
+
+    return ministriesList;
+  }
+
+  public async findById(id: string): Promise<Ministry | undefined> {
+    const ministry = this.ormRepository.findOne({ where: { id } });
+
+    return ministry;
   }
 }
 

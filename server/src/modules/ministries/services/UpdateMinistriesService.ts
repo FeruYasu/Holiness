@@ -1,17 +1,18 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
+import User from '@modules/users/infra/typeorm/entities/User';
 import IMinistriesRepository from '../repositories/IMinistriesRepository';
 
 import Ministry from '../infra/typeorm/entities/Ministry';
 
 interface IRequest {
   name: string;
-  leaders_id?: string;
   local?: string;
   date?: Date;
   hour?: Date;
-  members_id?: string;
+  leaders_id?: User[];
+  members_id?: string[];
 }
 
 @injectable()
@@ -48,11 +49,7 @@ class UpdateMinistriesService {
     }
 
     if (leaders_id) {
-      ministry.leaders_id = leaders_id;
-    }
-
-    if (members_id) {
-      ministry.members_id = members_id;
+      ministry.leaders = leaders_id;
     }
 
     return this.ministriesRepository.save(ministry);

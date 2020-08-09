@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
+import IMinistrieRepository from '@modules/ministries/repositories/IMinistriesRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 
@@ -12,6 +13,7 @@ interface IRequest {
   email: string;
   old_password?: string;
   password?: string;
+  leaders_id?: string[];
 }
 
 @injectable()
@@ -19,6 +21,9 @@ class UpdateProfileService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('MinistriesRepository')
+    private ministriesRepository: IMinistrieRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,

@@ -1,16 +1,12 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-import User from '@modules/users/infra/typeorm/entities/User';
+import MinistryLeaders from '@modules/ministries/infra/typeorm/entities/MinistryLeaders';
+import { Exclude } from 'class-transformer';
 
 @Entity('ministries')
 class Ministry {
   @PrimaryGeneratedColumn('uuid')
+  @Exclude()
   id: string;
 
   @Column()
@@ -25,19 +21,14 @@ class Ministry {
   @Column()
   hour: Date;
 
-  @Column()
-  leaders_id: string;
-
-  @ManyToMany(() => User)
-  @JoinColumn({ name: 'leaders_id' })
-  leader: User;
-
-  @Column()
-  members_id: string;
-
-  @ManyToMany(() => User)
-  @JoinColumn({ name: 'members_id' })
-  member: User;
+  @OneToMany(
+    () => MinistryLeaders,
+    ministriesleaders => ministriesleaders.ministry,
+    {
+      cascade: true,
+    },
+  )
+  ministries_leaders: MinistryLeaders[];
 }
 
 export default Ministry;

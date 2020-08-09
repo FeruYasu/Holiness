@@ -40,6 +40,14 @@ class UsersRepository implements IUsersRepository {
 
     return findUser;
   }
+
+  public async findByIds(ids: string[]): Promise<User[] | undefined> {
+    const findUsers = await this.users.filter(user => {
+      return ids.includes(user.id);
+    });
+
+    return findUsers;
+  }
 }
 
 export default UsersRepository;

@@ -1,9 +1,4 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export default class CreateMinistries1591131999398
   implements MigrationInterface {
@@ -38,48 +33,12 @@ export default class CreateMinistries1591131999398
             type: 'date',
             isNullable: true,
           },
-          {
-            name: 'leaders_id',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
-            name: 'members_id',
-            type: 'uuid',
-            isNullable: true,
-          },
         ],
-      }),
-    );
-
-    await queryRunner.createForeignKey(
-      'ministries',
-      new TableForeignKey({
-        name: 'MinistriesLeaders',
-        columnNames: ['leaders_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'users',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
-
-    await queryRunner.createForeignKey(
-      'ministries',
-      new TableForeignKey({
-        name: 'MinistriesMembers',
-        columnNames: ['members_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'users',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('ministries', 'MinistriesMembers');
-    await queryRunner.dropForeignKey('ministries', 'MinistriesLeaders');
     await queryRunner.dropTable('ministries');
   }
 }
