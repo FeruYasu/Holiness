@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import IMinistriesRepository from '@modules/ministries/repositories/IMinistriesRepository';
+
 import ICreateMinistryDTO from '@modules/ministries/dtos/ICreateMinistryDTO';
 
 import Ministry from '../entities/Ministry';
@@ -45,7 +46,10 @@ class MinistriesRepository implements IMinistriesRepository {
   }
 
   public async findById(id: string): Promise<Ministry | undefined> {
-    const ministry = this.ormRepository.findOne({ where: { id } });
+    const ministry = this.ormRepository.findOne({
+      where: { id },
+      relations: ['ministries_leaders'],
+    });
 
     return ministry;
   }

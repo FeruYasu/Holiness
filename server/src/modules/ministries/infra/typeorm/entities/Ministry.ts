@@ -29,7 +29,7 @@ class Ministry {
       cascade: true,
     },
   )
-  ministries_leaders: MinistryLeaders[];
+  ministries_leaders: Partial<MinistryLeaders>[];
 
   @OneToMany(
     () => MinistryMembers,

@@ -24,11 +24,9 @@ class UpdateMinistriesService {
 
   public async execute({
     name,
-    leaders_id,
     local,
     date,
     hour,
-    members_id,
   }: IRequest): Promise<Ministry> {
     const ministry = await this.ministriesRepository.findByName(name);
 
@@ -46,10 +44,6 @@ class UpdateMinistriesService {
 
     if (hour) {
       ministry.hour = hour;
-    }
-
-    if (leaders_id) {
-      ministry.leaders = leaders_id;
     }
 
     return this.ministriesRepository.save(ministry);

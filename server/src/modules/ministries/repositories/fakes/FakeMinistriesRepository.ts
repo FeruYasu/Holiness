@@ -40,6 +40,12 @@ class MinistriessRepository implements IMinistriessRepository {
 
     return ministriesList;
   }
+
+  public async findById(id: string): Promise<Ministry | undefined> {
+    const findMinistries = await this.ministries.find(user => user.id === id);
+
+    return findMinistries;
+  }
 }
 
 export default MinistriessRepository;

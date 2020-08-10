@@ -15,7 +15,7 @@ describe('CreateMinistries', () => {
   it('should be able to create a new Ministry', async () => {
     const ministry = await createMinistry.execute({
       name: 'Karis',
-      leaders_id: 'leader-123',
+      leaders: [{ user_id: '123' }],
     });
 
     expect(ministry).toHaveProperty('id');
@@ -24,13 +24,13 @@ describe('CreateMinistries', () => {
   it('should not be able to create a new Minitry with same name', async () => {
     await createMinistry.execute({
       name: 'Karis',
-      leaders_id: 'leader-123',
+      leaders: [{ user_id: '123' }],
     });
 
     expect(
       createMinistry.execute({
         name: 'Karis',
-        leaders_id: 'leader-0',
+        leaders: [{ user_id: '123' }],
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

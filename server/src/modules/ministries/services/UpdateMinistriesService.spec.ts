@@ -14,7 +14,7 @@ describe('UpdateMinistries', () => {
   it('should be able to update the Ministry', async () => {
     await fakeMinistriesRepository.create({
       name: 'Karis',
-      leaders_id: 'leader-123',
+      leaders: [{ user_id: '123' }],
     });
 
     const updatedMinistry = await updateMinistries.execute({

@@ -22,9 +22,6 @@ class UpdateProfileService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('MinistriesRepository')
-    private ministriesRepository: IMinistrieRepository,
-
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}

@@ -1,46 +1,35 @@
 import { injectable, inject } from 'tsyringe';
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
-import User from '@modules/users/infra/typeorm/entities/User';
+import MinistryLeaders from '@modules/ministries/infra/typeorm/entities/MinistryLeaders';
 import IMinistrieRepository from '../repositories/IMinistriesRepository';
-import ministriesRouter from '../infra/http/routes/ministries.routes';
+import Ministry from '../infra/typeorm/entities/Ministry';
 
 interface IRequest {
   ministryId: string;
-  leadersId: string[];
+  leaders: Partial<MinistryLeaders>[];
 }
 
 @injectable()
 class UpdateMinistriesLeadersService {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
-
     @inject('MinistriesRepository')
     private ministriesRepository: IMinistrieRepository,
   ) {}
 
   public async execute({
     ministryId,
-    leadersId,
-  }: IRequest): Promise<User[] | undefined> {
-    const usersID = await this.usersRepository.findByIds(leadersId);
+    leaders,
+  }: IRequest): Promise<Ministry | undefined> {
     const ministry = await this.ministriesRepository.findById(ministryId);
 
-    if (usersID && ministry) {
-      // for (let index = 0; index < usersID.length; index += 1) {
-      //   ministry.ministries_leaders = [{ user_id: 'oi'. mini }];
-      //   ministry.ministries_leaders = { user_id: leadersId[index] };
-      // }
-
-      ministry.ministries_leaders = [{ user_id: '1' }];
-
+    if (ministry) {
+      ministry.ministries_leaders = leaders;
       this.ministriesRepository.save(ministry);
     } else {
       throw new AppError('User ID or Ministry not found');
     }
 
-    return usersID;
+    return ministry;
   }
 }
 
