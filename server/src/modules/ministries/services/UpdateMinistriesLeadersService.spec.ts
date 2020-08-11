@@ -23,11 +23,9 @@ describe('Update Ministries Leaders', () => {
       leaders: [{ user_id: 'new1' }, { user_id: 'new2' }],
     });
 
-    if (updatedMinistryLeaders) {
-      expect(updatedMinistryLeaders.ministries_leaders).toMatchObject([
-        { user_id: 'new1' },
-        { user_id: 'new2' },
-      ]);
-    }
+    await expect(updatedMinistryLeaders?.ministries_leaders).toMatchObject([
+      { user_id: 'new1' },
+      { user_id: 'new2' },
+    ]);
   });
 });

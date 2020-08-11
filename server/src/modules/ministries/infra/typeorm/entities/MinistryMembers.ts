@@ -30,7 +30,7 @@ class MinistryMembers {
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  leader: User;
+  member: User;
 
   @Column()
   @Exclude()

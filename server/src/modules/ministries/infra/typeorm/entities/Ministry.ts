@@ -38,7 +38,7 @@ class Ministry {
       cascade: true,
     },
   )
-  ministries_members: MinistryMembers[];
+  ministries_members: Partial<MinistryMembers>[];
 }
 
 export default Ministry;
