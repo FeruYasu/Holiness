@@ -16,5 +16,6 @@ ministriesRouter.put('/', ministriesController.update);
 
 ministriesRouter.put('/leaders/:id', ministriesLeadersController.update);
 ministriesRouter.post('/members/:id', ministriesMembersController.create);
+ministriesRouter.delete('/members/:id', ministriesMembersController.destroy);
 
 export default ministriesRouter;

@@ -1,5 +1,7 @@
 import { container } from 'tsyringe';
-import UpdateMinistriesMembersService from '@modules/ministries/services/AddMembersToMinistriesService';
+import AddMembersToMinistriesService from '@modules/ministries/services/AddMembersToMinistriesService';
+import DeleteMembersToMinistriesService from '@modules/ministries/services/DeleteMembersOfMinistriesService';
+
 import { Request, Response } from 'express';
 
 export default class MinistriesMembersController {
@@ -7,9 +9,26 @@ export default class MinistriesMembersController {
     const { members } = request.body;
     const { id } = request.params;
 
-    const UpdateMinistriy = container.resolve(UpdateMinistriesMembersService);
+    const addMembers = container.resolve(AddMembersToMinistriesService);
 
-    const ministry = await UpdateMinistriy.execute({
+    const ministry = await addMembers.execute({
+      ministryId: id,
+      members,
+    });
+
+    return response.json(ministry);
+  }
+
+  public async destroy(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { members } = request.body;
+    const { id } = request.params;
+
+    const deleteMembers = container.resolve(DeleteMembersToMinistriesService);
+
+    const ministry = await deleteMembers.execute({
       ministryId: id,
       members,
     });

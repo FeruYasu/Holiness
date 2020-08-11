@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 @injectable()
-class AddMembersToMinistriesService {
+class DeleteMembersOfMinistriesService {
   constructor(
     @inject('MinistriesRepository')
     private ministriesRepository: IMinistrieRepository,
@@ -24,12 +24,12 @@ class AddMembersToMinistriesService {
 
     if (ministry) {
       members.forEach(memberId => {
-        const membercheck = ministry.ministries_members.find(
+        const membercheck = ministry.ministries_members.findIndex(
           member => member.user_id === memberId.user_id,
         );
 
-        if (!membercheck) {
-          ministry.ministries_members.push(memberId);
+        if (membercheck !== -1) {
+          ministry.ministries_members.splice(membercheck, 1);
         }
       });
 
@@ -42,4 +42,4 @@ class AddMembersToMinistriesService {
   }
 }
 
-export default AddMembersToMinistriesService;
+export default DeleteMembersOfMinistriesService;
