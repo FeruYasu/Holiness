@@ -1,14 +1,34 @@
-import React, { useRef } from 'react';
-import { Image } from 'react-native';
-
+import React, { useRef, useCallback } from 'react';
+import { TextInput, Alert } from 'react-native';
 import { Form } from '@unform/mobile';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import { FormHandles } from '@unform/core';
-import { Container, FormContainer } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import * as Yup from 'yup';
+import getValidationErrors from '../../utils/getValidationErrors';
+
+import { useAuth } from '../../hooks/auth';
+
+import {
+  Container,
+  FormContainer,
+  LogoImage,
+  GoogleButton,
+  GoogleButtonText,
+  OrText,
+  SignInButton,
+  ButtonsContainer,
+  NewAccountContainer,
+  NewAccountText,
+  CreateAccountButton,
+  CreateAccountButtonText,
+} from './styles';
 
 import logo from '../../assets/logo.png';
 
 import Input from '../../components/Input';
-import Button from '../../components/Button';
 
 interface SignInFormData {
   email: string;
@@ -18,27 +38,95 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
+  const navigation = useNavigation();
+
+  const { signIn } = useAuth();
+
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
+          password: Yup.string().required('Senha obrigatória'),
+        });
+
+        await schema.validate(data, { abortEarly: false });
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
+        Alert.alert(
+          'Erro na autenticação',
+          'Ocorreu um erro ao fazer login, cheque as credencias.'
+        );
+      }
+    },
+    [signIn]
+  );
 
   return (
     <Container>
-      <Image source={logo} />
       <FormContainer>
-        <Form>
-          <Input
-            autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            name="Email"
-          />
-          <Input
-            autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            name="Password"
-          />
+        <LogoImage source={logo} />
 
-          <Button>Entrar</Button>
+        <Form ref={formRef} onSubmit={handleSignIn}>
+          <Input
+            autoCorrect={false}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            name="email"
+            placeholder="E-mail"
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              passwordInputRef.current.focus();
+            }}
+          />
+          <Input
+            ref={passwordInputRef}
+            secureTextEntry
+            autoCorrect={false}
+            autoCapitalize="none"
+            name="password"
+          />
         </Form>
+
+        <ButtonsContainer>
+          <SignInButton
+            onPress={() => {
+              formRef.current?.submitForm();
+            }}
+          >
+            Entrar
+          </SignInButton>
+          <OrText>ou</OrText>
+          <GoogleButton>
+            <Icon name="logo-google" size={26} color="#fff" />
+            <GoogleButtonText>Continuar com Google</GoogleButtonText>
+          </GoogleButton>
+        </ButtonsContainer>
+
+        <NewAccountContainer>
+          <NewAccountText>Não tem uma conta ainda?</NewAccountText>
+          <CreateAccountButton
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
+          >
+            <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
+          </CreateAccountButton>
+        </NewAccountContainer>
       </FormContainer>
     </Container>
   );

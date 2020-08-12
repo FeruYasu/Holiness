@@ -7,13 +7,12 @@ interface ContainerProps {
 }
 
 export const Container = styled.View<ContainerProps>`
-  width: 100%;
+  width: 93%;
   height: 70px;
   background: #f9f9f9;
-  margin-bottom: 16px;
-  border-bottom-width: 1px;
+  margin: auto;
+  border-bottom-width: 0.8px;
   border-bottom-color: #939393;
-
   flex-direction: row;
   align-items: flex-end;
 
@@ -21,6 +20,7 @@ export const Container = styled.View<ContainerProps>`
     props.isFocused &&
     css`
       border-bottom-color: #18307a;
+      border-bottom-width: 1px;
     `}
 
   ${(props) =>
