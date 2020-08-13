@@ -23,6 +23,11 @@ export const LogoImage = styled.Image`
   margin-bottom: 40px;
 `;
 
+export const ForgotText = styled.Text`
+  font-size: 14px;
+  color: red;
+`;
+
 export const ButtonsContainer = styled.View`
   flex-direction: column;
   justify-content: center;

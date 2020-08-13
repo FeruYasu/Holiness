@@ -5,12 +5,14 @@ import React, {
   forwardRef,
   useState,
   useCallback,
+  ReactNode,
 } from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
 
 import {
   Container,
+  HeaderContainer,
   PlaceHolderContainer,
   TextInput,
   InputText,
@@ -18,6 +20,7 @@ import {
 
 interface InputProps extends TextInputProps {
   name: string;
+  inputRight?: ReactNode;
 }
 
 interface InputValueReference {
@@ -29,7 +32,7 @@ interface InputRef {
 }
 
 const Input: React.RefForwardingComponent<InputRef, InputProps> = (
-  { name, ...rest },
+  { name, placeholder, inputRight, ...rest },
   ref
 ) => {
   const inputElementRef = useRef<any>(null);
@@ -74,9 +77,13 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   return (
     <Container isFocused={isFocused} isFilled={isFilled}>
       <PlaceHolderContainer>
-        <InputText isFocused={isFocused} isFilled={isFilled}>
-          {name}
-        </InputText>
+        <HeaderContainer>
+          <InputText isFocused={isFocused} isFilled={isFilled}>
+            {placeholder}
+          </InputText>
+          {inputRight}
+        </HeaderContainer>
+
         <TextInput
           ref={inputElementRef}
           keyboardAppearance="dark"

@@ -30,6 +30,11 @@ export const Container = styled.View<ContainerProps>`
     `}
 `;
 
+export const HeaderContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const PlaceHolderContainer = styled.View`
   width: 100%;
   flex-direction: column;

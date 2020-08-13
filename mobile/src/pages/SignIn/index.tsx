@@ -1,6 +1,9 @@
+/* eslint-disable prettier/prettier */
 import React, { useRef, useCallback } from 'react';
 import { TextInput, Alert } from 'react-native';
 import { Form } from '@unform/mobile';
+
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -17,6 +20,7 @@ import {
   LogoImage,
   GoogleButton,
   GoogleButtonText,
+  ForgotText,
   OrText,
   SignInButton,
   ButtonsContainer,
@@ -76,6 +80,8 @@ const SignIn: React.FC = () => {
     [signIn]
   );
 
+  const handleForgot = useCallback(() => {}, []);
+
   return (
     <Container>
       <FormContainer>
@@ -87,7 +93,7 @@ const SignIn: React.FC = () => {
             autoCapitalize="none"
             keyboardType="email-address"
             name="email"
-            placeholder="E-mail"
+            placeholder="Email"
             returnKeyType="next"
             onSubmitEditing={() => {
               passwordInputRef.current.focus();
@@ -99,6 +105,12 @@ const SignIn: React.FC = () => {
             autoCorrect={false}
             autoCapitalize="none"
             name="password"
+            placeholder="Senha"
+            inputRight={(
+              <BorderlessButton onPress={handleForgot}>
+                <ForgotText>Esqueceu?</ForgotText>
+              </BorderlessButton>
+            )}
           />
         </Form>
 
