@@ -26,17 +26,16 @@ export default class MinistriesController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, leaders_id, local, members_id, date, hour } = request.body;
+    const { name, local, date, hour, description } = request.body;
 
     const UpdateMinistriy = container.resolve(UpdateMinistriesService);
 
     const ministry = await UpdateMinistriy.execute({
       name,
-      leaders_id,
       local,
-      members_id,
       date,
       hour,
+      description,
     });
 
     return response.json(ministry);

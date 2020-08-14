@@ -1,7 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
-import User from '@modules/users/infra/typeorm/entities/User';
 import IMinistriesRepository from '../repositories/IMinistriesRepository';
 
 import Ministry from '../infra/typeorm/entities/Ministry';
@@ -11,8 +10,7 @@ interface IRequest {
   local?: string;
   date?: Date;
   hour?: Date;
-  leaders_id?: User[];
-  members_id?: string[];
+  description?: string;
 }
 
 @injectable()
@@ -27,6 +25,7 @@ class UpdateMinistriesService {
     local,
     date,
     hour,
+    description,
   }: IRequest): Promise<Ministry> {
     const ministry = await this.ministriesRepository.findByName(name);
 
@@ -44,6 +43,10 @@ class UpdateMinistriesService {
 
     if (hour) {
       ministry.hour = hour;
+    }
+
+    if (description) {
+      ministry.description = description;
     }
 
     return this.ministriesRepository.save(ministry);
