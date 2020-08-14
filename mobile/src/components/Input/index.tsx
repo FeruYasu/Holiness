@@ -16,6 +16,7 @@ import {
   PlaceHolderContainer,
   TextInput,
   InputText,
+  InputRightContainer,
 } from './styles';
 
 interface InputProps extends TextInputProps {
@@ -29,6 +30,7 @@ interface InputValueReference {
 
 interface InputRef {
   focus(): void;
+  filled(): void;
 }
 
 const Input: React.RefForwardingComponent<InputRef, InputProps> = (
@@ -56,6 +58,12 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     focus() {
       inputElementRef.current.focus();
     },
+    filled() {
+      setIsFilled(true);
+    },
+    value(val: string) {
+      inputValueRef.current.value = val;
+    },
   }));
 
   useEffect(() => {
@@ -81,7 +89,6 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
           <InputText isFocused={isFocused} isFilled={isFilled}>
             {placeholder}
           </InputText>
-          {inputRight}
         </HeaderContainer>
 
         <TextInput
@@ -98,6 +105,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
           }}
           {...rest}
         />
+        <InputRightContainer>{inputRight}</InputRightContainer>
       </PlaceHolderContainer>
     </Container>
   );

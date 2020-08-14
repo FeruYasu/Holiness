@@ -1,6 +1,8 @@
-import React, { useRef, useCallback } from 'react';
-import { TextInput, Alert } from 'react-native';
+import React, { useRef, useCallback, useState } from 'react';
+import { TextInput, Alert, Platform } from 'react-native';
 import { Form } from '@unform/mobile';
+
+import { parseISO, parse, format } from 'date-fns';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
@@ -8,6 +10,7 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 import { FormHandles } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { useAuth } from '../../hooks/auth';
@@ -25,52 +28,76 @@ import {
 import logo from '../../assets/logo.png';
 
 import Input from '../../components/Input';
+import api from '../../services/api';
 
 interface SignUpFormData {
+  name: string;
   email: string;
+  birthday: string;
   password: string;
+  confirmPassword: string;
 }
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
+  const birthdayInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
 
-  const { signIn } = useAuth();
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [birthday, setBirthday] = useState('');
+  const [show, setShow] = useState(false);
 
-  const handleSignUp = useCallback(
-    async (data: SignUpFormData) => {
-      try {
-        formRef.current?.setErrors({});
-        const schema = Yup.object().shape({
-          email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().required('Senha obrigatória'),
-        });
+  const onChange = (event, selectedDate): void => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    setBirthday(format(date, 'dd/MM/yyyy'));
+    birthdayInputRef.current.value(format(date, 'dd/MM/yyyy'));
+    birthdayInputRef.current.filled();
+  };
 
-        await schema.validate(data, { abortEarly: false });
-        await signIn({
-          email: data.email,
-          password: data.password,
-        });
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(err);
+  const handleSignUp = useCallback(async (data: SignUpFormData) => {
+    try {
+      formRef.current?.setErrors({});
+      // const schema = Yup.object().shape({
+      //   name: Yup.string().required('Nome obrigatório'),
+      //   email: Yup.string()
+      //     .required('E-mail obrigatório')
+      //     .email('Digite um e-mail válido'),
+      //   birthday: Yup.date().required('Data obrigatória'),
+      //   password: Yup.string().required('Senha obrigatória'),
+      //   confirmPassword: Yup.string().required('Senha obrigatória'),
+      // });
 
-          formRef.current?.setErrors(errors);
+      // await schema.validate(data, { abortEarly: false });
 
-          return;
-        }
+      const response = await api.post('/users', {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
 
-        Alert.alert(
-          'Erro na autenticação',
-          'Ocorreu um erro ao fazer login, cheque as credencias.'
-        );
+      navigation.goBack();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
+
+        formRef.current?.setErrors(errors);
+
+        return;
       }
-    },
-    [signIn]
-  );
+
+      Alert.alert(
+        'Erro na autenticação',
+        'Ocorreu um erro ao fazer login, cheque as credencias.'
+      );
+    }
+  }, []);
+
+  const showDatepicker = useCallback(() => {
+    setShow(true);
+  }, []);
 
   return (
     <Container>
@@ -101,21 +128,33 @@ const SignUp: React.FC = () => {
             }}
           />
           <Input
+            ref={birthdayInputRef}
             autoCorrect={false}
             autoCapitalize="none"
-            keyboardType="email-address"
             placeholder="Data de nascimento"
             name="birthday"
-            returnKeyType="next"
+            value={birthday}
             onSubmitEditing={() => {
               passwordInputRef.current.focus();
             }}
             inputRight={(
-              <BorderlessButton>
+              <BorderlessButton onPress={showDatepicker}>
                 <Icon name="calendar" size={26} color="#6360EB" />
               </BorderlessButton>
             )}
           />
+
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode="date"
+              is24Hour
+              display="default"
+              onChange={onChange}
+            />
+          )}
+
           <Input
             ref={passwordInputRef}
             secureTextEntry
@@ -125,7 +164,6 @@ const SignUp: React.FC = () => {
             name="password"
           />
           <Input
-            ref={passwordInputRef}
             secureTextEntry
             autoCorrect={false}
             autoCapitalize="none"

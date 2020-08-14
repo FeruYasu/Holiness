@@ -15,6 +15,7 @@ export const Container = styled.View<ContainerProps>`
   border-bottom-color: #939393;
   flex-direction: row;
   align-items: flex-end;
+  position: relative;
 
   ${(props) =>
     props.isFocused &&
@@ -33,6 +34,7 @@ export const Container = styled.View<ContainerProps>`
 export const HeaderContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: baseline;
 `;
 
 export const PlaceHolderContainer = styled.View`
@@ -74,4 +76,10 @@ export const InputText = styled.Text`
     css`
       font-size: 12px;
     `}
+`;
+
+export const InputRightContainer = styled.View`
+  position: absolute;
+  right: 0;
+  bottom: 10px;
 `;
