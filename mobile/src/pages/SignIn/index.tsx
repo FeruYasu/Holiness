@@ -80,7 +80,9 @@ const SignIn: React.FC = () => {
     [signIn]
   );
 
-  const handleForgot = useCallback(() => {}, []);
+  const handleForgot = useCallback(() => {
+    console.log('esqueci')
+  }, []);
 
   return (
     <Container>
