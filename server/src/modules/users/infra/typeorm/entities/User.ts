@@ -41,7 +41,7 @@ class User {
 
   @OneToMany(
     () => MinistryMembers,
-    ministriesmembers => ministriesmembers.leader,
+    ministriesmembers => ministriesmembers.member,
     {
       cascade: true,
     },

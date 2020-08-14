@@ -22,6 +22,9 @@ class Ministry {
   @Column()
   hour: Date;
 
+  @Column()
+  photo: string;
+
   @OneToMany(
     () => MinistryLeaders,
     ministriesleaders => ministriesleaders.ministry,
