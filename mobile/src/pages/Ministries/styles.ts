@@ -12,7 +12,7 @@ export const MainTitle = styled.Text`
   font-size: 24px;
   color: #bf2525;
   margin: 0 20px;
-  margin-top: 56px;
+  margin-top: 24px;
   font-weight: bold;
 `;
 

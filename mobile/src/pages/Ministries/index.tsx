@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import api from '../../services/api';
 
+import Header from '../../components/Header';
+
 import {
   Container,
   MainTitle,
@@ -30,8 +32,13 @@ const Ministries: React.FC = () => {
 
   return (
     <Container>
-      <MainTitle>Ministérios</MainTitle>
       <MinistriesList
+        ListHeaderComponent={(
+          <>
+            <Header />
+            <MainTitle>Ministérios</MainTitle>
+          </>
+        )}
         data={ministries}
         keyExtractor={(ministry) => ministry.id}
         renderItem={({ item: ministry }) => (
