@@ -18,6 +18,8 @@ const ministriesPhotoController = new MinistriesPhotoController();
 const upload = multer(uploadConfig.multer);
 
 ministriesRouter.get('/', ministriesController.index);
+ministriesRouter.get('/:id', ministriesController.show);
+
 ministriesRouter.post('/', ministriesController.create);
 ministriesRouter.put('/', ministriesController.update);
 

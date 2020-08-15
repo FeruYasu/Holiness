@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
+
+import { container } from 'tsyringe';
+
 import CreateMinistriesService from '@modules/ministries/services/CreateMinistriesService';
 import UpdateMinistriesService from '@modules/ministries/services/UpdateMinistriesService';
-import { container } from 'tsyringe';
 import ListMinistriesService from '@modules/ministries/services/ListMinistriesService';
+import ListMinistryByIdService from '@modules/ministries/services/ListMinistryByIdService';
 
 import { classToClass } from 'class-transformer';
 
@@ -13,6 +16,16 @@ export default class MinistriesController {
     const allMinistries = await listMinistries.execute();
 
     return response.json(classToClass(allMinistries));
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const listMinistryById = container.resolve(ListMinistryByIdService);
+
+    const ministry = await listMinistryById.execute(id);
+
+    return response.json(classToClass(ministry));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
