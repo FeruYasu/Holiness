@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import { Ministry } from './index';
 
@@ -20,7 +21,7 @@ export const MinistriesList = styled(
   FlatList as new () => FlatList<Ministry>
 )``;
 
-export const MinistryContainer = styled.View`
+export const MinistryContainer = styled.TouchableOpacity`
   background-color: #fff;
   margin: 20px;
   border-radius: 16px;
