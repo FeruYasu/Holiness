@@ -8,6 +8,19 @@ export const Container = styled.View`
   padding: 5px;
 `;
 
+export const LeftContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+`;
+
+export const BackButton = styled.TouchableOpacity``;
+
+export const Title = styled.Text`
+  font-size: 20px;
+  margin-left: 50px;
+`;
+
 export const LogoImage = styled.Image`
   width: 120px;
   margin-left: 20px;

@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import { BaseButton } from 'react-native-gesture-handler';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   background-color: #f9f9f9;
 `;
@@ -10,22 +11,17 @@ export const MinistryImage = styled.Image`
   height: 250px;
 `;
 
-export const Title = styled.Text`
-  font-size: 24px;
-  padding: 10px;
-  color: #2825bf;
-  font-weight: bold;
-`;
-
 export const SubTitle = styled.Text`
   font-size: 16px;
   padding: 10px;
   color: #6d6d6d;
   font-weight: bold;
+  padding-left: 20px;
 `;
 
 export const InfoContainer = styled.View`
-  padding: 10px;
+  padding-left: 20px;
+  margin-top: 20px;
 `;
 
 export const Info = styled.View`
@@ -56,7 +52,7 @@ export const LeadersContainer = styled.View`
 export const Leader = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 5px;
+  margin-bottom: 10px;
 `;
 
 export const Picture = styled.Image`
@@ -67,4 +63,71 @@ export const Picture = styled.Image`
 
 export const Name = styled.Text`
   margin-left: 20px;
+`;
+
+export const Description = styled.Text`
+  font-size: 14px;
+  color: #626262;
+  padding: 10px;
+  padding-left: 20px;
+`;
+
+export const MembersTitle = styled.Text`
+  font-size: 16px;
+  padding: 10px;
+  color: #f88282;
+  font-weight: bold;
+  padding-left: 20px;
+`;
+
+export const MembersContainer = styled.ScrollView.attrs({
+  contentContainerStyle: { paddingHorizontal: 20 },
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+})`
+  flex-direction: row;
+  flex: 1;
+  margin-bottom: 10px;
+`;
+
+export const Member = styled.View`
+  margin-right: 8px;
+`;
+
+export const AcceptContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 20px;
+`;
+
+export const AcceptTitle = styled.Text`
+  font-size: 16px;
+  padding: 10px;
+  color: #989898;
+  font-weight: bold;
+  padding-left: 20px;
+`;
+
+export const AcceptDescription = styled.Text`
+  font-size: 14px;
+  color: #626262;
+  padding: 10px;
+  max-width: 200px;
+`;
+
+export const ConfirmButton = styled(BaseButton)`
+  margin-right: 20px;
+  background-color: #6360eb;
+  padding: 10px;
+  width: 120px;
+  border-radius: 21px;
+`;
+
+export const ConfirmButtonText = styled.Text`
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
 `;

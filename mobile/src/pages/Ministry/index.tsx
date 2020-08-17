@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import { useNavigation } from '@react-navigation/native';
+
+import { TouchableOpacity } from 'react-native';
 
 import Header from '../../components/Header';
 
 import {
   Container,
   MinistryImage,
-  Title,
   SubTitle,
   InfoContainer,
   Info,
@@ -17,6 +20,15 @@ import {
   Leader,
   Picture,
   Name,
+  Description,
+  MembersTitle,
+  MembersContainer,
+  Member,
+  AcceptContainer,
+  AcceptTitle,
+  AcceptDescription,
+  ConfirmButton,
+  ConfirmButtonText,
 } from './styles';
 
 interface Leader {
@@ -38,25 +50,21 @@ interface Ministry {
 const Ministry: React.FC = () => {
   const route = useRoute();
   const { data } = route.params as Ministry;
-  const [ministry, SetMinistry] = useState<Ministry>({});
 
-  useEffect(() => {
-    console.log(data.ministries_leaders);
-    data.ministries_leaders.map((item) => {
-      console.log(item.leader.name);
-    });
-    SetMinistry(data);
-  }, [data]);
+  const { navigate } = useNavigation();
+
+  const handleParticipants = useCallback(() => {
+    navigate('Participants');
+  }, []);
 
   return (
     <Container>
-      <Header />
-      <MinistryImage source={{ uri: ministry.photoUrl }} />
-      <Title>{ministry.name}</Title>
+      <Header title={data.name} back />
+      <MinistryImage source={{ uri: data.photoUrl }} />
       <InfoContainer>
         <Info>
           <Icon name="map-outline" size={26} color="#808080" />
-          <InfoText>{ministry.local}</InfoText>
+          <InfoText>{data.local}</InfoText>
         </Info>
         <Separator />
         <Info>
@@ -72,7 +80,7 @@ const Ministry: React.FC = () => {
       </InfoContainer>
       <SubTitle>Lideres</SubTitle>
       <LeadersContainer>
-        {ministry &&
+        {data &&
           data.ministries_leaders.map((item) => {
             return (
               <Leader key={item.leader.id}>
@@ -82,6 +90,34 @@ const Ministry: React.FC = () => {
             );
           })}
       </LeadersContainer>
+      <SubTitle>Sobre o ministério</SubTitle>
+      <Description>{data.description}</Description>
+      <MembersTitle>
+        {data.ministries_members.length} Participantes
+      </MembersTitle>
+      <TouchableOpacity onPress={handleParticipants}>
+        <MembersContainer>
+          {data &&
+            data.ministries_members.map((item) => {
+              return (
+                <Member key={item.member.id}>
+                  <Picture source={{ uri: item.member.avatar_url }} />
+                </Member>
+              );
+            })}
+        </MembersContainer>
+      </TouchableOpacity>
+
+      <AcceptTitle>Gostaria de fazer parte desse ministério?</AcceptTitle>
+
+      <AcceptContainer>
+        <AcceptDescription>
+          Clique em participar e o líder irá entrar em contato.
+        </AcceptDescription>
+        <ConfirmButton>
+          <ConfirmButtonText>Participar</ConfirmButtonText>
+        </ConfirmButton>
+      </AcceptContainer>
     </Container>
   );
 };
