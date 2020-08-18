@@ -31,6 +31,8 @@ export const HeaderRightContainer = styled.View`
   align-items: center;
 `;
 
+export const ProfileButton = styled.TouchableOpacity``;
+
 export const ProfilePicture = styled.Image`
   width: 50px;
   height: 50px;

@@ -54,7 +54,7 @@ const Ministry: React.FC = () => {
   const { navigate } = useNavigation();
 
   const handleParticipants = useCallback(() => {
-    navigate('Participants');
+    navigate('Participants', { data });
   }, []);
 
   return (

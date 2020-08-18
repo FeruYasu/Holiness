@@ -12,6 +12,7 @@ import {
   BackButton,
   LogoImage,
   HeaderRightContainer,
+  ProfileButton,
   ProfilePicture,
   Title,
 } from './styles';
@@ -46,7 +47,13 @@ const Header: React.FC = ({ title, back }) => {
           color="#858585"
           onPress={signOut}
         />
-        <ProfilePicture source={{ uri: user.avatar_url }} />
+        <ProfileButton
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+        >
+          <ProfilePicture source={{ uri: user.avatar_url }} />
+        </ProfileButton>
       </HeaderRightContainer>
     </Container>
   );
