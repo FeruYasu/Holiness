@@ -8,26 +8,21 @@ interface ContainerProps {
 
 export const Container = styled.View<ContainerProps>`
   width: 93%;
-  height: 70px;
+  height: 56px;
   background: #f9f9f9;
   margin: auto;
-  border-bottom-width: 0.8px;
+  border-bottom-width: 0.5px;
   border-bottom-color: #939393;
   flex-direction: row;
   align-items: flex-end;
   position: relative;
+  margin-top: 5px;
 
   ${(props) =>
     props.isFocused &&
     css`
       border-bottom-color: #18307a;
       border-bottom-width: 1px;
-    `}
-
-  ${(props) =>
-    props.isFilled &&
-    css`
-      border-bottom-color: #18307a;
     `}
 `;
 
@@ -44,9 +39,12 @@ export const PlaceHolderContainer = styled.View`
 
 export const TextInput = styled.TextInput`
   color: #5a5a5a;
-  font-size: 20px;
+  font-size: 16px;
   height: 20px;
   padding: 5px;
+  font-weight: bold;
+  margin-left: 0;
+  padding-left: 0;
 
   ${(props) =>
     props.isFocused &&
@@ -63,12 +61,14 @@ export const TextInput = styled.TextInput`
 
 export const InputText = styled.Text`
   color: #939393;
-  font-size: 16px;
+  font-size: 14px;
 
   ${(props) =>
     props.isFocused &&
     css`
       font-size: 12px;
+      color: #18307a;
+      font-weight: bold;
     `}
 
   ${(props) =>

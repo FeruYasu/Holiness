@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { BaseButton } from 'react-native-gesture-handler';
+import Button from '../../components/Button';
 
 export const Container = styled.ScrollView`
   flex: 1;
@@ -117,7 +117,7 @@ export const AcceptDescription = styled.Text`
   max-width: 200px;
 `;
 
-export const ConfirmButton = styled(BaseButton)`
+export const ConfirmButton = styled(Button)`
   margin-right: 20px;
   background-color: #6360eb;
   padding: 10px;

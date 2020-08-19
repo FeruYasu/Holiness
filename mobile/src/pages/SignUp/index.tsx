@@ -2,7 +2,7 @@ import React, { useRef, useCallback, useState } from 'react';
 import { TextInput, Alert, Platform } from 'react-native';
 import { Form } from '@unform/mobile';
 
-import { parseISO, parse, format } from 'date-fns';
+import { format } from 'date-fns';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
