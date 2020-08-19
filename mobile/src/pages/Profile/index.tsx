@@ -100,8 +100,6 @@ const Profile: React.FC = () => {
           return;
         }
         if (response.error) {
-          console.log(response.error);
-
           Alert.alert('Erro ao atualizar seu avatar');
           return;
         }

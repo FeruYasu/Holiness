@@ -21,9 +21,9 @@ export const Header = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   color: #2825bf;
-  font-weight: bold;
+  font-family: 'SourceSansPro-Bold';
   margin: 10px 0;
 `;
 
@@ -45,6 +45,7 @@ export const UserAvatar = styled.Image`
 
 export const ChangePasswordText = styled.Text`
   color: #ff5656;
+  font-family: 'SourceSansPro-SemiBold';
 `;
 
 export const SwitchesContainer = styled.View`
@@ -69,14 +70,14 @@ export const Separator = styled.View`
 
 export const SubTitle = styled.Text`
   color: #939393;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
+  font-family: 'SourceSansPro-SemiBold';
 `;
 
 export const NotificationTitle = styled.Text`
   color: #939393;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
+  font-family: 'SourceSansPro-SemiBold';
   margin-top: 24px;
 `;
 
@@ -94,7 +95,10 @@ export const NotificationContainer = styled.View`
   margin-bottom: 8px;
 `;
 
-export const Notification = styled.Text``;
+export const Notification = styled.Text`
+  font-size: 16px;
+  font-family: 'SourceSansPro-Regular';
+`;
 
 export const SubmitButton = styled(Button)`
   margin-top: 10px;

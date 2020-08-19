@@ -8,20 +8,22 @@ export const Container = styled.ScrollView`
 
 export const MinistryImage = styled.Image`
   width: 100%;
-  height: 250px;
+  height: 248px;
+`;
+
+export const ContentContainer = styled.View`
+  padding: 0 24px;
 `;
 
 export const SubTitle = styled.Text`
-  font-size: 16px;
-  padding: 10px;
+  font-size: 20px;
   color: #6d6d6d;
-  font-weight: bold;
-  padding-left: 20px;
+  font-family: 'SourceSansPro-Bold';
+  margin-bottom: 16px;
 `;
 
 export const InfoContainer = styled.View`
-  padding-left: 20px;
-  margin-top: 20px;
+  margin-top: 24px;
 `;
 
 export const Info = styled.View`
@@ -30,29 +32,24 @@ export const Info = styled.View`
 `;
 
 export const InfoText = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: #626262;
-  margin-left: 15px;
-  margin-right: 30px;
+  margin-left: 16px;
+  font-family: 'SourceSansPro-Regular';
 `;
 
 export const Separator = styled.View`
   border-bottom-width: 0.5px;
   border-bottom-color: #bdbdbd;
-  margin: 0 35px;
-  margin-top: 15px;
-  margin-bottom: 12px;
+  margin: 16px 36px;
 `;
 
-export const LeadersContainer = styled.View`
-  padding: 0 20px;
-  justify-content: space-between;
-`;
+export const LeadersContainer = styled.View``;
 
 export const Leader = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 `;
 
 export const Picture = styled.Image`
@@ -62,65 +59,64 @@ export const Picture = styled.Image`
 `;
 
 export const Name = styled.Text`
-  margin-left: 20px;
+  font-family: 'SourceSansPro-SemiBold';
+  color: #626262;
+  font-size: 16px;
+  margin-left: 8px;
 `;
 
 export const Description = styled.Text`
-  font-size: 14px;
+  font-size: 18px;
   color: #626262;
-  padding: 10px;
-  padding-left: 20px;
+  font-family: 'SourceSansPro-Regular';
 `;
 
 export const MembersTitle = styled.Text`
-  font-size: 16px;
-  padding: 10px;
+  font-size: 18px;
   color: #f88282;
-  font-weight: bold;
-  padding-left: 20px;
+  font-family: 'SourceSansPro-SemiBold';
+  margin-top: 16px;
 `;
 
 export const MembersContainer = styled.ScrollView.attrs({
-  contentContainerStyle: { paddingHorizontal: 20 },
   horizontal: true,
   showsHorizontalScrollIndicator: false,
 })`
   flex-direction: row;
   flex: 1;
-  margin-bottom: 10px;
 `;
 
 export const Member = styled.View`
-  margin-right: 8px;
+  margin-right: 16px;
+  margin-top: 8px;
+  height: 100%;
 `;
 
 export const AcceptContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
   margin-bottom: 20px;
 `;
 
 export const AcceptTitle = styled.Text`
-  font-size: 16px;
-  padding: 10px;
+  font-size: 18px;
   color: #989898;
-  font-weight: bold;
-  padding-left: 20px;
+  font-family: 'SourceSansPro-Bold';
+  margin-top: 16px;
+  margin-bottom: 16px;
 `;
 
 export const AcceptDescription = styled.Text`
-  font-size: 14px;
+  font-size: 18px;
   color: #626262;
-  padding: 10px;
   max-width: 200px;
+  font-family: 'SourceSansPro-Regular';
 `;
 
 export const ConfirmButton = styled(Button)`
   margin-right: 20px;
   background-color: #6360eb;
-  padding: 10px;
   width: 120px;
   border-radius: 21px;
 `;
@@ -128,6 +124,6 @@ export const ConfirmButton = styled(Button)`
 export const ConfirmButtonText = styled.Text`
   text-align: center;
   font-size: 16px;
-  font-weight: bold;
   color: #fff;
+  font-family: 'SourceSansPro-Bold';
 `;

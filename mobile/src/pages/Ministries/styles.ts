@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
-import { TouchableOpacity } from 'react-native';
 
 import { Ministry } from './index';
 
@@ -12,9 +11,9 @@ export const Container = styled.View`
 export const MainTitle = styled.Text`
   font-size: 24px;
   color: #bf2525;
-  margin: 0 20px;
-  margin-top: 24px;
-  font-weight: bold;
+  margin: 0 26px;
+  margin-top: 16px;
+  font-family: 'SourceSansPro-Bold';
 `;
 
 export const MinistriesList = styled(
@@ -23,7 +22,7 @@ export const MinistriesList = styled(
 
 export const MinistryContainer = styled.TouchableOpacity`
   background-color: #fff;
-  margin: 20px;
+  margin: 8px 24px;
   border-radius: 16px;
   height: 200px;
   elevation: 8;
@@ -45,6 +44,9 @@ export const InfoContainer = styled.View`
 export const Title = styled.Text`
   font-size: 20px;
   color: #000;
+  font-family: 'SourceSansPro-SemiBold';
 `;
 
-export const MinistryDate = styled.Text``;
+export const MinistryDate = styled.Text`
+  font-family: 'SourceSansPro-Regular';
+`;

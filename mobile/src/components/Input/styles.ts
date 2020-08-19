@@ -42,7 +42,7 @@ export const TextInput = styled.TextInput`
   font-size: 16px;
   height: 20px;
   padding: 5px;
-  font-weight: bold;
+  font-family: 'SourceSansPro-Bold';
   margin-left: 0;
   padding-left: 0;
 
@@ -62,6 +62,7 @@ export const TextInput = styled.TextInput`
 export const InputText = styled.Text`
   color: #939393;
   font-size: 14px;
+  font-family: 'SourceSansPro-Regular';
 
   ${(props) =>
     props.isFocused &&

@@ -5,21 +5,22 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 8px;
   elevation: 8;
 `;
 
 export const LeftContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 8px;
 `;
 
 export const BackButton = styled.TouchableOpacity``;
 
 export const Title = styled.Text`
   font-size: 20px;
-  margin-left: 50px;
+  margin-left: 56px;
+  font-family: 'SourceSansPro-SemiBold';
 `;
 
 export const LogoImage = styled.Image`

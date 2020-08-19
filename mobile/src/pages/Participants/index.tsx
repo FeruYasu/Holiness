@@ -37,10 +37,6 @@ const Participants: React.FC = () => {
 
   const { navigate } = useNavigation();
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
-
   return (
     <Container>
       <Header title={data.name} back />
