@@ -18,7 +18,7 @@ import {
 } from './styles';
 
 const Header: React.FC = ({ title, back }) => {
-  const { user, signOut } = useAuth();
+  const { theme, user, signOut } = useAuth();
   const navigation = useNavigation();
 
   return (
@@ -30,7 +30,11 @@ const Header: React.FC = ({ title, back }) => {
               navigation.goBack();
             }}
           >
-            <Icon name="ios-chevron-back" size={30} color="#000" />
+            <Icon
+              name="ios-chevron-back"
+              size={30}
+              color={theme.colors.darkerGreyText}
+            />
           </BackButton>
         )}
         {title ? (
@@ -44,7 +48,7 @@ const Header: React.FC = ({ title, back }) => {
         <Icon
           name="notifications-outline"
           size={30}
-          color="#858585"
+          color={theme.colors.darkerGreyText}
           onPress={signOut}
         />
         <ProfileButton

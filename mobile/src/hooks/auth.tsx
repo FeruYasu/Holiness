@@ -7,7 +7,10 @@ import React, {
 } from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import { DefaultTheme } from 'styled-components';
 import api from '../services/api';
+
+import themes from '../styles/themes';
 
 interface User {
   id: string;
@@ -29,6 +32,9 @@ interface SignInCredentials {
 
 interface AuthContextData {
   user: User;
+  theme: DefaultTheme;
+  setTheme(theme: DefaultTheme): void;
+  changeTheme(): void;
   loading: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
@@ -50,6 +56,8 @@ function useAuth(): AuthContextData {
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
+
+  const [theme, setTheme] = useState<DefaultTheme>(themes.light);
 
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
@@ -106,6 +114,16 @@ const AuthProvider: React.FC = ({ children }) => {
     [setData, data.token]
   );
 
+  const changeTheme = useCallback(() => {
+    AsyncStorage.setItem('@IEHC:theme', JSON.stringify(theme));
+
+    if (theme.title === 'dark') {
+      setTheme(themes.light);
+    } else {
+      setTheme(themes.dark);
+    }
+  }, [theme]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -114,6 +132,9 @@ const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         updateUser,
+        theme,
+        setTheme,
+        changeTheme,
       }}
     >
       {children}

@@ -3,7 +3,7 @@ import Button from '../../components/Button';
 
 export const Container = styled.ScrollView`
   flex: 1;
-  background-color: #f9f9f9;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const MinistryImage = styled.Image`
@@ -17,7 +17,7 @@ export const ContentContainer = styled.View`
 
 export const SubTitle = styled.Text`
   font-size: 20px;
-  color: #6d6d6d;
+  color: ${(props) => props.theme.colors.darkerGreyText};
   font-family: 'SourceSansPro-Bold';
   margin-bottom: 16px;
 `;
@@ -33,14 +33,14 @@ export const Info = styled.View`
 
 export const InfoText = styled.Text`
   font-size: 18px;
-  color: #626262;
+  color: ${(props) => props.theme.colors.text};
   margin-left: 16px;
   font-family: 'SourceSansPro-Regular';
 `;
 
 export const Separator = styled.View`
   border-bottom-width: 0.5px;
-  border-bottom-color: #bdbdbd;
+  border-bottom-color: ${(props) => props.theme.colors.separator};
   margin: 16px 36px;
 `;
 
@@ -60,20 +60,20 @@ export const Picture = styled.Image`
 
 export const Name = styled.Text`
   font-family: 'SourceSansPro-SemiBold';
-  color: #626262;
+  color: ${(props) => props.theme.colors.greyText};
   font-size: 16px;
   margin-left: 8px;
 `;
 
 export const Description = styled.Text`
   font-size: 18px;
-  color: #626262;
+  color: ${(props) => props.theme.colors.darkerGreyText};
   font-family: 'SourceSansPro-Regular';
 `;
 
 export const MembersTitle = styled.Text`
   font-size: 18px;
-  color: #f88282;
+  color: ${(props) => props.theme.colors.accent};
   font-family: 'SourceSansPro-SemiBold';
   margin-top: 16px;
 `;
@@ -101,7 +101,7 @@ export const AcceptContainer = styled.View`
 
 export const AcceptTitle = styled.Text`
   font-size: 18px;
-  color: #989898;
+  color: ${(props) => props.theme.colors.text};
   font-family: 'SourceSansPro-Bold';
   margin-top: 16px;
   margin-bottom: 16px;
@@ -109,7 +109,7 @@ export const AcceptTitle = styled.Text`
 
 export const AcceptDescription = styled.Text`
   font-size: 18px;
-  color: #626262;
+  color: ${(props) => props.theme.colors.darkerGreyText};
   max-width: 200px;
   font-family: 'SourceSansPro-Regular';
 `;

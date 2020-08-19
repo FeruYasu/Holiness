@@ -31,6 +31,7 @@ import {
   ConfirmButton,
   ConfirmButtonText,
 } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 interface Leader {
   leader: {
@@ -51,6 +52,7 @@ interface Ministry {
 const Ministry: React.FC = () => {
   const route = useRoute();
   const { data } = route.params as Ministry;
+  const { theme } = useAuth();
 
   const { navigate } = useNavigation();
 
@@ -66,17 +68,29 @@ const Ministry: React.FC = () => {
       <ContentContainer>
         <InfoContainer>
           <Info>
-            <Icon name="map-outline" size={26} color="#808080" />
+            <Icon
+              name="map-outline"
+              size={26}
+              color={theme.colors.darkerGreyText}
+            />
             <InfoText>{data.local}</InfoText>
           </Info>
           <Separator />
           <Info>
-            <Icon name="calendar-outline" size={26} color="#808080" />
+            <Icon
+              name="calendar-outline"
+              size={26}
+              color={theme.colors.darkerGreyText}
+            />
             <InfoText>Todos os domingos</InfoText>
           </Info>
           <Separator />
           <Info>
-            <Icon name="time-outline" size={26} color="#808080" />
+            <Icon
+              name="time-outline"
+              size={26}
+              color={theme.colors.darkerGreyText}
+            />
             <InfoText>09:00 até as 16:00</InfoText>
           </Info>
           <Separator />

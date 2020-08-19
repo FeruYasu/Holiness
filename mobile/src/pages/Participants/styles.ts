@@ -2,13 +2,13 @@ import styled from 'styled-components/native';
 
 export const Container = styled.ScrollView`
   flex: 1;
-  background-color: #f9f9f9;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const SubTitle = styled.Text`
   font-size: 16px;
   padding: 10px;
-  color: #f88282;
+  color: ${(props) => props.theme.colors.accent};
   font-weight: bold;
   padding-left: 20px;
   font-family: 'SourceSansPro-SemiBold';
@@ -16,7 +16,7 @@ export const SubTitle = styled.Text`
 
 export const Separator = styled.View`
   border-bottom-width: 0.5px;
-  border-bottom-color: #bdbdbd;
+  border-bottom-color: ${(props) => props.theme.colors.separator};
   margin-bottom: 10px;
   margin-left: 70px;
   margin-right: 50px;
@@ -42,6 +42,6 @@ export const Picture = styled.Image`
 export const Name = styled.Text`
   margin-left: 24px;
   font-size: 18px;
-  color: #626262;
+  color: ${(props) => props.theme.colors.greyText};
   font-family: 'SourceSansPro-SemiBold';
 `;

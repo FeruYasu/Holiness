@@ -5,12 +5,12 @@ import { Ministry } from './index';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #f9f9f9;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const MainTitle = styled.Text`
   font-size: 24px;
-  color: #bf2525;
+  color: ${(props) => props.theme.colors.primary};
   margin: 0 26px;
   margin-top: 16px;
   font-family: 'SourceSansPro-Bold';
@@ -21,7 +21,7 @@ export const MinistriesList = styled(
 )``;
 
 export const MinistryContainer = styled.TouchableOpacity`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.cardBackground};
   margin: 8px 24px;
   border-radius: 16px;
   height: 200px;
@@ -38,15 +38,18 @@ export const InfoContainer = styled.View`
   height: 60px;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
+  padding: 16px;
 `;
 
 export const Title = styled.Text`
   font-size: 20px;
-  color: #000;
+  color: ${(props) => props.theme.colors.darkerGreyText};
   font-family: 'SourceSansPro-SemiBold';
 `;
 
 export const MinistryDate = styled.Text`
   font-family: 'SourceSansPro-Regular';
+  font-size: 16px;
+  margin-right: 8px;
+  color: ${(props) => props.theme.colors.text};
 `;

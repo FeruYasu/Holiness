@@ -5,13 +5,13 @@ export const Container = styled.View`
   flex: 1;
   position: relative;
   justify-content: space-between;
-  background-color: #f9f9f9;
+  background-color: ${(props) => props.theme.colors.background};
   padding: 0px 24px;
   align-items: center;
 `;
 
 export const Header = styled.View`
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.headerBackground};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,7 @@ export const Header = styled.View`
 
 export const Title = styled.Text`
   font-size: 18px;
-  color: #2825bf;
+  color: ${(props) => props.theme.colors.secondary};
   font-family: 'SourceSansPro-Bold';
   margin: 10px 0;
 `;
@@ -44,7 +44,7 @@ export const UserAvatar = styled.Image`
 `;
 
 export const ChangePasswordText = styled.Text`
-  color: #ff5656;
+  color: ${(props) => props.theme.colors.accent};
   font-family: 'SourceSansPro-SemiBold';
 `;
 
@@ -64,18 +64,18 @@ export const DarkThemeContainer = styled.View`
 
 export const Separator = styled.View`
   border-bottom-width: 0.5px;
-  border-bottom-color: #bdbdbd;
+  border-bottom-color: ${(props) => props.theme.colors.separator};
   margin-top: 4px;
 `;
 
 export const SubTitle = styled.Text`
-  color: #939393;
+  color: ${(props) => props.theme.colors.greyText};
   font-size: 16px;
   font-family: 'SourceSansPro-SemiBold';
 `;
 
 export const NotificationTitle = styled.Text`
-  color: #939393;
+  color: ${(props) => props.theme.colors.greyText};
   font-size: 16px;
   font-family: 'SourceSansPro-SemiBold';
   margin-top: 24px;
@@ -83,7 +83,7 @@ export const NotificationTitle = styled.Text`
 
 export const NotificationSeparator = styled.View`
   border-bottom-width: 0.5px;
-  border-bottom-color: #bdbdbd;
+  border-bottom-color: ${(props) => props.theme.colors.separator};
   margin-top: 4px;
   margin-bottom: 8px;
 `;
@@ -97,6 +97,7 @@ export const NotificationContainer = styled.View`
 
 export const Notification = styled.Text`
   font-size: 16px;
+  color: ${(props) => props.theme.colors.darkerGreyText};
   font-family: 'SourceSansPro-Regular';
 `;
 

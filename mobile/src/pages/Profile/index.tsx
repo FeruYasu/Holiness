@@ -52,7 +52,7 @@ const Profile: React.FC = () => {
   const [date, setDate] = useState(new Date(1598051730000));
   const [birthday, setBirthday] = useState('');
 
-  const { updateUser } = useAuth();
+  const { theme, updateUser, changeTheme } = useAuth();
 
   const [darktheme, setDarkTheme] = useState(false);
   const [preachNotification, setPreachNotification] = useState(true);
@@ -165,6 +165,17 @@ const Profile: React.FC = () => {
     [birthday, updateUser]
   );
 
+  const toggleTheme = useCallback(() => {
+    console.log(darktheme);
+    if (darktheme === true) {
+      setDarkTheme(false);
+      changeTheme();
+    } else {
+      setDarkTheme(true);
+      changeTheme();
+    }
+  }, [darktheme, changeTheme]);
+
   return (
     <>
       <Header>
@@ -173,7 +184,11 @@ const Profile: React.FC = () => {
             navigation.goBack();
           }}
         >
-          <Icon name="ios-chevron-back" size={30} color="#000" />
+          <Icon
+            name="ios-chevron-back"
+            size={30}
+            color={theme.colors.darkerGreyText}
+          />
         </BackButton>
         <Title>Configurações</Title>
       </Header>
@@ -208,7 +223,11 @@ const Profile: React.FC = () => {
             editable={false}
             inputRight={
               <BorderlessButton onPress={showDatepicker}>
-                <Icon name="calendar" size={26} color="#6360EB" />
+                <Icon
+                  name="calendar"
+                  size={26}
+                  color={theme.colors.secondary}
+                />
               </BorderlessButton>
             }
           />
@@ -242,10 +261,16 @@ const Profile: React.FC = () => {
           <DarkThemeContainer>
             <SubTitle>TEMA NOTURNO</SubTitle>
             <Switch
-              trackColor={{ false: '#928C8C', true: '#FF8484' }}
-              thumbTintColor="#BF2525"
-              thumbColor={darktheme === false ? '#404040' : '#BF2525'}
-              ios_backgroundColor="#FF8484"
+              trackColor={{
+                false: '#928C8C',
+                true: theme.colors.primaryBackground,
+              }}
+              thumbTintColor={theme.colors.primary}
+              thumbColor={
+                darktheme === false ? '#404040' : theme.colors.primary
+              }
+              ios_backgroundColor={theme.colors.primary}
+              onValueChange={toggleTheme}
               value={darktheme}
             />
           </DarkThemeContainer>
@@ -257,30 +282,45 @@ const Profile: React.FC = () => {
           <NotificationContainer>
             <Notification>Avisos</Notification>
             <Switch
-              trackColor={{ false: '#928C8C', true: '#FF8484' }}
-              thumbTintColor="#BF2525"
-              thumbColor={preachNotification === false ? '#404040' : '#BF2525'}
-              ios_backgroundColor="#FF8484"
+              trackColor={{
+                false: '#928C8C',
+                true: theme.colors.primaryBackground,
+              }}
+              thumbTintColor={theme.colors.primary}
+              thumbColor={
+                preachNotification === false ? '#404040' : theme.colors.primary
+              }
+              ios_backgroundColor={theme.colors.primary}
               value={preachNotification}
             />
           </NotificationContainer>
           <NotificationContainer>
             <Notification>Evento</Notification>
             <Switch
-              trackColor={{ false: '#928C8C', true: '#FF8484' }}
-              thumbTintColor="#BF2525"
-              thumbColor={preachNotification === false ? '#404040' : '#BF2525'}
-              ios_backgroundColor="#FF8484"
-              value={preachNotification}
+              trackColor={{
+                false: '#928C8C',
+                true: theme.colors.primaryBackground,
+              }}
+              thumbTintColor={theme.colors.primary}
+              thumbColor={
+                preachNotification === false ? '#404040' : theme.colors.primary
+              }
+              ios_backgroundColor={theme.colors.primary}
+              value={false}
             />
           </NotificationContainer>
           <NotificationContainer>
             <Notification>Pregações</Notification>
             <Switch
-              trackColor={{ false: '#928C8C', true: '#FF8484' }}
-              thumbTintColor="#BF2525"
-              thumbColor={preachNotification === false ? '#404040' : '#BF2525'}
-              ios_backgroundColor="#FF8484"
+              trackColor={{
+                false: '#928C8C',
+                true: theme.colors.primaryBackground,
+              }}
+              thumbTintColor={theme.colors.primary}
+              thumbColor={
+                preachNotification === false ? '#404040' : theme.colors.primary
+              }
+              ios_backgroundColor={theme.colors.primary}
               value={preachNotification}
             />
           </NotificationContainer>

@@ -9,7 +9,7 @@ interface ContainerProps {
 export const Container = styled.View<ContainerProps>`
   width: 93%;
   height: 56px;
-  background: #f9f9f9;
+  background-color: ${(props) => props.theme.colors.background};
   margin: auto;
   border-bottom-width: 0.5px;
   border-bottom-color: #939393;
@@ -21,7 +21,7 @@ export const Container = styled.View<ContainerProps>`
   ${(props) =>
     props.isFocused &&
     css`
-      border-bottom-color: #18307a;
+      border-bottom-color: ${props.theme.colors.secondary};
       border-bottom-width: 1px;
     `}
 `;
@@ -38,7 +38,7 @@ export const PlaceHolderContainer = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
-  color: #5a5a5a;
+  color: ${(props) => props.theme.colors.darkerGreyText};
   font-size: 16px;
   height: 20px;
   padding: 5px;
@@ -68,7 +68,7 @@ export const InputText = styled.Text`
     props.isFocused &&
     css`
       font-size: 12px;
-      color: #18307a;
+      color: ${props.theme.colors.secondary};
       font-weight: bold;
     `}
 

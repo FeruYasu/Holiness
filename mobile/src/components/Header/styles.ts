@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.headerBackground};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -20,6 +20,7 @@ export const BackButton = styled.TouchableOpacity``;
 export const Title = styled.Text`
   font-size: 20px;
   margin-left: 56px;
+  color: ${(props) => props.theme.colors.text};
   font-family: 'SourceSansPro-SemiBold';
 `;
 
