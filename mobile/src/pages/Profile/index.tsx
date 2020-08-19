@@ -48,13 +48,13 @@ interface ProfileFormData {
 
 const Profile: React.FC = () => {
   const { user } = useAuth();
-  const [theme, setTheme] = useState(true);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date(1598051730000));
   const [birthday, setBirthday] = useState('');
 
   const { updateUser } = useAuth();
 
+  const [darktheme, setDarkTheme] = useState(false);
   const [preachNotification, setPreachNotification] = useState(true);
 
   const formRef = useRef<FormHandles>(null);
@@ -72,6 +72,7 @@ const Profile: React.FC = () => {
     passwordInputRef.current.filled();
 
     setBirthday(format(parseISO(user.birthdate), 'dd/MM/yyyy'));
+    setDate(parseISO(user.birthdate));
   }, [user.birthdate]);
 
   const showDatepicker = useCallback(() => {
@@ -99,6 +100,8 @@ const Profile: React.FC = () => {
           return;
         }
         if (response.error) {
+          console.log(response.error);
+
           Alert.alert('Erro ao atualizar seu avatar');
           return;
         }
@@ -110,52 +113,59 @@ const Profile: React.FC = () => {
           name: `${user.id}.jpg`,
           uri: response.uri,
         });
+
+        api.patch('users/avatar', data).then((ApiResponse) => {
+          updateUser(ApiResponse.data);
+        });
       }
     );
-  }, [user.id]);
+  }, [user.id, updateUser]);
 
-  const handleSubmit = useCallback(async (data: ProfileFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: ProfileFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido'),
-        birthdate: Yup.string().required('Data de nascimento obrigatório'),
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatório'),
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
+          birthdate: Yup.string().required('Data de nascimento obrigatório'),
+        });
 
-      await schema.validate(data, { abortEarly: false });
+        await schema.validate(data, { abortEarly: false });
 
-      const { name, email, birthdate } = data;
+        const { name, email } = data;
 
-      const formData = {
-        name,
-        email,
-        birthdate,
-      };
+        const formData = {
+          name,
+          email,
+          birthdate: birthday,
+        };
 
-      const response = await api.put('/profile', formData);
+        const response = await api.put('/profile', formData);
 
-      updateUser(response.data);
+        updateUser(response.data);
 
-      Alert.alert('Perfil atualizado com sucesso!');
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        Alert.alert('Perfil atualizado com sucesso!');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
 
-        return;
+          return;
+        }
+
+        Alert.alert(
+          'Erro no atualização do perfil',
+          'Ocorreu um erro ao atualizar seu perfil, tente novamente.'
+        );
       }
-
-      Alert.alert(
-        'Erro no atualização do perfil',
-        'Ocorreu um erro ao atualizar seu perfil, tente novamente.'
-      );
-    }
-  }, []);
+    },
+    [birthday, updateUser]
+  );
 
   return (
     <>
@@ -236,9 +246,9 @@ const Profile: React.FC = () => {
             <Switch
               trackColor={{ false: '#928C8C', true: '#FF8484' }}
               thumbTintColor="#BF2525"
-              thumbColor={preachNotification === false ? '#404040' : '#BF2525'}
+              thumbColor={darktheme === false ? '#404040' : '#BF2525'}
               ios_backgroundColor="#FF8484"
-              value={preachNotification}
+              value={darktheme}
             />
           </DarkThemeContainer>
           <Separator />
