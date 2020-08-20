@@ -4,13 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
 } from 'typeorm';
 import uploadConfig from '@config/upload';
 
 import { Exclude, Expose } from 'class-transformer';
-import MinistryLeaders from '@modules/ministries/infra/typeorm/entities/MinistryLeaders';
-import MinistryMembers from '@modules/ministries/infra/typeorm/entities/MinistryMembers';
 
 @Entity('users')
 class User {
@@ -24,29 +21,14 @@ class User {
   email: string;
 
   @Column()
+  birthdate: Date;
+
+  @Column()
   @Exclude()
   password: string;
 
   @Column()
   avatar: string;
-
-  @OneToMany(
-    () => MinistryLeaders,
-    ministriesleaders => ministriesleaders.leader,
-    {
-      cascade: true,
-    },
-  )
-  ministries_leaders: MinistryLeaders[];
-
-  @OneToMany(
-    () => MinistryMembers,
-    ministriesmembers => ministriesmembers.member,
-    {
-      cascade: true,
-    },
-  )
-  ministries_members: MinistryMembers[];
 
   @CreateDateColumn()
   @Exclude()

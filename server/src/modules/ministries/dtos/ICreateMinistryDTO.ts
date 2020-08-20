@@ -1,11 +1,9 @@
-interface ILeaders {
-  user_id: string;
-}
+import User from '@modules/users/infra/typeorm/entities/User';
 
 export default interface ICreateMinistryDTO {
   name: string;
   local?: string;
   date?: Date;
   hour?: Date;
-  leaders?: ILeaders[];
+  leaders?: User[];
 }

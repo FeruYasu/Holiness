@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
-import IMinistrieRepository from '@modules/ministries/repositories/IMinistriesRepository';
+import { parse } from 'date-fns';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 
@@ -11,6 +11,7 @@ interface IRequest {
   user_id: string;
   name: string;
   email: string;
+  birthdate: string;
   old_password?: string;
   password?: string;
   leaders_id?: string[];
@@ -30,6 +31,7 @@ class UpdateProfileService {
     user_id,
     name,
     email,
+    birthdate,
     password,
     old_password,
   }: IRequest): Promise<User> {
@@ -63,6 +65,10 @@ class UpdateProfileService {
       }
       user.password = await this.hashProvider.generateHash(password);
     }
+
+    const [day, month, year] = birthdate.split('/');
+
+    user.birthdate = new Date(Number(year), Number(month) - 1, Number(day));
 
     return this.usersRepository.save(user);
   }

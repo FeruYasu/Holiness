@@ -1,9 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import uploadConfig from '@config/upload';
 
-import MinistryLeaders from '@modules/ministries/infra/typeorm/entities/MinistryLeaders';
 import { Expose } from 'class-transformer';
-import MinistryMembers from './MinistryMembers';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('ministries')
 class Ministry {
@@ -28,23 +33,13 @@ class Ministry {
   @Column()
   description: string;
 
-  @OneToMany(
-    () => MinistryLeaders,
-    ministriesleaders => ministriesleaders.ministry,
-    {
-      cascade: true,
-    },
-  )
-  ministries_leaders: Partial<MinistryLeaders>[];
-
-  @OneToMany(
-    () => MinistryMembers,
-    menistriesmembers => menistriesmembers.ministry,
-    {
-      cascade: true,
-    },
-  )
-  ministries_members: Partial<MinistryMembers>[];
+  @ManyToMany(() => User)
+  @JoinTable({
+    name: 'ministries_leaders',
+    joinColumns: [{ name: 'ministry_id' }],
+    inverseJoinColumns: [{ name: 'user_id' }],
+  })
+  leaders: User[];
 
   @Expose({ name: 'photoUrl' })
   getAvatarUrl(): string | null {

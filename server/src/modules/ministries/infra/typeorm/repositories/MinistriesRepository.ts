@@ -13,13 +13,9 @@ class MinistriesRepository implements IMinistriesRepository {
     this.ormRepository = getRepository(Ministry);
   }
 
-  public async create({
-    name,
-    leaders,
-  }: ICreateMinistryDTO): Promise<Ministry> {
+  public async create({ name }: ICreateMinistryDTO): Promise<Ministry> {
     const ministry = this.ormRepository.create({
       name,
-      ministries_leaders: leaders,
     });
 
     await this.ormRepository.save(ministry);
@@ -39,12 +35,7 @@ class MinistriesRepository implements IMinistriesRepository {
 
   public async listAll(): Promise<Ministry[] | undefined> {
     const ministriesList = this.ormRepository.find({
-      relations: [
-        'ministries_leaders',
-        'ministries_leaders.leader',
-        'ministries_members',
-        'ministries_members.member',
-      ],
+      relations: ['leaders'],
     });
 
     return ministriesList;
@@ -53,7 +44,7 @@ class MinistriesRepository implements IMinistriesRepository {
   public async findById(id: string): Promise<Ministry | undefined> {
     const ministry = this.ormRepository.findOne({
       where: { id },
-      relations: ['ministries_leaders', 'ministries_members'],
+      relations: ['leaders'],
     });
 
     return ministry;
