@@ -1,3 +1,5 @@
+import uploadConfig from '@config/upload';
+
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,13 +8,11 @@ import {
   JoinTable,
   CreateDateColumn,
 } from 'typeorm';
-import uploadConfig from '@config/upload';
 
-import { Expose, Exclude } from 'class-transformer';
-import User from '@modules/users/infra/typeorm/entities/User';
+import { Exclude, Expose } from 'class-transformer';
 
-@Entity('ministries')
-class Ministry {
+@Entity('events')
+class Event {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,16 +23,22 @@ class Ministry {
   local: string;
 
   @Column()
-  date: Date;
-
-  @Column()
-  hour: Date;
+  description: string;
 
   @Column()
   photo: string;
 
   @Column()
-  description: string;
+  start_date: Date;
+
+  @Column()
+  start_hour: Date;
+
+  @Column()
+  end_date: Date;
+
+  @Column()
+  end_hour: Date;
 
   @CreateDateColumn()
   @Exclude()
@@ -41,22 +47,6 @@ class Ministry {
   @CreateDateColumn()
   @Exclude()
   updated_at: Date;
-
-  @ManyToMany(() => User)
-  @JoinTable({
-    name: 'ministries_leaders',
-    joinColumns: [{ name: 'ministry_id' }],
-    inverseJoinColumns: [{ name: 'user_id' }],
-  })
-  leaders: User[];
-
-  @ManyToMany(() => User)
-  @JoinTable({
-    name: 'ministries_members',
-    joinColumns: [{ name: 'ministry_id' }],
-    inverseJoinColumns: [{ name: 'user_id' }],
-  })
-  members: User[];
 
   @Expose({ name: 'photoUrl' })
   getPhotoUrl(): string | null {
@@ -75,4 +65,4 @@ class Ministry {
   }
 }
 
-export default Ministry;
+export default Event;
