@@ -5,9 +5,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 import { Exclude, Expose } from 'class-transformer';
+import Ministry from '@modules/ministries/infra/typeorm/entities/Ministry';
 
 @Entity('events')
 class Event {
@@ -39,6 +42,14 @@ class Event {
   @CreateDateColumn()
   @Exclude()
   updated_at: Date;
+
+  @ManyToMany(() => Ministry)
+  @JoinTable({
+    name: 'events_ministries',
+    joinColumns: [{ name: 'event_id' }],
+    inverseJoinColumns: [{ name: 'ministry_id' }],
+  })
+  leaders: Ministry[];
 
   @Expose({ name: 'photoUrl' })
   getPhotoUrl(): string | null {
