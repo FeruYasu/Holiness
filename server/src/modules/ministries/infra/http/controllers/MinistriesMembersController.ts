@@ -6,14 +6,14 @@ import { Request, Response } from 'express';
 
 export default class MinistriesMembersController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { members } = request.body;
+    const { membersIds } = request.body;
     const { id } = request.params;
 
     const addMembers = container.resolve(AddMembersToMinistriesService);
 
     const ministry = await addMembers.execute({
       ministryId: id,
-      members,
+      membersIds,
     });
 
     return response.json(ministry);
@@ -23,14 +23,14 @@ export default class MinistriesMembersController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const { members } = request.body;
+    const { membersIds } = request.body;
     const { id } = request.params;
 
     const deleteMembers = container.resolve(DeleteMembersToMinistriesService);
 
     const ministry = await deleteMembers.execute({
       ministryId: id,
-      members,
+      membersIds,
     });
 
     return response.json(ministry);

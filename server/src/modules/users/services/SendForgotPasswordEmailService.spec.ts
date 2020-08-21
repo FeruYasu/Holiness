@@ -30,6 +30,7 @@ describe('SendForgotPasswordEmail', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     await sendForgotPasswordEmail.execute({
@@ -54,6 +55,7 @@ describe('SendForgotPasswordEmail', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     await sendForgotPasswordEmail.execute({

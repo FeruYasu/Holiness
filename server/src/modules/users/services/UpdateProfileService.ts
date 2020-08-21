@@ -1,7 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
-import { parse } from 'date-fns';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 
@@ -9,9 +8,9 @@ import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   user_id: string;
-  name: string;
-  email: string;
-  birthdate: string;
+  name?: string;
+  email?: string;
+  birthdate?: string;
   old_password?: string;
   password?: string;
   leaders_id?: string[];
@@ -41,14 +40,21 @@ class UpdateProfileService {
       throw new AppError('User not found');
     }
 
-    const userWithUpdatedEmail = await this.usersRepository.findByEmail(email);
+    if (email) {
+      const userWithUpdatedEmail = await this.usersRepository.findByEmail(
+        email,
+      );
 
-    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user_id) {
-      throw new AppError('E-mail already in use');
+      if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user_id) {
+        throw new AppError('E-mail already in use');
+      }
+
+      user.email = email;
     }
 
-    user.name = name;
-    user.email = email;
+    if (name) {
+      user.name = name;
+    }
 
     if (password && !old_password) {
       throw new AppError('You need to inform your old password');
@@ -66,9 +72,11 @@ class UpdateProfileService {
       user.password = await this.hashProvider.generateHash(password);
     }
 
-    const [day, month, year] = birthdate.split('/');
+    if (birthdate) {
+      const [day, month, year] = birthdate.split('/');
 
-    user.birthdate = new Date(Number(year), Number(month) - 1, Number(day));
+      user.birthdate = new Date(Number(year), Number(month) - 1, Number(day));
+    }
 
     return this.usersRepository.save(user);
   }

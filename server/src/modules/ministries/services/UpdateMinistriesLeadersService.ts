@@ -6,7 +6,7 @@ import Ministry from '../infra/typeorm/entities/Ministry';
 
 interface IRequest {
   ministryId: string;
-  leaders_ids: string[];
+  leadersIds: string[];
 }
 
 @injectable()
@@ -21,10 +21,10 @@ class UpdateMinistriesLeadersService {
 
   public async execute({
     ministryId,
-    leaders_ids,
+    leadersIds,
   }: IRequest): Promise<Ministry | undefined> {
     const ministry = await this.ministriesRepository.findById(ministryId);
-    const users = await this.usersRepository.findByIds(leaders_ids);
+    const users = await this.usersRepository.findByIds(leadersIds);
 
     if (ministry && users) {
       ministry.leaders = users;

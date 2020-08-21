@@ -2,19 +2,16 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import Ministry from '@modules/ministries/infra/typeorm/entities/Ministry';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IMinistriesRepository from '../repositories/IMinistriesRepository';
-
-interface ILeaders {
-  user_id: string;
-}
 
 interface IRequest {
   name: string;
   local?: string;
   date?: Date;
   hour?: Date;
-  leaders?: ILeaders[];
-  members_id?: string[];
+  leadersIds: string[];
+  membersIds?: string[];
 }
 
 @injectable()
@@ -22,11 +19,14 @@ class CreateMinistriesService {
   constructor(
     @inject('MinistriesRepository')
     private ministriesRepository: IMinistriesRepository,
+
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
   ) {}
 
   public async execute({
     name,
-    leaders,
+    leadersIds,
     local,
     date,
     hour,
@@ -39,12 +39,14 @@ class CreateMinistriesService {
       throw new AppError('Ministries already used.');
     }
 
+    const leaders = await this.usersRepository.findByIds(leadersIds);
+
     const ministries = await this.ministriesRepository.create({
       name,
-      leaders,
       local,
       date,
       hour,
+      leaders,
     });
 
     return ministries;

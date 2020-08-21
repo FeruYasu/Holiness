@@ -35,7 +35,7 @@ class MinistriesRepository implements IMinistriesRepository {
 
   public async listAll(): Promise<Ministry[] | undefined> {
     const ministriesList = this.ormRepository.find({
-      relations: ['leaders'],
+      relations: ['leaders', 'members'],
     });
 
     return ministriesList;
@@ -44,7 +44,7 @@ class MinistriesRepository implements IMinistriesRepository {
   public async findById(id: string): Promise<Ministry | undefined> {
     const ministry = this.ormRepository.findOne({
       where: { id },
-      relations: ['leaders'],
+      relations: ['leaders', 'members'],
     });
 
     return ministry;

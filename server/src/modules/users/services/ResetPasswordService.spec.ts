@@ -28,6 +28,7 @@ describe('ResetPasswordService', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     const { token } = await fakeUserTokensRepository.generate(user.id);
@@ -72,6 +73,7 @@ describe('ResetPasswordService', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     const { token } = await fakeUserTokensRepository.generate(user.id);

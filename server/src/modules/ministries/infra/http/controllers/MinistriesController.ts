@@ -29,11 +29,11 @@ export default class MinistriesController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, leaders } = request.body;
+    const { name, leadersIds } = request.body;
 
     const createMinistry = container.resolve(CreateMinistriesService);
 
-    const ministry = await createMinistry.execute({ name, leaders });
+    const ministry = await createMinistry.execute({ name, leadersIds });
 
     return response.json(ministry);
   }

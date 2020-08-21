@@ -23,6 +23,7 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     const updatedUser = await updateProfile.execute({
@@ -50,12 +51,14 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     const user = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'teste@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     await expect(
@@ -72,6 +75,7 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     const updatedUser = await updateProfile.execute({
@@ -90,6 +94,7 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     await expect(
@@ -107,6 +112,7 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'oi@oi.com.br',
       password: '123123',
+      birthdate: new Date(),
     });
 
     await expect(

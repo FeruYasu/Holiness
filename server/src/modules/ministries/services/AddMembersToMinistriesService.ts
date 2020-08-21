@@ -1,12 +1,12 @@
 import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
-import MinistryMembers from '@modules/ministries/infra/typeorm/entities/MinistryMembers';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IMinistrieRepository from '../repositories/IMinistriesRepository';
 import Ministry from '../infra/typeorm/entities/Ministry';
 
 interface IRequest {
   ministryId: string;
-  members: Partial<MinistryMembers>[];
+  membersIds: string[];
 }
 
 @injectable()
@@ -14,25 +14,25 @@ class AddMembersToMinistriesService {
   constructor(
     @inject('MinistriesRepository')
     private ministriesRepository: IMinistrieRepository,
+
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
   ) {}
 
   public async execute({
     ministryId,
-    members,
+    membersIds,
   }: IRequest): Promise<Ministry | undefined> {
     const ministry = await this.ministriesRepository.findById(ministryId);
+    const users = await this.usersRepository.findByIds(membersIds);
+    const members = ministry?.members;
 
-    if (ministry) {
-      members.forEach(memberId => {
-        const membercheck = ministry.ministries_members.find(
-          member => member.user_id === memberId.user_id,
-        );
-
-        if (!membercheck) {
-          ministry.ministries_members.push(memberId);
-        }
-      });
-
+    if (ministry && users) {
+      if (members) {
+        ministry.members = members.concat(users);
+      } else {
+        ministry.members = users;
+      }
       this.ministriesRepository.save(ministry);
     } else {
       throw new AppError('User ID or Ministry not found');

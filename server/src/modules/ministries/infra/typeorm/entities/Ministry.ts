@@ -41,6 +41,14 @@ class Ministry {
   })
   leaders: User[];
 
+  @ManyToMany(() => User)
+  @JoinTable({
+    name: 'ministries_members',
+    joinColumns: [{ name: 'ministry_id' }],
+    inverseJoinColumns: [{ name: 'user_id' }],
+  })
+  members: User[];
+
   @Expose({ name: 'photoUrl' })
   getAvatarUrl(): string | null {
     if (!this.photo) {
