@@ -4,8 +4,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
   CreateDateColumn,
 } from 'typeorm';
 
@@ -32,13 +30,7 @@ class Event {
   start_date: Date;
 
   @Column()
-  start_hour: Date;
-
-  @Column()
   end_date: Date;
-
-  @Column()
-  end_hour: Date;
 
   @CreateDateColumn()
   @Exclude()

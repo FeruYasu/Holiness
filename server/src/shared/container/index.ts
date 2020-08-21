@@ -12,6 +12,9 @@ import MinistriesRepository from '@modules/ministries/infra/typeorm/repositories
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
+import IEventsRepository from '@modules/events/repositories/IEventsRepository';
+import EventsRepository from '@modules/events/infra/typeorm/repositories/EventsRepository';
+
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
 
@@ -28,6 +31,11 @@ container.registerSingleton<IMinistrieRepository>(
 container.registerSingleton<IUserTokensRepository>(
   'UserTokensRepository',
   UserTokensRepository,
+);
+
+container.registerSingleton<IEventsRepository>(
+  'EventsRepository',
+  EventsRepository,
 );
 
 container.registerSingleton<INotificationsRepository>(

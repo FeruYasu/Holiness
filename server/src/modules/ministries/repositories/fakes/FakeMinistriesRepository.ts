@@ -1,11 +1,11 @@
 import { uuid } from 'uuidv4';
 
-import IMinistriessRepository from '@modules/ministries/repositories/IMinistriesRepository';
+import IMinistriesRepository from '@modules/ministries/repositories/IMinistriesRepository';
 import ICreateMinistryDTO from '@modules/ministries/dtos/ICreateMinistryDTO';
 
 import Ministry from '../../infra/typeorm/entities/Ministry';
 
-class MinistriessRepository implements IMinistriessRepository {
+class MinistriesRepository implements IMinistriesRepository {
   private ministries: Ministry[] = [];
 
   public async create({ name }: ICreateMinistryDTO): Promise<Ministry> {
@@ -48,4 +48,4 @@ class MinistriessRepository implements IMinistriessRepository {
   }
 }
 
-export default MinistriessRepository;
+export default MinistriesRepository;

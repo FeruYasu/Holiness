@@ -35,15 +35,7 @@ export default class CreateEvent1598013796681 implements MigrationInterface {
             type: 'timestamp',
           },
           {
-            name: 'start_hour',
-            type: 'timestamp',
-          },
-          {
             name: 'end_date',
-            type: 'timestamp',
-          },
-          {
-            name: 'end_hour',
             type: 'timestamp',
           },
           {
