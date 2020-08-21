@@ -46,6 +46,14 @@ class MinistriesRepository implements IMinistriesRepository {
 
     return findMinistries;
   }
+
+  public async findByIds(ids: string[]): Promise<Ministry[] | undefined> {
+    const findMinistries = await this.ministries.filter(ministry => {
+      return ids.includes(ministry.id);
+    });
+
+    return findMinistries;
+  }
 }
 
 export default MinistriesRepository;

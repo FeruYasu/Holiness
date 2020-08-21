@@ -4,11 +4,10 @@ import {
   Column,
   ManyToMany,
   JoinTable,
-  CreateDateColumn,
 } from 'typeorm';
 import uploadConfig from '@config/upload';
 
-import { Expose, Exclude } from 'class-transformer';
+import { Expose } from 'class-transformer';
 import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('ministries')
@@ -33,14 +32,6 @@ class Ministry {
 
   @Column()
   description: string;
-
-  @CreateDateColumn()
-  @Exclude()
-  created_at: Date;
-
-  @CreateDateColumn()
-  @Exclude()
-  updated_at: Date;
 
   @ManyToMany(() => User)
   @JoinTable({

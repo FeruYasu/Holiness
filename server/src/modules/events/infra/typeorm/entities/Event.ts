@@ -49,7 +49,7 @@ class Event {
     joinColumns: [{ name: 'event_id' }],
     inverseJoinColumns: [{ name: 'ministry_id' }],
   })
-  leaders: Ministry[];
+  ministries: Ministry[];
 
   @Expose({ name: 'photoUrl' })
   getPhotoUrl(): string | null {

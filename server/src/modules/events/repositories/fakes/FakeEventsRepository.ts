@@ -46,6 +46,12 @@ class EventRepository implements IEventRepository {
     this.events[findIndex] = event;
     return event;
   }
+
+  public async findById(id: string): Promise<Event | undefined> {
+    const event = this.events.find(e => e.id === id);
+
+    return event;
+  }
 }
 
 export default EventRepository;

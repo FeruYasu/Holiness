@@ -1,14 +1,14 @@
 import FakeEventsRepository from '../repositories/fakes/FakeEventsRepository';
 import CreateEventsService from './CreateEventsService';
 
-let fakeMinistriesRepository: FakeEventsRepository;
+let fakeEventsRepository: FakeEventsRepository;
 let createEvent: CreateEventsService;
 
 describe('CreateEvents', () => {
   beforeEach(() => {
-    fakeMinistriesRepository = new FakeEventsRepository();
+    fakeEventsRepository = new FakeEventsRepository();
 
-    createEvent = new CreateEventsService(fakeMinistriesRepository);
+    createEvent = new CreateEventsService(fakeEventsRepository);
   });
 
   it('should be able to create a new Event', async () => {
