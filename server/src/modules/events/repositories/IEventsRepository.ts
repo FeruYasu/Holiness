@@ -11,5 +11,6 @@ interface IRequest {
 export default interface IMinistrieRepository {
   save(data: IRequest): Promise<Event>;
   findById(id: string): Promise<Event | undefined>;
+  listAll(): Promise<Event[] | undefined>;
   create(data: IRequest): Promise<Event>;
 }

@@ -52,6 +52,12 @@ class EventRepository implements IEventRepository {
 
     return event;
   }
+
+  public async listAll(): Promise<Event[] | undefined> {
+    const { events } = this;
+
+    return events;
+  }
 }
 
 export default EventRepository;
