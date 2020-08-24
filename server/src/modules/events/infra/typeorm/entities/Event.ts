@@ -11,6 +11,7 @@ import {
 
 import { Exclude, Expose } from 'class-transformer';
 import Ministry from '@modules/ministries/infra/typeorm/entities/Ministry';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('events')
 class Event {
@@ -50,6 +51,14 @@ class Event {
     inverseJoinColumns: [{ name: 'ministry_id' }],
   })
   ministries: Ministry[];
+
+  @ManyToMany(() => User)
+  @JoinTable({
+    name: 'events_participants',
+    joinColumns: [{ name: 'event_id' }],
+    inverseJoinColumns: [{ name: 'user_id' }],
+  })
+  participants: User[];
 
   @Expose({ name: 'photoUrl' })
   getPhotoUrl(): string | null {

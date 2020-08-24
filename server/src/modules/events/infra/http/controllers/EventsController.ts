@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 
 import CreateEventsService from '@modules/events/services/CreateEventsService';
 import ListEventsService from '@modules/events/services/ListEventsService';
+import { classToClass } from 'class-transformer';
 
 export default class EventsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -11,7 +12,7 @@ export default class EventsController {
 
     const events = await listEvent.execute();
 
-    return response.json(events);
+    return response.json(classToClass(events));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
