@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRoute } from '@react-navigation/native';
-
-import { useNavigation } from '@react-navigation/native';
 
 import Header from '../../components/Header';
 
@@ -21,6 +19,11 @@ interface Participant {
     name: string;
     avatar_url: string;
   };
+  member: {
+    id: string;
+    name: string;
+    avatar_url: string;
+  };
 }
 
 interface Ministry {
@@ -28,14 +31,13 @@ interface Ministry {
     name: string;
     photoUrl: string;
     ministries_leaders: Participant[];
+    ministries_members: Participant[];
   };
 }
 
 const Participants: React.FC = () => {
   const route = useRoute();
   const { data } = route.params as Ministry;
-
-  const { navigate } = useNavigation();
 
   return (
     <Container>

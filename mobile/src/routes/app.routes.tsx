@@ -6,6 +6,7 @@ import Ministry from '../pages/Ministry';
 import Participants from '../pages/Participants';
 import Profile from '../pages/Profile';
 import Events from '../pages/Events';
+import SingleEvent from '../pages/SingleEvent';
 
 const Auth = createStackNavigator();
 
@@ -18,6 +19,7 @@ const AppRoutes: React.FC = () => {
       }}
     >
       <Auth.Screen name="Events" component={Events} />
+      <Auth.Screen name="SingleEvent" component={SingleEvent} />
       <Auth.Screen name="Ministries" component={Ministries} />
       <Auth.Screen name="Ministry" component={Ministry} />
       <Auth.Screen name="Participants" component={Participants} />
