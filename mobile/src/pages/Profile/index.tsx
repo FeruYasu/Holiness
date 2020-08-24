@@ -166,7 +166,6 @@ const Profile: React.FC = () => {
   );
 
   const toggleTheme = useCallback(() => {
-    console.log(darktheme);
     if (darktheme === true) {
       setDarkTheme(false);
       changeTheme();

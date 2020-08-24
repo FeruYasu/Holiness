@@ -27,7 +27,7 @@ const Ministries: React.FC = () => {
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    api.get('/ministries').then((response) => {
+    api.get('ministries').then((response) => {
       setMinistries(response.data);
     });
   }, []);
@@ -35,12 +35,12 @@ const Ministries: React.FC = () => {
   return (
     <Container>
       <MinistriesList
-        ListHeaderComponent={(
+        ListHeaderComponent={
           <>
             <Header />
             <MainTitle>Ministérios</MainTitle>
           </>
-        )}
+        }
         data={ministries}
         keyExtractor={(ministry) => ministry.id}
         renderItem={({ item: ministry }) => (

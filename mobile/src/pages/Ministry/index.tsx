@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -33,19 +33,20 @@ import {
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 
-interface Leader {
-  leader: {
-    id: string;
-    name: string;
-    avatar_url: string;
-  };
+interface User {
+  id: string;
+  name: string;
+  avatar_url: string;
 }
 
 interface Ministry {
   data: {
     name: string;
+    description: string;
     photoUrl: string;
-    ministries_leaders: Leader[];
+    local: string;
+    leaders: User[];
+    members: User[];
   };
 }
 
@@ -58,7 +59,7 @@ const Ministry: React.FC = () => {
 
   const handleParticipants = useCallback(() => {
     navigate('Participants', { data });
-  }, []);
+  }, [data, navigate]);
 
   return (
     <Container>
@@ -99,27 +100,25 @@ const Ministry: React.FC = () => {
         <SubTitle>Lideres</SubTitle>
         <LeadersContainer>
           {data &&
-            data.ministries_leaders.map((item) => {
+            data.leaders.map((leader) => {
               return (
-                <Leader key={item.leader.id}>
-                  <Picture source={{ uri: item.leader.avatar_url }} />
-                  <Name>{item.leader.name}</Name>
+                <Leader key={leader.id}>
+                  <Picture source={{ uri: leader.avatar_url }} />
+                  <Name>{leader.name}</Name>
                 </Leader>
               );
             })}
         </LeadersContainer>
         <SubTitle>Sobre o ministério</SubTitle>
         <Description>{data.description}</Description>
-        <MembersTitle>
-          {data.ministries_members.length} Participantes
-        </MembersTitle>
+        <MembersTitle>{data.members.length} Participantes</MembersTitle>
         <TouchableOpacity onPress={handleParticipants}>
           <MembersContainer>
             {data &&
-              data.ministries_members.map((item) => {
+              data.members.map((member) => {
                 return (
-                  <Member key={item.member.id}>
-                    <Picture source={{ uri: item.member.avatar_url }} />
+                  <Member key={member.id}>
+                    <Picture source={{ uri: member.avatar_url }} />
                   </Member>
                 );
               })}
