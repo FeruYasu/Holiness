@@ -24,13 +24,13 @@ export default class EventsParticipantsController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const { eventId, participantsIds } = request.body;
+    const { eventId, usersIds } = request.body;
 
     const deleteParticipants = container.resolve(DeleteParticipantsFromEvent);
 
     const event = await deleteParticipants.execute({
       eventId,
-      usersIds: participantsIds,
+      usersIds,
     });
 
     return response.json(classToClass(event));

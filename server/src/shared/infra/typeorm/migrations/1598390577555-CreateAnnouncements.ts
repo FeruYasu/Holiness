@@ -1,6 +1,11 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export default class CreateNotification1591132004959
+export default class CreateAnnouncements1598390577555
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -37,7 +42,12 @@ export default class CreateNotification1591132004959
             isNullable: true,
           },
           {
-            name: 'recipients_id',
+            name: 'link',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'event_id',
             type: 'uuid',
             isNullable: true,
           },
@@ -54,9 +64,35 @@ export default class CreateNotification1591132004959
         ],
       }),
     );
+
+    await queryRunner.createForeignKey(
+      'announcements',
+      new TableForeignKey({
+        name: 'userId',
+        columnNames: ['user_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users',
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      }),
+    );
+
+    await queryRunner.createForeignKey(
+      'announcements',
+      new TableForeignKey({
+        name: 'eventId',
+        columnNames: ['event_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'events',
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey('announcements', 'eventId');
+    await queryRunner.dropForeignKey('announcements', 'userId');
     await queryRunner.dropTable('announcements');
   }
 }

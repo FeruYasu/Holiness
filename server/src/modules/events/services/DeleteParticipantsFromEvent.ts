@@ -28,8 +28,6 @@ class DeleteParticipantsFromEvent {
   }: IRequest): Promise<Event | undefined> {
     const event = await this.eventsRepository.findById(eventId);
 
-    console.log(event);
-
     if (event) {
       usersIds.forEach(userId => {
         const userCheck = event.participants.findIndex(

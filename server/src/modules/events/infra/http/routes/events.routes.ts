@@ -15,6 +15,7 @@ eventsRouter.get('/', eventsController.index);
 eventsRouter.get('/:id', eventsController.show);
 
 eventsRouter.post('/ministries', eventsMinistriesController.create);
+
 eventsRouter.post('/participants', eventsParticipantsController.create);
 eventsRouter.delete('/participants', eventsParticipantsController.destroy);
 
