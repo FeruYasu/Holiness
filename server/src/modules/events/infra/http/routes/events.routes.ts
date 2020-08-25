@@ -12,6 +12,7 @@ const eventsParticipantsController = new EventsParticipantsController();
 
 eventsRouter.post('/', eventsController.create);
 eventsRouter.get('/', eventsController.index);
+eventsRouter.get('/:id', eventsController.show);
 
 eventsRouter.post('/ministries', eventsMinistriesController.create);
 eventsRouter.post('/participants', eventsParticipantsController.create);

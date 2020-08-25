@@ -30,6 +30,6 @@ describe('ListEvents', () => {
 
     const events = await listEventService.execute();
 
-    expect(events).toMatchObject([event, event2]);
+    await expect(events).toMatchObject([event, event2]);
   });
 });

@@ -6,6 +6,8 @@ import CreateEventsService from '@modules/events/services/CreateEventsService';
 import ListEventsService from '@modules/events/services/ListEventsService';
 import { classToClass } from 'class-transformer';
 
+import ShowEventByIdService from '@modules/events/services/ShowEventByIdService';
+
 export default class EventsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listEvent = container.resolve(ListEventsService);
@@ -13,6 +15,15 @@ export default class EventsController {
     const events = await listEvent.execute();
 
     return response.json(classToClass(events));
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const showEvent = container.resolve(ShowEventByIdService);
+
+    const event = await showEvent.execute(id);
+
+    return response.json(classToClass(event));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
