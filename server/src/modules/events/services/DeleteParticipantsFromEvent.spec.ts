@@ -2,13 +2,15 @@ import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepo
 import FakeEventsRepository from '../repositories/fakes/FakeEventsRepository';
 
 import AddParticipantsToEventService from './AddParticipantsToEventService';
+import DeleteParticipantsFromEvent from './DeleteParticipantsFromEvent';
 
 let fakeEventsRepository: FakeEventsRepository;
 let fakeUsersRepository: FakeUsersRepository;
 
 let addParticipantsToEvent: AddParticipantsToEventService;
+let deleteParticipantsFromEvent: DeleteParticipantsFromEvent;
 
-describe('Add Participants to Event', () => {
+describe('Delete Participant from event', () => {
   beforeEach(() => {
     fakeEventsRepository = new FakeEventsRepository();
     fakeUsersRepository = new FakeUsersRepository();
@@ -17,17 +19,14 @@ describe('Add Participants to Event', () => {
       fakeEventsRepository,
       fakeUsersRepository,
     );
+
+    deleteParticipantsFromEvent = new DeleteParticipantsFromEvent(
+      fakeEventsRepository,
+      fakeUsersRepository,
+    );
   });
 
-  it('should be able to add participants to specific event', async () => {
-    const event = await fakeEventsRepository.create({
-      name: 'Primeiro Evento',
-      local: 'Igreja Holiness',
-      description: 'Primiero evento Teste',
-      start_date: new Date(),
-      end_date: new Date(),
-    });
-
+  it('should be able to delete from single event', async () => {
     const participant1 = await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'oi@oi.com.br',
@@ -42,6 +41,14 @@ describe('Add Participants to Event', () => {
       birthdate: new Date(),
     });
 
+    const event = await fakeEventsRepository.create({
+      name: 'Primeiro Evento',
+      local: 'Igreja Holiness',
+      description: 'Primeiro evento Teste',
+      start_date: new Date(),
+      end_date: new Date(),
+    });
+
     const usersIds = [participant1.id, participant2.id];
 
     await addParticipantsToEvent.execute({
@@ -49,22 +56,11 @@ describe('Add Participants to Event', () => {
       usersIds,
     });
 
-    const participant3 = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'oi@oi.com.br',
-      password: '123123',
-      birthdate: new Date(),
-    });
-
-    const updatedParticipants = await addParticipantsToEvent.execute({
+    const updatedEvent = await deleteParticipantsFromEvent.execute({
       eventId: event.id,
-      usersIds: [participant3.id],
+      usersIds: [participant1.id],
     });
 
-    await expect(updatedParticipants?.participants).toMatchObject([
-      participant1,
-      participant2,
-      participant3,
-    ]);
+    await expect(updatedEvent?.participants).toMatchObject([participant2]);
   });
 });

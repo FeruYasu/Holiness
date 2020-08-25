@@ -44,12 +44,12 @@ class EventsRepository implements IEventsRepository {
   }
 
   public async findById(id: string): Promise<Event | undefined> {
-    return this.ormRepository.findOne(id);
+    return this.ormRepository.findOne(id, { relations: ['participants'] });
   }
 
   public async listAll(): Promise<Event[] | undefined> {
     const events = this.ormRepository.find({
-      relations: ['ministries'],
+      relations: ['ministries', 'participants'],
     });
 
     return events;

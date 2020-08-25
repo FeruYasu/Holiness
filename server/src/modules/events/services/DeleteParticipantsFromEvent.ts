@@ -13,7 +13,7 @@ interface IRequest {
 }
 
 @injectable()
-class AddParticipantsToEventService {
+class DeleteParticipantsFromEvent {
   constructor(
     @inject('EventsRepository')
     public eventsRepository: IEventsRepository,
@@ -27,17 +27,18 @@ class AddParticipantsToEventService {
     usersIds,
   }: IRequest): Promise<Event | undefined> {
     const event = await this.eventsRepository.findById(eventId);
-    const users = await this.usersRepository.findByIds(usersIds);
 
-    const participants = event?.participants;
+    console.log(event);
 
-    if (event && users) {
-      if (participants) {
-        event.participants = participants.concat(users);
-      } else {
-        event.participants = users;
-      }
-
+    if (event) {
+      usersIds.forEach(userId => {
+        const userCheck = event.participants.findIndex(
+          participant => participant.id === userId,
+        );
+        if (userCheck !== -1) {
+          event.participants.splice(userCheck, 1);
+        }
+      });
       this.eventsRepository.save(event);
     } else {
       throw new AppError('Users IDs or Event not found');
@@ -47,4 +48,4 @@ class AddParticipantsToEventService {
   }
 }
 
-export default AddParticipantsToEventService;
+export default DeleteParticipantsFromEvent;
