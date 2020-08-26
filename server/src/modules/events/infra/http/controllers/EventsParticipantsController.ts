@@ -8,13 +8,15 @@ import { classToClass } from 'class-transformer';
 
 export default class EventsParticipantsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { eventId, usersIds } = request.body;
+    const { eventId } = request.body;
+
+    const usersId = request.user.id;
 
     const addParticipants = container.resolve(AddParticipantsToEventService);
 
     const event = await addParticipants.execute({
       eventId,
-      usersIds,
+      usersIds: [usersId],
     });
 
     return response.json(classToClass(event));
@@ -24,13 +26,15 @@ export default class EventsParticipantsController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const { eventId, usersIds } = request.body;
+    const { eventId } = request.body;
+
+    const usersId = request.user.id;
 
     const deleteParticipants = container.resolve(DeleteParticipantsFromEvent);
 
     const event = await deleteParticipants.execute({
       eventId,
-      usersIds,
+      usersIds: [usersId],
     });
 
     return response.json(classToClass(event));

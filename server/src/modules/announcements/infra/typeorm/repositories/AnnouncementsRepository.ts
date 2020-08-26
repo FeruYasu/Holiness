@@ -1,18 +1,9 @@
 import { Repository, getRepository } from 'typeorm';
 import IAnnouncementRepository from '@modules/announcements/repositories/IAnnouncementsRepository';
 import Announcement from '../entities/Announcement';
+import ICreateAnnouncementDTO from '../../../dtos/ICreateAnnouncementDTO';
 
-interface IRequest {
-  title: string;
-  content: string;
-  user_id: string;
-  image?: string;
-  video?: string;
-  link?: string;
-  event_id?: string;
-}
-
-class AnnouncementRepository implements IAnnouncementRepository {
+class AnnouncementsRepository implements IAnnouncementRepository {
   private ormRepository: Repository<Announcement>;
 
   constructor() {
@@ -31,7 +22,7 @@ class AnnouncementRepository implements IAnnouncementRepository {
     video,
     link,
     event_id,
-  }: IRequest): Promise<Announcement> {
+  }: ICreateAnnouncementDTO): Promise<Announcement> {
     const announcement = this.ormRepository.create({
       title,
       content,
@@ -48,4 +39,4 @@ class AnnouncementRepository implements IAnnouncementRepository {
   }
 }
 
-export default AnnouncementRepository;
+export default AnnouncementsRepository;

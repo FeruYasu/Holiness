@@ -1,4 +1,4 @@
-export default interface ICreateMinistryDTO {
+export default interface ICreateEventDTO {
   name: string;
   local: string;
   description: string;

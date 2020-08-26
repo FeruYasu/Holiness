@@ -6,6 +6,7 @@ import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 import eventsRouter from '@modules/events/infra/http/routes/events.routes';
+import announcementsRouter from '@modules/announcements/infra/http/routes/announcements.routes';
 
 const routes = Router();
 
@@ -15,5 +16,6 @@ routes.use('/sessions', sessionsRouter);
 routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
 routes.use('/events', eventsRouter);
+routes.use('/announcements', announcementsRouter);
 
 export default routes;

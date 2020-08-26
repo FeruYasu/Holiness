@@ -17,6 +17,8 @@ import EventsRepository from '@modules/events/infra/typeorm/repositories/EventsR
 
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
+import IAnnouncementsRepository from '@modules/announcements/repositories/IAnnouncementsRepository';
+import AnnouncementsRepository from '@modules/announcements/infra/typeorm/repositories/AnnouncementsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -41,4 +43,9 @@ container.registerSingleton<IEventsRepository>(
 container.registerSingleton<INotificationsRepository>(
   'NotificationsRepository',
   NotificationsRepository,
+);
+
+container.registerSingleton<IAnnouncementsRepository>(
+  'AnnouncementsRepository',
+  AnnouncementsRepository,
 );
