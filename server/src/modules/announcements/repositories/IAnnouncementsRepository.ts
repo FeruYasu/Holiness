@@ -13,4 +13,5 @@ interface IRequest {
 export default interface IAnnouncementsRepository {
   save(data: Announcement): Promise<Announcement>;
   create(data: IRequest): Promise<Announcement>;
+  listAll(): Promise<Announcement[]>;
 }

@@ -1,18 +1,18 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import CreateAnnouncementService from './CreateAnnouncementService';
-import FakeAnnouncementRepository from '../repositories/fakes/FakeAnnouncementRepository';
+import FakeAnnouncementRepository from '../repositories/fakes/FakeAnnouncementsRepository';
 
 let createAnnouncementService: CreateAnnouncementService;
-let fakeAnnouncementeRepository: FakeAnnouncementRepository;
+let fakeAnnouncementsRepository: FakeAnnouncementRepository;
 let fakeUsersRepository: FakeUsersRepository;
 
 describe('CreateAnnouncement', () => {
   beforeEach(() => {
-    fakeAnnouncementeRepository = new FakeAnnouncementRepository();
+    fakeAnnouncementsRepository = new FakeAnnouncementRepository();
     fakeUsersRepository = new FakeUsersRepository();
 
     createAnnouncementService = new CreateAnnouncementService(
-      fakeAnnouncementeRepository,
+      fakeAnnouncementsRepository,
     );
   });
   it('should be able to create an announcement', async () => {

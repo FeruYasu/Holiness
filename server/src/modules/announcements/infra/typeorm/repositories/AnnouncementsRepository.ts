@@ -37,6 +37,14 @@ class AnnouncementsRepository implements IAnnouncementRepository {
 
     return announcement;
   }
+
+  public async listAll(): Promise<Announcement[]> {
+    const announcements = await this.ormRepository.find({
+      relations: ['user'],
+    });
+
+    return announcements;
+  }
 }
 
 export default AnnouncementsRepository;

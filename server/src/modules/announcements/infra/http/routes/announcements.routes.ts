@@ -7,10 +7,8 @@ const announcementsRouter = Router();
 
 const announcementsController = new AnnouncementsController();
 
-announcementsRouter.post(
-  '/',
-  ensureAuthentication,
-  announcementsController.create,
-);
+announcementsRouter.use(ensureAuthentication);
+announcementsRouter.post('/', announcementsController.create);
+announcementsRouter.get('/', announcementsController.index);
 
 export default announcementsRouter;

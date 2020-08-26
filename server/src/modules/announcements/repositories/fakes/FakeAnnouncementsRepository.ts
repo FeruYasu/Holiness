@@ -1,6 +1,6 @@
 import { uuid } from 'uuidv4';
 
-import IAnnouncementRepository from '@modules/announcements/repositories/IAnnouncementsRepository';
+import IAnnouncementsRepository from '@modules/announcements/repositories/IAnnouncementsRepository';
 
 import Announcement from '../../infra/typeorm/entities/Announcement';
 
@@ -14,7 +14,7 @@ interface IRequest {
   event_id?: string;
 }
 
-class AnnouncementRepository implements IAnnouncementRepository {
+class AnnouncementsRepository implements IAnnouncementsRepository {
   private announcements: Announcement[] = [];
 
   public async create({
@@ -52,6 +52,10 @@ class AnnouncementRepository implements IAnnouncementRepository {
     this.announcements[findIndex] = announcement;
     return announcement;
   }
+
+  public async listAll(): Promise<Announcement[]> {
+    return this.announcements;
+  }
 }
 
-export default AnnouncementRepository;
+export default AnnouncementsRepository;
