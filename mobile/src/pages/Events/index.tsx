@@ -52,8 +52,7 @@ const Events: React.FC = () => {
             </DateContainer>
             <ImageContainer
               onPress={() => {
-                navigate('SingleEvent', { data: event });
-                console.log('clicked');
+                navigate('SingleEvent', { id: event.id });
               }}
             >
               <EventImage source={{ uri: event.photoUrl }} />

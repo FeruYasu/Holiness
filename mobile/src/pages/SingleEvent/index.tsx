@@ -3,8 +3,10 @@ import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { useNavigation } from '@react-navigation/native';
-
 import { TouchableOpacity } from 'react-native';
+import { useAuth } from '../../hooks/auth';
+
+import api from '../../services/api';
 
 import Header from '../../components/Header';
 
@@ -36,7 +38,6 @@ import {
   ConfirmButton,
   ConfirmButtonText,
 } from './styles';
-import { useAuth } from '../../hooks/auth';
 
 interface Ministry {
   name: string;
@@ -49,33 +50,65 @@ interface User {
 }
 
 interface Event {
-  data: {
-    name: string;
-    description: string;
-    photoUrl: string;
-    local: string;
-    start_date: Date;
-    end_date: Date;
-    ministries: Ministry[];
-    participants: User[];
-  };
+  id: string;
+  photoUrl: string;
+}
+
+interface EventId {
+  id: string;
 }
 
 const SingleEvent: React.FC = () => {
   const route = useRoute();
-  const { data } = route.params as Event;
-  const { theme } = useAuth();
+  const { id } = route.params as EventId;
+  const { theme, user } = useAuth();
   const [event, setEvent] = useState<Event>({});
+  const [alredyParticipant, setAlredyParticipant] = useState(false);
+  const [participants, setParticipants] = useState<User[]>(false);
 
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    setEvent(data);
-  }, [data]);
+    api.get(`/events/${id}`).then((response) => {
+      setEvent(response.data);
+
+      setParticipants(response.data.participants);
+      response.data.participants.forEach((participant) => {
+        if (participant.id === user.id) {
+          setAlredyParticipant(true);
+        }
+      });
+    });
+  }, [id, user.id]);
 
   const handleParticipants = useCallback(() => {
-    navigate('Participants', { data });
-  }, [data, navigate]);
+    navigate('EventParticipants', { data: event });
+  }, [event, navigate]);
+
+  const confirmParticipation = useCallback(() => {
+    api
+      .post('events/participants', {
+        eventId: event.id,
+        usersIds: [user.id],
+      })
+      .then((response) => {
+        setEvent(response.data);
+        setParticipants(response.data.participants);
+        setAlredyParticipant(true);
+      });
+  }, [event.id, user.id]);
+
+  const cancelParticipation = useCallback(() => {
+    api
+      .delete('events/participants', {
+        data: { eventId: event.id, usersIds: [user.id] },
+      })
+      .then((response) => {
+        setEvent(response.data);
+        setParticipants(response.data.participants);
+        setAlredyParticipant(false);
+      });
+  }, [event.id, user.id]);
 
   return (
     <Container>
@@ -135,12 +168,12 @@ const SingleEvent: React.FC = () => {
         <SubTitle>Sobre o evento</SubTitle>
         <Description>{event.description}</Description>
         <ParticipantsTitle>
-          {event && event.participants?.length} Participantes
+          {participants && participants.length} Participantes
         </ParticipantsTitle>
         <TouchableOpacity onPress={handleParticipants}>
           <ParticipantsContainer>
-            {data &&
-              data.participants.map((participant) => {
+            {participants &&
+              participants.map((participant) => {
                 return (
                   <Participant key={participant.id}>
                     <Picture source={{ uri: participant.avatar_url }} />
@@ -151,12 +184,20 @@ const SingleEvent: React.FC = () => {
         </TouchableOpacity>
 
         <ButtonsContainer>
-          <CantGoButton>
-            <CantGoButtonText>Não participarei</CantGoButtonText>
-          </CantGoButton>
-          <ConfirmButton>
-            <ConfirmButtonText>Participar</ConfirmButtonText>
-          </ConfirmButton>
+          {alredyParticipant ? (
+            <CantGoButton onPress={cancelParticipation}>
+              <CantGoButtonText>Cancelar participação</CantGoButtonText>
+            </CantGoButton>
+          ) : (
+            <>
+              <CantGoButton>
+                <CantGoButtonText>Não participarei</CantGoButtonText>
+              </CantGoButton>
+              <ConfirmButton onPress={confirmParticipation}>
+                <ConfirmButtonText>Participar</ConfirmButtonText>
+              </ConfirmButton>
+            </>
+          )}
         </ButtonsContainer>
       </ContentContainer>
     </Container>

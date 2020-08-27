@@ -125,16 +125,12 @@ export const ParticipantsTitle = styled.Text`
 export const ParticipantsContainer = styled.ScrollView.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
-})`
-  flex-direction: row;
-  flex: 1;
-  height: 100%;
-`;
+})``;
 
 export const Participant = styled.View`
   margin-right: 16px;
   margin-top: 8px;
-  height: 100%;
+  height: 60px;
 `;
 
 export const ButtonsContainer = styled.View`
@@ -147,7 +143,7 @@ export const ButtonsContainer = styled.View`
 
 export const CantGoButton = styled.TouchableOpacity`
   margin-right: 20px;
-  width: 120px;
+  width: 180px;
 `;
 
 export const CantGoButtonText = styled.Text`

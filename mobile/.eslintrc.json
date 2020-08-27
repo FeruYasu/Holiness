@@ -33,6 +33,7 @@
       "prettier"
   ],
   "rules": {
+    "camelcase": "off",
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-one-expression-per-line": "off",
