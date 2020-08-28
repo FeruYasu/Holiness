@@ -5,10 +5,10 @@ import { getDate, parseISO } from 'date-fns';
 
 import {
   Container,
+  EventsList,
   DateContainer,
   InitialDate,
   FinalDate,
-  EventsList,
   MainTitle,
   EventContainer,
   ImageContainer,
