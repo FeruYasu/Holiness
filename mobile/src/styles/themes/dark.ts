@@ -14,5 +14,7 @@ export default {
     darkerGreyText: '#c2c2c2',
     cardBackground: '#292929',
     text: '#f5f5f5',
+    tabButtonText: '#969696',
+    tabBorder: '#474545',
   },
 };

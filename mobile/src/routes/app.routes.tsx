@@ -1,8 +1,11 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useAuth } from '../hooks/auth';
 
 import Ministries from '../pages/Ministries';
 import Ministry from '../pages/Ministry';
@@ -13,7 +16,6 @@ import SingleEvent from '../pages/SingleEvent';
 import EventParticipants from '../pages/EventParticipants';
 import Announcements from '../pages/Announcements';
 import Home from '../pages/Home';
-import { useAuth } from '../hooks/auth';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,7 +25,6 @@ const StackRoutes: React.FC = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        cardStyle: { backgroundColor: '#DADADA' },
       }}
     >
       <Stack.Screen name="Home" component={Home} />
@@ -36,38 +37,127 @@ const StackRoutes: React.FC = () => {
   );
 };
 
-const Oie: React.FC = () => {
-  const { theme } = useAuth();
-
-  return (
-    <Icon name="ios-information-circle" color={theme.colors.accent} size={24} />
-  );
-};
-
 const AppRoutes: React.FC = () => {
   const { theme } = useAuth();
 
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
         style: {
+          height: 50,
           backgroundColor: theme.colors.headerBackground,
+          borderTopWidth: 1,
+          borderTopColor: theme.colors.tabBorder,
+          paddingBottom: 4,
         },
+        tabSyle: {
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        iconStyle: {
+          flex: 0,
+          widht: 20,
+          height: 20,
+        },
+        labelStyle: {
+          fontFamily: 'SourceSansPro-Regular',
+          fontSize: 11,
+          marginTop: 4,
+        },
+        inactiveTintColor: theme.colors.tabButtonText,
+        TintColor: theme.colors.accent,
       }}
     >
       <Tab.Screen
         options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: Oie,
+          tabBarLabel: 'Pregações',
+          tabBarIcon: ({ size, focused }) => {
+            return (
+              <Icon
+                name="caret-forward-circle"
+                size={size}
+                color={
+                  focused ? theme.colors.accent : theme.colors.tabButtonText
+                }
+              />
+            );
+          },
         }}
-        name="StackRoutes"
+        name="Announcements"
+        component={Announcements}
+      />
+      <Tab.Screen
+        options={{
+          tabBarLabel: 'Compartilhar',
+          tabBarIcon: ({ size, focused }) => {
+            return (
+              <Icon
+                name="chatbubbles"
+                size={size}
+                color={
+                  focused ? theme.colors.accent : theme.colors.tabButtonText
+                }
+              />
+            );
+          },
+        }}
+        name="caret-forward-circle"
+        component={Ministries}
+      />
+      <Tab.Screen
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ size, focused }) => {
+            return (
+              <Icon
+                name="home"
+                size={size}
+                color={
+                  focused ? theme.colors.accent : theme.colors.tabButtonText
+                }
+              />
+            );
+          },
+        }}
+        name="Home"
         component={StackRoutes}
       />
-      <Tab.Screen name="Announcements" component={Announcements} />
-      <Tab.Screen name="Ministries" component={Ministries} />
-      <Tab.Screen name="Events" component={Events} />
+      <Tab.Screen
+        options={{
+          tabBarLabel: 'Eventos',
+          tabBarIcon: ({ size, focused }) => {
+            return (
+              <Icon
+                name="calendar"
+                size={size}
+                color={
+                  focused ? theme.colors.accent : theme.colors.tabButtonText
+                }
+              />
+            );
+          },
+        }}
+        name="Events"
+        component={Events}
+      />
+      <Tab.Screen
+        options={{
+          tabBarLabel: 'Menu',
+          tabBarIcon: ({ size, focused }) => {
+            return (
+              <Icon
+                name="menu"
+                size={size}
+                color={
+                  focused ? theme.colors.accent : theme.colors.tabButtonText
+                }
+              />
+            );
+          },
+        }}
+        name="Opções"
+        component={Events}
+      />
     </Tab.Navigator>
   );
 };
