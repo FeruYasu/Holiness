@@ -16,6 +16,7 @@ import SingleEvent from '../pages/SingleEvent';
 import EventParticipants from '../pages/EventParticipants';
 import Announcements from '../pages/Announcements';
 import Home from '../pages/Home';
+import Sermon from '../pages/Sermon';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -83,8 +84,8 @@ const AppRoutes: React.FC = () => {
             );
           },
         }}
-        name="Announcements"
-        component={Announcements}
+        name="Sermon"
+        component={Sermon}
       />
       <Tab.Screen
         options={{
