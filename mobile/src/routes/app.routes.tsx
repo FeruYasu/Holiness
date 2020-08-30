@@ -16,7 +16,7 @@ import SingleEvent from '../pages/SingleEvent';
 import EventParticipants from '../pages/EventParticipants';
 import Announcements from '../pages/Announcements';
 import Home from '../pages/Home';
-import Sermon from '../pages/Sermon';
+import Sermons from '../pages/Sermons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -51,13 +51,9 @@ const AppRoutes: React.FC = () => {
           borderTopColor: theme.colors.tabBorder,
           paddingBottom: 4,
         },
-        tabSyle: {
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
         iconStyle: {
           flex: 0,
-          widht: 20,
+          width: 20,
           height: 20,
         },
         labelStyle: {
@@ -66,7 +62,6 @@ const AppRoutes: React.FC = () => {
           marginTop: 4,
         },
         inactiveTintColor: theme.colors.tabButtonText,
-        TintColor: theme.colors.accent,
       }}
     >
       <Tab.Screen
@@ -84,8 +79,8 @@ const AppRoutes: React.FC = () => {
             );
           },
         }}
-        name="Sermon"
-        component={Sermon}
+        name="Sermons"
+        component={Sermons}
       />
       <Tab.Screen
         options={{
