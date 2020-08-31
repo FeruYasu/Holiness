@@ -8,6 +8,7 @@ interface IRequest {
   title: string;
   content: string;
   user_id: string;
+  ministry_id: string;
   image?: string;
   video?: string;
   link?: string;
@@ -21,6 +22,7 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
     title,
     content,
     user_id,
+    ministry_id,
     image,
     video,
     link,
@@ -33,6 +35,7 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
       title,
       content,
       user_id,
+      ministry_id,
       image,
       video,
       link,

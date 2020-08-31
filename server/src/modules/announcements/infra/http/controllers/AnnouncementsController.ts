@@ -7,7 +7,15 @@ import { classToClass } from 'class-transformer';
 
 export default class AnnouncementController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { title, content, image, video, link, event_id } = request.body;
+    const {
+      title,
+      content,
+      image,
+      video,
+      link,
+      event_id,
+      ministry_id,
+    } = request.body;
 
     const user_id = request.user.id;
 
@@ -17,6 +25,7 @@ export default class AnnouncementController {
       title,
       content,
       user_id,
+      ministry_id,
       image,
       video,
       link,

@@ -5,12 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateAnnouncements1598390577555
-  implements MigrationInterface {
+export default class CreateSermons1598901208201 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'announcements',
+        name: 'sermons',
         columns: [
           {
             name: 'id',
@@ -20,40 +19,25 @@ export default class CreateAnnouncements1598390577555
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'user_id',
-            type: 'uuid',
-          },
-          {
             name: 'title',
             type: 'varchar',
           },
           {
-            name: 'content',
-            type: 'varchar',
-          },
-          {
-            name: 'image',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'video',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'link',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'event_id',
+            name: 'preacher_id',
             type: 'uuid',
+          },
+          {
+            name: 'description',
+            type: 'varchar',
+          },
+          {
+            name: 'thumbnail',
+            type: 'varchar',
             isNullable: true,
           },
           {
-            name: 'ministry_id',
-            type: 'uuid',
+            name: 'video_url',
+            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -70,24 +54,12 @@ export default class CreateAnnouncements1598390577555
     );
 
     await queryRunner.createForeignKey(
-      'announcements',
+      'sermons',
       new TableForeignKey({
-        name: 'userId',
-        columnNames: ['user_id'],
+        name: 'preacherId',
+        columnNames: ['preacher_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      }),
-    );
-
-    await queryRunner.createForeignKey(
-      'announcements',
-      new TableForeignKey({
-        name: 'eventId',
-        columnNames: ['event_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'events',
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
       }),
@@ -95,8 +67,7 @@ export default class CreateAnnouncements1598390577555
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('announcements', 'eventId');
-    await queryRunner.dropForeignKey('announcements', 'userId');
-    await queryRunner.dropTable('announcements');
+    await queryRunner.dropForeignKey('sermons', 'preacherId');
+    await queryRunner.dropTable('sermons');
   }
 }

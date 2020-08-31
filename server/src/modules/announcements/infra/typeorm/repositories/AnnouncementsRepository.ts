@@ -18,6 +18,7 @@ class AnnouncementsRepository implements IAnnouncementRepository {
     title,
     content,
     user_id,
+    ministry_id,
     image,
     video,
     link,
@@ -27,6 +28,7 @@ class AnnouncementsRepository implements IAnnouncementRepository {
       title,
       content,
       user_id,
+      ministry_id,
       image,
       video,
       link,
@@ -40,7 +42,7 @@ class AnnouncementsRepository implements IAnnouncementRepository {
 
   public async listAll(): Promise<Announcement[]> {
     const announcements = await this.ormRepository.find({
-      relations: ['user'],
+      relations: ['user', 'ministry'],
     });
 
     return announcements;
