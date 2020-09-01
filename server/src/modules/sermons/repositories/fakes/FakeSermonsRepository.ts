@@ -24,11 +24,13 @@ class SermonsRepository implements ISermonsRepository {
       video_url,
     });
 
+    this.sermons.push(sermon);
+
     return sermon;
   }
 
   public async save(sermon: Sermon): Promise<Sermon> {
-    const findIndex = this.sermons.findIndex(
+    const findIndex = await this.sermons.findIndex(
       findSermon => findSermon.id === sermon.id,
     );
 
@@ -37,7 +39,15 @@ class SermonsRepository implements ISermonsRepository {
   }
 
   public async listAll(): Promise<Sermon[] | undefined> {
-    return this.sermons;
+    const sermonsList = await this.sermons;
+
+    return sermonsList;
+  }
+
+  public async findById(id: string): Promise<Sermon | undefined> {
+    const foundSermon = await this.sermons.find(sermon => sermon.id === id);
+
+    return foundSermon;
   }
 }
 

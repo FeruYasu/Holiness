@@ -6,7 +6,10 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
+
+import uploadConfig from '@config/upload';
+
+import { Exclude, Expose } from 'class-transformer';
 import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('sermons')
@@ -26,6 +29,10 @@ class Sermon {
   @Column()
   video_url: string;
 
+  @Column()
+  @Exclude()
+  thumbnail: string;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'preacher_id', referencedColumnName: 'id' })
   preacher: User;
@@ -37,6 +44,22 @@ class Sermon {
   @CreateDateColumn()
   @Exclude()
   updated_at: Date;
+
+  @Expose({ name: 'photoUrl' })
+  getPhotoUrl(): string | null {
+    if (!this.thumbnail) {
+      return null;
+    }
+
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.thumbnail}`;
+      case 's3':
+        return `https://${uploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.thumbnail}`;
+      default:
+        return null;
+    }
+  }
 }
 
 export default Sermon;
