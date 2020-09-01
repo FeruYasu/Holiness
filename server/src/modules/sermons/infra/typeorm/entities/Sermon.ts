@@ -28,7 +28,7 @@ class Sermon {
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'preacher_id', referencedColumnName: 'id' })
-  user: User;
+  preacher: User;
 
   @CreateDateColumn()
   @Exclude()

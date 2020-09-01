@@ -35,6 +35,10 @@ class SermonsRepository implements ISermonsRepository {
     this.sermons[findIndex] = sermon;
     return sermon;
   }
+
+  public async listAll(): Promise<Sermon[] | undefined> {
+    return this.sermons;
+  }
 }
 
 export default SermonsRepository;

@@ -34,6 +34,12 @@ class SermonsRepository implements ISermonsRepository {
   public async save(sermon: Sermon): Promise<Sermon> {
     return this.ormRepository.save(sermon);
   }
+
+  public async listAll(): Promise<Sermon[] | undefined> {
+    const sermons = await this.ormRepository.find({ relations: ['preacher'] });
+
+    return sermons;
+  }
 }
 
 export default SermonsRepository;
