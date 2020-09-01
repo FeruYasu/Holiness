@@ -135,3 +135,48 @@ export const Content = styled.Text`
 `;
 
 export const AnnouncementDate = styled.Text``;
+
+export const SermonsList = styled(FlatList as new () => FlatList<Sermon>)``;
+
+export const SermonContainer = styled.TouchableOpacity`
+  height: 280px;
+  margin-top: 24px;
+`;
+
+export const SermonPhoto = styled.Image`
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
+
+export const PreacherPicture = styled.Image`
+  width: 46px;
+  height: 46px;
+  border-radius: 23px;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
+
+export const InfoContainer = styled.View`
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 50px;
+  align-items: center;
+  margin: 8px 0;
+  margin-left: 16px;
+`;
+
+export const SermonTitle = styled.Text`
+  font-size: 20px;
+  color: ${(props) => props.theme.colors.darkerGreyText};
+  font-family: 'SourceSansPro-SemiBold';
+`;
+
+export const TextContent = styled.View`
+  flex-direction: column;
+  margin-left: 16px;
+`;
+
+export const Description = styled.Text`
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.darkerGreyText};
+  font-family: 'SourceSansPro-SemiBold';
+`;

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
@@ -32,13 +32,24 @@ import {
 
 import { useAuth } from '../../hooks/auth';
 
-const VideoPlayer: React.FC = () => {
+interface VideoProps {
+  videoUrl: string;
+  title: string;
+  description: string;
+}
+
+const VideoPlayer: React.FC<VideoProps> = ({
+  videoUrl,
+  title,
+  description,
+}) => {
   const [error, setError] = useState('');
   const [pause, setPause] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const videoRef = useRef<Video>(null);
+  const videoRef = useRef(null);
   const { user, theme } = useAuth();
+  const [videoInfo, setVideoInfo] = useState();
 
   const handleError = useCallback((data) => {
     const {
@@ -78,7 +89,7 @@ const VideoPlayer: React.FC = () => {
       <VideoContainer>
         <VideoContent
           source={{
-            uri: 'http://techslides.com/demos/sample-videos/small.mp4',
+            uri: videoUrl,
           }}
           paused={pause}
           resizeMode="contain"
@@ -101,15 +112,13 @@ const VideoPlayer: React.FC = () => {
 
       <VideoHeaderContainer>
         <HeaderTopContent>
-          <VideoTitle>Culto Dominical 12/09/2020 </VideoTitle>
+          <VideoTitle>{title} </VideoTitle>
           <Icon name="heart-outline" size={26} color="#000" />
           <Icon name="share-social-outline" size={26} color="#000" />
         </HeaderTopContent>
-        <OwnerName>Pregação: Pr. Rogério Arabori</OwnerName>
+        <OwnerName>Pregação: </OwnerName>
 
-        <VideoDescription>
-          Série reconstruindo os muros parte 3
-        </VideoDescription>
+        <VideoDescription>{description}</VideoDescription>
 
         <VideoSocialActionsContainer />
       </VideoHeaderContainer>

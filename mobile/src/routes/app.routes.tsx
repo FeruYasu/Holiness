@@ -17,6 +17,7 @@ import EventParticipants from '../pages/EventParticipants';
 import Announcements from '../pages/Announcements';
 import Home from '../pages/Home';
 import Sermons from '../pages/Sermons';
+import SingleSermon from '../pages/SingleSermon';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,6 +34,20 @@ const HomeRoutes: React.FC = () => {
       <Stack.Screen name="EventParticipants" component={EventParticipants} />
       <Stack.Screen name="Ministry" component={Ministry} />
       <Stack.Screen name="MinistryMembers" component={MinistryMembers} />
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Navigator>
+  );
+};
+
+const SermonsRoutes: React.FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Sermons" component={Sermons} />
+      <Stack.Screen name="SingleSermon" component={SingleSermon} />
       <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
@@ -79,8 +94,8 @@ const AppRoutes: React.FC = () => {
             );
           },
         }}
-        name="Sermons"
-        component={Sermons}
+        name="SermonsRoutes"
+        component={SermonsRoutes}
       />
       <Tab.Screen
         options={{

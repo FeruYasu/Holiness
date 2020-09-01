@@ -23,9 +23,11 @@ export interface Sermon {
   photoUrl: string;
   preacher: {
     avatar_url: string;
+    name: string;
   };
   title: string;
   description: string;
+  video_url: string;
 }
 
 const Sermons: React.FC = () => {
@@ -52,7 +54,7 @@ const Sermons: React.FC = () => {
         renderItem={({ item: sermon }) => (
           <SermonContainer
             onPress={() => {
-              navigate('Sermon', { data: sermon });
+              navigate('SingleSermon', sermon);
             }}
           >
             <InfoContainer>

@@ -26,11 +26,20 @@ import {
   ContentContainer,
   AnnouncementTitle,
   Content,
+  SermonsList,
+  PreacherPicture,
+  SermonContainer,
+  TextContent,
+  Description,
+  SermonPhoto,
+  InfoContainer,
+  SermonTitle,
 } from './styles';
 
 const Home: React.FC = () => {
   const [events, setEvents] = useState();
   const [announcements, setAnnouncements] = useState();
+  const [sermons, setSermons] = useState();
 
   const { navigate } = useNavigation();
 
@@ -41,6 +50,10 @@ const Home: React.FC = () => {
 
     api.get('announcements').then((response) => {
       setAnnouncements(response.data);
+    });
+
+    api.get('sermons').then((response) => {
+      setSermons(response.data);
     });
   }, []);
 
@@ -91,6 +104,28 @@ const Home: React.FC = () => {
                 <Content>{announcement.content}</Content>
               </ContentContainer>
             </AnnouncementContainer>
+          );
+        })}
+
+      {sermons &&
+        sermons.map((sermon) => {
+          return (
+            <SermonContainer
+              onPress={() => {
+                navigate('SingleSermon', sermon);
+              }}
+              key={sermon.id}
+            >
+              <InfoContainer>
+                <PreacherPicture source={{ uri: sermon.preacher.avatar_url }} />
+                <TextContent>
+                  <SermonTitle>{sermon.title}</SermonTitle>
+                  <Description>{sermon.description}</Description>
+                </TextContent>
+              </InfoContainer>
+
+              <SermonPhoto source={{ uri: sermon.photoUrl }} />
+            </SermonContainer>
           );
         })}
     </Container>

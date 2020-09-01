@@ -2,7 +2,14 @@ import React from 'react';
 
 import { User, Picture, Name, Separator } from './styles';
 
-const Participant: React.FC = ({ user }) => {
+interface ParticipantProps {
+  user: {
+    avatar_url: string;
+    name: string;
+  };
+}
+
+const Participant: React.FC<ParticipantProps> = ({ user }) => {
   return (
     <>
       <User>
