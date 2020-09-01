@@ -19,24 +19,29 @@ export const MainTitle = styled.Text`
 export const SermonsList = styled(FlatList as new () => FlatList<Sermon>)``;
 
 export const SermonContainer = styled.TouchableOpacity`
-  background-color: ${(props) => props.theme.colors.cardBackground};
-  margin: 8px 24px;
-  border-radius: 16px;
-  height: 200px;
-  elevation: 8;
+  height: 280px;
+  margin-top: 24px;
 `;
 
 export const SermonPhoto = styled.Image`
   flex: 1;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
+
+export const PreacherPicture = styled.Image`
+  width: 46px;
+  height: 46px;
+  border-radius: 23px;
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 export const InfoContainer = styled.View`
-  height: 60px;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 16px;
+  justify-content: flex-start;
+  height: 50px;
+  align-items: center;
+  margin: 8px 0;
+  margin-left: 16px;
 `;
 
 export const Title = styled.Text`
@@ -45,9 +50,13 @@ export const Title = styled.Text`
   font-family: 'SourceSansPro-SemiBold';
 `;
 
-export const SermonDate = styled.Text`
-  font-family: 'SourceSansPro-Regular';
-  font-size: 16px;
-  margin-right: 8px;
-  color: ${(props) => props.theme.colors.text};
+export const TextContent = styled.View`
+  flex-direction: column;
+  margin-left: 16px;
+`;
+
+export const Description = styled.Text`
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.darkerGreyText};
+  font-family: 'SourceSansPro-SemiBold';
 `;

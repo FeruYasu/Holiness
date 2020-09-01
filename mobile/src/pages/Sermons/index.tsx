@@ -9,22 +9,34 @@ import {
   Container,
   MainTitle,
   SermonsList,
+  PreacherPicture,
   SermonContainer,
+  TextContent,
+  Description,
   SermonPhoto,
   InfoContainer,
   Title,
-  SermonDate,
 } from './styles';
 
 export interface Sermon {
   id: string;
-  name: string;
   photoUrl: string;
+  preacher: {
+    avatar_url: string;
+  };
+  title: string;
+  description: string;
 }
 
 const Sermons: React.FC = () => {
-  const [sermons, setSermons] = useState();
+  const [sermons, setSermons] = useState<Sermon[]>();
   const { navigate } = useNavigation();
+
+  useEffect(() => {
+    api.get('sermons').then((response) => {
+      setSermons(response.data);
+    });
+  }, []);
 
   return (
     <Container>
@@ -43,11 +55,15 @@ const Sermons: React.FC = () => {
               navigate('Sermon', { data: sermon });
             }}
           >
-            <SermonPhoto source={{ uri: sermon.photoUrl }} />
             <InfoContainer>
-              <Title>{sermon.name}</Title>
-              <SermonDate>Domingo as 18h</SermonDate>
+              <PreacherPicture source={{ uri: sermon.preacher.avatar_url }} />
+              <TextContent>
+                <Title>{sermon.title}</Title>
+                <Description>{sermon.description}</Description>
+              </TextContent>
             </InfoContainer>
+
+            <SermonPhoto source={{ uri: sermon.photoUrl }} />
           </SermonContainer>
         )}
       />

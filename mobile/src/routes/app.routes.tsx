@@ -21,7 +21,7 @@ import Sermons from '../pages/Sermons';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const StackRoutes: React.FC = () => {
+const HomeRoutes: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -116,7 +116,7 @@ const AppRoutes: React.FC = () => {
           },
         }}
         name="Home"
-        component={StackRoutes}
+        component={HomeRoutes}
       />
       <Tab.Screen
         options={{
