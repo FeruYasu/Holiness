@@ -17,8 +17,12 @@ import EventsRepository from '@modules/events/infra/typeorm/repositories/EventsR
 
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
+
 import IAnnouncementsRepository from '@modules/announcements/repositories/IAnnouncementsRepository';
 import AnnouncementsRepository from '@modules/announcements/infra/typeorm/repositories/AnnouncementsRepository';
+
+import ISermonsRepository from '@modules/sermons/repositories/ISermonsRepository';
+import SermonsRepository from '@modules/sermons/infra/typeorm/repositories/SermonsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -48,4 +52,9 @@ container.registerSingleton<INotificationsRepository>(
 container.registerSingleton<IAnnouncementsRepository>(
   'AnnouncementsRepository',
   AnnouncementsRepository,
+);
+
+container.registerSingleton<ISermonsRepository>(
+  'SermonsRepository',
+  SermonsRepository,
 );
