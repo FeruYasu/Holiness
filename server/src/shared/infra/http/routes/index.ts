@@ -8,6 +8,7 @@ import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 import eventsRouter from '@modules/events/infra/http/routes/events.routes';
 import announcementsRouter from '@modules/announcements/infra/http/routes/announcements.routes';
 import sermonsRouter from '@modules/sermons/infra/http/routes/sermons.routes';
+import tagsRouter from '@modules/tags/infra/http/routes/tags.routes';
 
 const routes = Router();
 
@@ -19,5 +20,6 @@ routes.use('/profile', profileRouter);
 routes.use('/events', eventsRouter);
 routes.use('/announcements', announcementsRouter);
 routes.use('/sermons', sermonsRouter);
+routes.use('/tags', tagsRouter);
 
 export default routes;

@@ -24,6 +24,9 @@ import AnnouncementsRepository from '@modules/announcements/infra/typeorm/reposi
 import ISermonsRepository from '@modules/sermons/repositories/ISermonsRepository';
 import SermonsRepository from '@modules/sermons/infra/typeorm/repositories/SermonsRepository';
 
+import ITagsRepository from '@modules/tags/repositories/ITagsRepository';
+import TagsRepository from '@modules/tags/infra/typeorm/repositories/TagsRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -58,3 +61,5 @@ container.registerSingleton<ISermonsRepository>(
   'SermonsRepository',
   SermonsRepository,
 );
+
+container.registerSingleton<ITagsRepository>('TagsRepository', TagsRepository);
