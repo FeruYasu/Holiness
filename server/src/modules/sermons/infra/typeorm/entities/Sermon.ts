@@ -5,12 +5,15 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 import uploadConfig from '@config/upload';
 
 import { Exclude, Expose } from 'class-transformer';
 import User from '@modules/users/infra/typeorm/entities/User';
+import Tag from '@modules/tags/infra/typeorm/entities/Tag';
 
 @Entity('sermons')
 class Sermon {
@@ -44,6 +47,14 @@ class Sermon {
   @CreateDateColumn()
   @Exclude()
   updated_at: Date;
+
+  @ManyToMany(() => Tag)
+  @JoinTable({
+    name: 'sermons_tags',
+    joinColumns: [{ name: 'sermon_id' }],
+    inverseJoinColumns: [{ name: 'tag_id' }],
+  })
+  tags: Tag[];
 
   @Expose({ name: 'photoUrl' })
   getPhotoUrl(): string | null {

@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 
 import CreateSermonsService from '@modules/sermons/services/CreateSermonsService';
 import ListSermonsService from '@modules/sermons/services/ListSermonsService';
+import UpdateSermonsTagsService from '@modules/sermons/services/UpdateSermonsTagsService';
 import { classToClass } from 'class-transformer';
 
 export default class SermonsController {
@@ -16,17 +17,30 @@ export default class SermonsController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { title, preacher_id, description, video_url } = request.body;
+    const {
+      title,
+      preacher_id,
+      description,
+      video_url,
+      tags_ids,
+    } = request.body;
 
     const createSermon = container.resolve(CreateSermonsService);
 
-    const ministry = await createSermon.execute({
+    const sermon = await createSermon.execute({
       title,
       preacher_id,
       description,
       video_url,
     });
 
-    return response.json(ministry);
+    const UpdateSermonTags = container.resolve(UpdateSermonsTagsService);
+
+    const sermonWithTags = await UpdateSermonTags.execute({
+      sermonId: sermon.id,
+      tagsIds: tags_ids,
+    });
+
+    return response.json(classToClass(sermonWithTags));
   }
 }
