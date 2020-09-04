@@ -18,6 +18,7 @@ import Announcements from '../pages/Announcements';
 import Home from '../pages/Home';
 import Sermons from '../pages/Sermons';
 import SingleSermon from '../pages/SingleSermon';
+import Menu from '../pages/Menu';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -167,7 +168,7 @@ const AppRoutes: React.FC = () => {
           },
         }}
         name="Opções"
-        component={Events}
+        component={Menu}
       />
     </Tab.Navigator>
   );

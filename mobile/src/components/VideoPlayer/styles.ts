@@ -11,6 +11,7 @@ export const Container = styled.View`
 
 export const VideoHeaderContainer = styled.View`
   padding: 8px 8px;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const HeaderTopContent = styled.View`
@@ -27,9 +28,12 @@ export const VideoTitle = styled.Text`
   font-size: 20px;
   font-family: 'SourceSansPro-Bold';
   justify-content: center;
+  color: ${(props) => props.theme.colors.text};
 `;
 
-export const VideoDescription = styled.Text``;
+export const VideoDescription = styled.Text`
+  color: ${(props) => props.theme.colors.greyText};
+`;
 
 export const OwnerContainer = styled.View`
   flex-direction: row;
@@ -49,6 +53,7 @@ export const OwnerPicture = styled.Image`
 export const OwnerName = styled.Text`
   font-size: 16px;
   font-family: 'SourceSansPro-Regular';
+  color: ${(props) => props.theme.colors.greyText};
 `;
 
 export const VideoContent = styled(Video)`
@@ -74,10 +79,13 @@ export const VideoSocialActionsContainer = styled.View`
   justify-content: space-between;
 `;
 
-export const CommentsList = styled.ScrollView``;
+export const CommentsList = styled.ScrollView`
+  background-color: ${(props) => props.theme.colors.background};
+`;
 
 export const CommentsContainer = styled.View`
   margin-bottom: 16px;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const Comment = styled.View`

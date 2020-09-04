@@ -113,6 +113,7 @@ export const PostedAt = styled.Text`
 export const Ministry = styled.Text`
   font-size: 18px;
   font-family: 'SourceSansPro-Bold';
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const ContentContainer = styled.View`
@@ -127,11 +128,13 @@ export const ContentContainer = styled.View`
 export const AnnouncementTitle = styled.Text`
   font-size: 18px;
   font-family: 'SourceSansPro-BoldItalic';
+  color: ${(props) => props.theme.colors.greyText};
 `;
 
 export const Content = styled.Text`
   font-size: 16px;
   font-family: 'SourceSansPro-Regular';
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const AnnouncementDate = styled.Text``;

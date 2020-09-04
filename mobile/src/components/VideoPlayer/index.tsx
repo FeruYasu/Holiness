@@ -113,8 +113,12 @@ const VideoPlayer: React.FC<VideoProps> = ({
       <VideoHeaderContainer>
         <HeaderTopContent>
           <VideoTitle>{title} </VideoTitle>
-          <Icon name="heart-outline" size={26} color="#000" />
-          <Icon name="share-social-outline" size={26} color="#000" />
+          <Icon name="heart-outline" size={26} color={theme.colors.text} />
+          <Icon
+            name="share-social-outline"
+            size={26}
+            color={theme.colors.text}
+          />
         </HeaderTopContent>
         <OwnerName>Pregação: </OwnerName>
 
@@ -140,7 +144,11 @@ const VideoPlayer: React.FC<VideoProps> = ({
                 <AnswerActions>responder</AnswerActions>
               </CommentActions>
             </ContentContainer>
-            <Icon name="thumbs-up-outline" size={20} />
+            <Icon
+              name="thumbs-up-outline"
+              size={20}
+              color={theme.colors.text}
+            />
           </Comment>
           <CommentAnswer>
             <CommentPicture source={{ uri: user.avatar_url }} />
@@ -157,7 +165,11 @@ const VideoPlayer: React.FC<VideoProps> = ({
                 <AnswerActions>responder</AnswerActions>
               </CommentActions>
             </ContentContainer>
-            <Icon name="thumbs-up-outline" size={20} />
+            <Icon
+              name="thumbs-up-outline"
+              size={20}
+              color={theme.colors.text}
+            />
           </CommentAnswer>
         </CommentsContainer>
 
@@ -177,7 +189,11 @@ const VideoPlayer: React.FC<VideoProps> = ({
                 <AnswerActions>responder</AnswerActions>
               </CommentActions>
             </ContentContainer>
-            <Icon name="thumbs-up-outline" size={20} />
+            <Icon
+              name="thumbs-up-outline"
+              size={20}
+              color={theme.colors.text}
+            />
           </Comment>
           <CommentAnswer>
             <CommentPicture source={{ uri: user.avatar_url }} />
@@ -194,7 +210,11 @@ const VideoPlayer: React.FC<VideoProps> = ({
                 <AnswerActions>responder</AnswerActions>
               </CommentActions>
             </ContentContainer>
-            <Icon name="thumbs-up-outline" size={20} />
+            <Icon
+              name="thumbs-up-outline"
+              size={20}
+              color={theme.colors.text}
+            />
           </CommentAnswer>
         </CommentsContainer>
       </CommentsList>
