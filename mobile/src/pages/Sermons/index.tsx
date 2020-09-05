@@ -16,6 +16,9 @@ import {
   SermonPhoto,
   InfoContainer,
   Title,
+  TagsContainer,
+  Tag,
+  TagText,
 } from './styles';
 
 export interface Sermon {
@@ -52,21 +55,29 @@ const Sermons: React.FC = () => {
         data={sermons}
         keyExtractor={(sermon) => sermon.id}
         renderItem={({ item: sermon }) => (
-          <SermonContainer
-            onPress={() => {
-              navigate('SingleSermon', sermon);
-            }}
-          >
-            <InfoContainer>
-              <PreacherPicture source={{ uri: sermon.preacher.avatar_url }} />
-              <TextContent>
-                <Title>{sermon.title}</Title>
-                <Description>{sermon.description}</Description>
-              </TextContent>
-            </InfoContainer>
-
-            <SermonPhoto source={{ uri: sermon.photoUrl }} />
-          </SermonContainer>
+          <>
+            <SermonContainer
+              onPress={() => {
+                navigate('SingleSermon', sermon);
+              }}
+            >
+              <InfoContainer>
+                <PreacherPicture source={{ uri: sermon.preacher.avatar_url }} />
+                <TextContent>
+                  <Title>{sermon.title}</Title>
+                  <Description>{sermon.description}</Description>
+                </TextContent>
+              </InfoContainer>
+              <SermonPhoto source={{ uri: sermon.photoUrl }} />
+            </SermonContainer>
+            <TagsContainer>
+              {sermon.tags.map((tag) => (
+                <Tag key={tag.name}>
+                  <TagText> {tag.name}</TagText>
+                </Tag>
+              ))}
+            </TagsContainer>
+          </>
         )}
       />
     </Container>
