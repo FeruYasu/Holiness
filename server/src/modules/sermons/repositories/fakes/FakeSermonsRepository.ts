@@ -49,6 +49,19 @@ class SermonsRepository implements ISermonsRepository {
 
     return foundSermon;
   }
+
+  public async filterByTag(tag: string): Promise<Sermon[] | undefined> {
+    const filtered = this.sermons.filter(findSermon =>
+      findSermon.tags.map(t => {
+        if (t.name.includes(tag)) {
+          return true;
+        }
+        return false;
+      }),
+    );
+
+    return filtered;
+  }
 }
 
 export default SermonsRepository;

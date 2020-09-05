@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, Like, SelectQueryBuilder } from 'typeorm';
 
 import ISermonsRepository from '@modules/sermons/repositories/ISermonsRepository';
 
@@ -43,6 +43,16 @@ class SermonsRepository implements ISermonsRepository {
     const sermons = await this.ormRepository.find({
       relations: ['preacher', 'tags'],
     });
+
+    return sermons;
+  }
+
+  public async filterByTag(tag: string): Promise<Sermon[] | undefined> {
+    const sermons = await this.ormRepository
+      .createQueryBuilder('qb')
+      .innerJoinAndSelect('qb.tags', 'tags')
+      .where('tags.name = :name', { name: tag })
+      .getMany();
 
     return sermons;
   }

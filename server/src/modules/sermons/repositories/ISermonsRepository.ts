@@ -6,4 +6,5 @@ export default interface IMinistrieRepository {
   save(data: ICreateSermonDTO): Promise<Sermon>;
   findById(id: string): Promise<Sermon | undefined>;
   listAll(): Promise<Sermon[] | undefined>;
+  filterByTag(tag: string): Promise<Sermon[] | undefined>;
 }
