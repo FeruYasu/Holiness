@@ -1,4 +1,4 @@
-import { getRepository, Repository, Like, SelectQueryBuilder } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 import ISermonsRepository from '@modules/sermons/repositories/ISermonsRepository';
 

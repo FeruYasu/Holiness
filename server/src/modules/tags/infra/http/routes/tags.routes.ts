@@ -7,6 +7,6 @@ const tagsRouter = Router();
 const tagsController = new TagsController();
 
 tagsRouter.post('/', tagsController.create);
-// tagsRouter.get('/', tagsController.index);
+tagsRouter.get('/', tagsController.index);
 
 export default tagsRouter;

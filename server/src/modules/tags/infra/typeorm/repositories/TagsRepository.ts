@@ -32,6 +32,12 @@ class TagsRepository implements ITagsRepository {
 
     return tags;
   }
+
+  public async listAll(): Promise<Tag[] | undefined> {
+    const tags = this.ormRepository.find();
+
+    return tags;
+  }
 }
 
 export default TagsRepository;
