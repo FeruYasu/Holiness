@@ -8,6 +8,12 @@ export const Container = styled.View`
   background-color: ${(props) => props.theme.colors.background};
 `;
 
+export const TitleContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const MainTitle = styled.Text`
   font-size: 24px;
   color: ${(props) => props.theme.colors.primary};

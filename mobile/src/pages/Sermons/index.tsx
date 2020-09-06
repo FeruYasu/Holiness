@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactText, useCallback } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import { Picker } from '@react-native-community/picker';
 import api from '../../services/api';
 
 import Header from '../../components/Header';
@@ -9,6 +10,7 @@ import {
   Container,
   MainTitle,
   SermonsList,
+  TitleContainer,
   PreacherPicture,
   SermonContainer,
   TextContent,
@@ -33,14 +35,40 @@ export interface Sermon {
   video_url: string;
 }
 
+interface Filter {
+  filter: ReactText;
+}
+
+interface Tag {
+  name: string;
+}
+
 const Sermons: React.FC = () => {
   const [sermons, setSermons] = useState<Sermon[]>();
   const { navigate } = useNavigation();
+  const [tags, setTags] = useState<Tag[]>([{ name: '' }]);
+  const [tagFilter, setTagFilter] = useState<Filter>({ filter: '' });
 
   useEffect(() => {
     api.get('sermons').then((response) => {
       setSermons(response.data);
     });
+
+    api.get('tags').then((response) => {
+      setTags(response.data);
+    });
+  }, []);
+
+  const handleFilterChange = useCallback((itemValue) => {
+    api
+      .get('sermons', {
+        params: {
+          tag: itemValue,
+        },
+      })
+      .then((response) => {
+        setSermons(response.data);
+      });
   }, []);
 
   return (
@@ -49,7 +77,32 @@ const Sermons: React.FC = () => {
         ListHeaderComponent={
           <>
             <Header />
-            <MainTitle>Pregações</MainTitle>
+
+            <TitleContainer>
+              <MainTitle>Pregações</MainTitle>
+
+              <Picker
+                selectedValue={tagFilter.filter}
+                style={{
+                  marginTop: 16,
+                  width: 200,
+                  marginRight: 16,
+                  textAlign: 'right',
+                }}
+                onValueChange={(itemValue, itemIndex) => {
+                  setTagFilter({ filter: itemValue });
+                  handleFilterChange(itemValue);
+                }}
+              >
+                {tags.map((tag) => (
+                  <Picker.Item
+                    key={tag.name}
+                    label={tag.name}
+                    value={tag.name}
+                  />
+                ))}
+              </Picker>
+            </TitleContainer>
           </>
         }
         data={sermons}
