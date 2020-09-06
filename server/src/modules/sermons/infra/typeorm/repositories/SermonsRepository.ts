@@ -52,6 +52,7 @@ class SermonsRepository implements ISermonsRepository {
       .createQueryBuilder('qb')
       .innerJoinAndSelect('qb.tags', 'tags')
       .where('tags.name = :name', { name: tag })
+      .leftJoinAndSelect('qb.preacher', 'preacher')
       .getMany();
 
     return sermons;
