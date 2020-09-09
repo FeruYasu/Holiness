@@ -9,6 +9,7 @@ import eventsRouter from '@modules/events/infra/http/routes/events.routes';
 import announcementsRouter from '@modules/announcements/infra/http/routes/announcements.routes';
 import sermonsRouter from '@modules/sermons/infra/http/routes/sermons.routes';
 import tagsRouter from '@modules/tags/infra/http/routes/tags.routes';
+import commentsRouter from '@modules/comments/infra/http/routes/comments.routes';
 
 const routes = Router();
 
@@ -21,5 +22,6 @@ routes.use('/events', eventsRouter);
 routes.use('/announcements', announcementsRouter);
 routes.use('/sermons', sermonsRouter);
 routes.use('/tags', tagsRouter);
+routes.use('/comments', commentsRouter);
 
 export default routes;
