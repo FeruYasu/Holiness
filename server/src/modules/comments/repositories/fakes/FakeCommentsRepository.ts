@@ -40,6 +40,14 @@ class CommentsRepository implements ICommentsRepository {
 
     return findComment;
   }
+
+  public async findByIds(ids: string[]): Promise<Comment[] | undefined> {
+    const findMinistries = await this.comments.filter(comment => {
+      return ids.includes(comment.id);
+    });
+
+    return findMinistries;
+  }
 }
 
 export default CommentsRepository;

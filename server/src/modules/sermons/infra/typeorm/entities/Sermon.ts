@@ -14,6 +14,7 @@ import uploadConfig from '@config/upload';
 import { Exclude, Expose } from 'class-transformer';
 import User from '@modules/users/infra/typeorm/entities/User';
 import Tag from '@modules/tags/infra/typeorm/entities/Tag';
+import Comment from '@modules/comments/infra/typeorm/entities/Comment';
 
 @Entity('sermons')
 class Sermon {
@@ -55,6 +56,14 @@ class Sermon {
     inverseJoinColumns: [{ name: 'tag_id' }],
   })
   tags: Tag[];
+
+  @ManyToMany(() => Comment)
+  @JoinTable({
+    name: 'sermons_comments',
+    joinColumns: [{ name: 'sermon_id' }],
+    inverseJoinColumns: [{ name: 'comment_id' }],
+  })
+  comments: Comment[];
 
   @Expose({ name: 'photoUrl' })
   getPhotoUrl(): string | null {

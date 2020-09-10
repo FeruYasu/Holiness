@@ -30,6 +30,7 @@ class CreateCommentsService {
       });
     } else {
       comment = await this.commentsRepository.findById(reply_of);
+
       const replies = comment?.replies;
 
       const reply = await this.commentsRepository.create({

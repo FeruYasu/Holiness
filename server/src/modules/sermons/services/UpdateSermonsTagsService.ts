@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 @injectable()
-class UpdateSermonsLeadersService {
+class UpdateSermonsTagsService {
   constructor(
     @inject('SermonsRepository')
     private sermonsRepository: ISermonsRepository,
@@ -38,4 +38,4 @@ class UpdateSermonsLeadersService {
   }
 }
 
-export default UpdateSermonsLeadersService;
+export default UpdateSermonsTagsService;

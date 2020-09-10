@@ -41,8 +41,14 @@ class SermonsRepository implements ISermonsRepository {
 
   public async listAll(): Promise<Sermon[] | undefined> {
     const sermons = await this.ormRepository.find({
-      relations: ['preacher', 'tags'],
+      relations: ['preacher', 'tags', 'comments'],
     });
+
+    // const sermons = await this.ormRepository
+    //   .createQueryBuilder('sermons')
+    //   .innerJoinAndSelect('sermons.comments', 'comments')
+    //   .leftJoinAndSelect('comments.replies', 'replies')
+    //   .getMany();
 
     return sermons;
   }

@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 @injectable()
-class UpdateSermonsPhotoService {
+class UpdateSermonsThumbnailService {
   constructor(
     @inject('SermonsRepository')
     private sermonsRepository: ISermonsRepository,
@@ -43,4 +43,4 @@ class UpdateSermonsPhotoService {
   }
 }
 
-export default UpdateSermonsPhotoService;
+export default UpdateSermonsThumbnailService;

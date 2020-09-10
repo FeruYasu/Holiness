@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
-import CreateCommentService from '@modules/comments/services/CreateCommentService';
+import CreateCommentService from '@modules/comments/services/CreateCommentsService';
 
 export default class CommentsController {
   public async create(request: Request, response: Response): Promise<Response> {
