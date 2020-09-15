@@ -36,7 +36,10 @@ class SermonsRepository implements ISermonsRepository {
   }
 
   public async findById(id: string): Promise<Sermon | undefined> {
-    return this.ormRepository.findOne({ where: { id } });
+    return this.ormRepository.findOne({
+      where: { id },
+      relations: ['comments'],
+    });
   }
 
   public async listAll(): Promise<Sermon[] | undefined> {

@@ -9,6 +9,5 @@ const commentsController = new CommentsController();
 
 commentsRouter.use(ensureAuthentication);
 commentsRouter.post('/', commentsController.create);
-commentsRouter.get('/', commentsController.show);
 
 export default commentsRouter;

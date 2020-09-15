@@ -1,14 +1,14 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 
 import FakeCommentsRepository from '../repositories/fakes/FakeCommentsRepository';
-import ShowCommentByIdService from './ShowCommentByIdService';
+import ShowCommentByIdService from './ListCommentsByIdService';
 
 let fakeCommentsRepository: FakeCommentsRepository;
 
 let fakeUsersRepository: FakeUsersRepository;
 let showCommentByIdService: ShowCommentByIdService;
 
-describe('CreateComments', () => {
+describe('List Comments', () => {
   beforeEach(() => {
     fakeCommentsRepository = new FakeCommentsRepository();
     fakeUsersRepository = new FakeUsersRepository();
@@ -16,7 +16,7 @@ describe('CreateComments', () => {
     showCommentByIdService = new ShowCommentByIdService(fakeCommentsRepository);
   });
 
-  it('should be able to create a new Comment', async () => {
+  it('should be able to show all Comment from ids', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'oi@oi.com.br',
@@ -29,8 +29,16 @@ describe('CreateComments', () => {
       user_id: user.id,
     });
 
-    const getComment = await showCommentByIdService.execute(comment.id);
+    const comment2 = await fakeCommentsRepository.create({
+      content: 'Comentário',
+      user_id: user.id,
+    });
 
-    expect(getComment).toBe(comment);
+    const comments = await showCommentByIdService.execute([
+      comment.id,
+      comment2.id,
+    ]);
+
+    expect(comments).toMatchObject([comment, comment2]);
   });
 });

@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import UpdateSermonsCommentsService from '@modules/sermons/services/UpdateSermonsCommentsService';
+import ListCommentsFromSingleSermonService from '@modules/sermons/services/ListCommentsFromSingleSermonService';
 
 import { classToClass } from 'class-transformer';
 
@@ -20,5 +21,17 @@ export default class SermonsCommentsController {
     });
 
     return response.json(classToClass(sermon));
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const { sermonId } = request.params;
+
+    const listCommentsFromSingleSermon = container.resolve(
+      ListCommentsFromSingleSermonService,
+    );
+
+    const comments = await listCommentsFromSingleSermon.execute(sermonId);
+
+    return response.json(classToClass(comments));
   }
 }

@@ -25,5 +25,6 @@ sermonsRouter.put(
 );
 
 sermonsRouter.put('/comments', sermonsCommentsController.update);
+sermonsRouter.get('/comments/:sermonId', sermonsCommentsController.index);
 
 export default sermonsRouter;
