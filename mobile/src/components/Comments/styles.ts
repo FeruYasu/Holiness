@@ -7,6 +7,7 @@ import { Dimensions } from 'react-native';
 export const Container = styled.View`
   width: 100%;
   height: 100%;
+  flex: 1;
   background-color: #000;
 `;
 
@@ -102,6 +103,36 @@ export const ContentContainer = styled.View`
   margin-bottom: 16px;
 `;
 
+export const CommentButtonContainer = styled.View`
+  background-color: ${(props) => props.theme.colors.background};
+  padding: 16px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const CommentInputContainer = styled.View`
+  position: absolute;
+  flex-direction: row;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  padding: 0 16px;
+
+  background-color: ${(props) => props.theme.colors.background};
+`;
+
+export const CommentInput = styled.TextInput`
+  padding-left: 8px;
+  flex: 1;
+`;
+
+export const CommentButton = styled.TouchableOpacity``;
+
+export const CommentButtonText = styled.Text`
+  color: ${(props) => props.theme.colors.greyText};
+  margin-left: 8px;
+`;
+
 export const TopContent = styled.View`
   flex-direction: row;
 `;
@@ -129,10 +160,13 @@ export const LikesCounter = styled.Text`
   color: ${(props) => props.theme.colors.tabButtonText};
 `;
 
-export const AnswerActions = styled.Text`
+export const AnswerActions = styled.TouchableOpacity`
+  margin-left: 36px;
+`;
+
+export const AnswerActionsText = styled.Text`
   font-size: 12px;
   font-family: 'SourceSansPro-Bold';
-  margin-left: 36px;
   color: ${(props) => props.theme.colors.tabButtonText};
 `;
 
@@ -157,3 +191,14 @@ export const MainTitle = styled.Text``;
 
 export const FullscreenButton = styled.TouchableOpacity``;
 export const FullscreenButtonText = styled.Text``;
+
+export const SendCommentButton = styled.TouchableOpacity``;
+
+export const OpacityLayer = styled.TouchableOpacity`
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+`;
