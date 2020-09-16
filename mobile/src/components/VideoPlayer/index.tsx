@@ -4,29 +4,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {
   Container,
   VideoContainer,
-  VideoHeaderContainer,
-  HeaderTopContent,
-  VideoTitle,
-  VideoDescription,
-  OwnerContainer,
-  OwnerPicture,
-  OwnerName,
   VideoContent,
   VideoBar,
   PlayButton,
-  VideoSocialActionsContainer,
-  CommentsContainer,
-  Comment,
-  CommentsList,
-  ContentContainer,
-  TopContent,
-  CommentName,
-  CommentContent,
-  CommentActions,
-  LikesCounter,
-  AnswerActions,
-  CommentAnswer,
-  CommentPicture,
   Duration,
 } from './styles';
 
@@ -34,21 +14,15 @@ import { useAuth } from '../../hooks/auth';
 
 interface VideoProps {
   videoUrl: string;
-  title: string;
-  description: string;
 }
 
-const VideoPlayer: React.FC<VideoProps> = ({
-  videoUrl,
-  title,
-  description,
-}) => {
+const VideoPlayer: React.FC<VideoProps> = ({ videoUrl }) => {
   const [error, setError] = useState('');
   const [pause, setPause] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const videoRef = useRef(null);
-  const { user, theme } = useAuth();
+  const { theme } = useAuth();
   const [videoInfo, setVideoInfo] = useState();
 
   const handleError = useCallback((data) => {
@@ -109,115 +83,6 @@ const VideoPlayer: React.FC<VideoProps> = ({
         {/*
         <Duration>{duration}</Duration> */}
       </VideoContainer>
-
-      <VideoHeaderContainer>
-        <HeaderTopContent>
-          <VideoTitle>{title} </VideoTitle>
-          <Icon name="heart-outline" size={26} color={theme.colors.text} />
-          <Icon
-            name="share-social-outline"
-            size={26}
-            color={theme.colors.text}
-          />
-        </HeaderTopContent>
-        <OwnerName>Pregação: </OwnerName>
-
-        <VideoDescription>{description}</VideoDescription>
-
-        <VideoSocialActionsContainer />
-      </VideoHeaderContainer>
-
-      <CommentsList>
-        <CommentsContainer>
-          <Comment>
-            <OwnerPicture source={{ uri: user.avatar_url }} />
-            <ContentContainer>
-              <TopContent>
-                <CommentContent>
-                  <CommentName>Fernando Yasumoto</CommentName> Que palavra
-                  abençoada! Fui muito tocado por essa palavra do Pastor
-                  Arabori!Fui muito tocado por essa palavra do Pastor Arabori!
-                </CommentContent>
-              </TopContent>
-              <CommentActions>
-                <LikesCounter>1 curtida</LikesCounter>
-                <AnswerActions>responder</AnswerActions>
-              </CommentActions>
-            </ContentContainer>
-            <Icon
-              name="thumbs-up-outline"
-              size={20}
-              color={theme.colors.text}
-            />
-          </Comment>
-          <CommentAnswer>
-            <CommentPicture source={{ uri: user.avatar_url }} />
-            <ContentContainer>
-              <TopContent>
-                <CommentContent>
-                  <CommentName>Fernando Yasumoto</CommentName> Que palavra
-                  abençoada! Fui muito tocado por essa palavra do Pastor
-                  Arabori!Fui muito tocado por essa palavra do Pastor Arabori!
-                </CommentContent>
-              </TopContent>
-              <CommentActions>
-                <LikesCounter>1 curtida</LikesCounter>
-                <AnswerActions>responder</AnswerActions>
-              </CommentActions>
-            </ContentContainer>
-            <Icon
-              name="thumbs-up-outline"
-              size={20}
-              color={theme.colors.text}
-            />
-          </CommentAnswer>
-        </CommentsContainer>
-
-        <CommentsContainer>
-          <Comment>
-            <OwnerPicture source={{ uri: user.avatar_url }} />
-            <ContentContainer>
-              <TopContent>
-                <CommentContent>
-                  <CommentName>Fernando Yasumoto</CommentName> Que palavra
-                  abençoada! Fui muito tocado por essa palavra do Pastor
-                  Arabori!Fui muito tocado por essa palavra do Pastor Arabori!
-                </CommentContent>
-              </TopContent>
-              <CommentActions>
-                <LikesCounter>1 curtida</LikesCounter>
-                <AnswerActions>responder</AnswerActions>
-              </CommentActions>
-            </ContentContainer>
-            <Icon
-              name="thumbs-up-outline"
-              size={20}
-              color={theme.colors.text}
-            />
-          </Comment>
-          <CommentAnswer>
-            <CommentPicture source={{ uri: user.avatar_url }} />
-            <ContentContainer>
-              <TopContent>
-                <CommentContent>
-                  <CommentName>Fernando Yasumoto</CommentName> Que palavra
-                  abençoada! Fui muito tocado por essa palavra do Pastor
-                  Arabori!Fui muito tocado por essa palavra do Pastor Arabori!
-                </CommentContent>
-              </TopContent>
-              <CommentActions>
-                <LikesCounter>1 curtida</LikesCounter>
-                <AnswerActions>responder</AnswerActions>
-              </CommentActions>
-            </ContentContainer>
-            <Icon
-              name="thumbs-up-outline"
-              size={20}
-              color={theme.colors.text}
-            />
-          </CommentAnswer>
-        </CommentsContainer>
-      </CommentsList>
 
       {/* <FullscreenButton onPress={fullScreen}>
         <FullscreenButtonText>FullScreen</FullscreenButtonText>

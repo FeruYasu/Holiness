@@ -33,6 +33,7 @@ export interface Sermon {
   title: string;
   description: string;
   video_url: string;
+  tags: [{ name: string }];
 }
 
 interface Filter {
@@ -89,7 +90,7 @@ const Sermons: React.FC = () => {
                   marginRight: 16,
                   textAlign: 'right',
                 }}
-                onValueChange={(itemValue, itemIndex) => {
+                onValueChange={(itemValue) => {
                   setTagFilter({ filter: itemValue });
                   handleFilterChange(itemValue);
                 }}
@@ -125,7 +126,12 @@ const Sermons: React.FC = () => {
             </SermonContainer>
             <TagsContainer>
               {sermon.tags.map((tag) => (
-                <Tag key={tag.name}>
+                <Tag
+                  key={tag.name}
+                  onPress={() => {
+                    handleFilterChange(tag.name);
+                  }}
+                >
                   <TagText> {tag.name}</TagText>
                 </Tag>
               ))}
