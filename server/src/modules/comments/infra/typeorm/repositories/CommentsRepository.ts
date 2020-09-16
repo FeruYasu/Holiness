@@ -42,7 +42,14 @@ class CommentsRepository implements ICommentsRepository {
 
   public async findByIds(ids: string[]): Promise<Comment[] | undefined> {
     const comment = await this.ormRepository.findByIds(ids, {
-      relations: ['replies'],
+      join: {
+        alias: 'comment',
+        leftJoinAndSelect: {
+          user: 'comment.user',
+          replies: 'comment.replies',
+          repliesUser: 'replies.user',
+        },
+      },
     });
 
     return comment;
