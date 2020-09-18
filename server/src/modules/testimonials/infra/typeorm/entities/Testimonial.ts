@@ -1,5 +1,6 @@
 import Ministry from '@modules/ministries/infra/typeorm/entities/Ministry';
 import User from '@modules/users/infra/typeorm/entities/User';
+import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +9,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import uploadConfig from '@config/upload';
 
 @Entity('testimonials')
 class Testimonial {
@@ -63,6 +66,22 @@ class Testimonial {
 
   @CreateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'photo_url' })
+  getPhotoUrl(): string | null {
+    if (!this.photo) {
+      return null;
+    }
+
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.photo}`;
+      case 's3':
+        return `https://${uploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.photo}`;
+      default:
+        return null;
+    }
+  }
 }
 
 export default Testimonial;

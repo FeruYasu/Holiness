@@ -10,8 +10,8 @@ class TestimonialsRepository implements ITestimonialRepository {
     this.ormRepository = getRepository(Testimonial);
   }
 
-  public async save(announcement: Testimonial): Promise<Testimonial> {
-    return this.ormRepository.save(announcement);
+  public async save(testimonial: Testimonial): Promise<Testimonial> {
+    return this.ormRepository.save(testimonial);
   }
 
   public async create({
@@ -21,7 +21,7 @@ class TestimonialsRepository implements ITestimonialRepository {
     user_id,
     ministry_id,
   }: ICreateTestimonialDTO): Promise<Testimonial> {
-    const announcement = this.ormRepository.create({
+    const testimonial = this.ormRepository.create({
       title,
       content,
       photo,
@@ -29,9 +29,9 @@ class TestimonialsRepository implements ITestimonialRepository {
       ministry_id,
     });
 
-    await this.ormRepository.save(announcement);
+    await this.ormRepository.save(testimonial);
 
-    return announcement;
+    return testimonial;
   }
 
   public async listAll(): Promise<Testimonial[]> {
@@ -40,6 +40,12 @@ class TestimonialsRepository implements ITestimonialRepository {
     });
 
     return testimonials;
+  }
+
+  public async findById(id: string): Promise<Testimonial | undefined> {
+    const testimonial = await this.ormRepository.findOne({ where: { id } });
+
+    return testimonial;
   }
 }
 

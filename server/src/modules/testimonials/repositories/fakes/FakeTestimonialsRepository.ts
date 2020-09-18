@@ -43,6 +43,14 @@ class TestimonialsRepository implements ITestimonialsRepository {
   public async listAll(): Promise<Testimonial[]> {
     return this.testimonials;
   }
+
+  public async findById(id: string): Promise<Testimonial | undefined> {
+    const findTestimonial = this.testimonials.find(
+      testimonial => testimonial.id === id,
+    );
+
+    return findTestimonial;
+  }
 }
 
 export default TestimonialsRepository;
