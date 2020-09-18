@@ -42,32 +42,39 @@ export default class CreateTestimonials1600451828705
             isNullable: true,
           },
           {
-            name: 'emoji1',
-            type: 'int',
-          },
-          {
             name: 'approved',
             type: 'boolean',
+            default: false,
+          },
+          {
+            name: 'emoji1',
+            type: 'int',
+            default: 0,
           },
           {
             name: 'emoji2',
             type: 'int',
+            default: 0,
           },
           {
             name: 'emoji3',
             type: 'int',
+            default: 0,
           },
           {
             name: 'emoji4',
             type: 'int',
+            default: 0,
           },
           {
             name: 'emoji5',
             type: 'int',
+            default: 0,
           },
           {
             name: 'emoji6',
             type: 'int',
+            default: 0,
           },
           {
             name: 'created_at',

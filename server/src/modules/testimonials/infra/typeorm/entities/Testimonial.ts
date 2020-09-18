@@ -21,7 +21,7 @@ class Testimonial {
   content: string;
 
   @Column()
-  image: string;
+  photo: string;
 
   @Column()
   user_id: string;
@@ -29,25 +29,25 @@ class Testimonial {
   @Column()
   ministry_id: string;
 
-  @Column({ default: false })
+  @Column()
   approved: boolean;
 
-  @Column({ default: 0 })
+  @Column()
   emoji1: number;
 
-  @Column({ default: 0 })
+  @Column()
   emoji2: number;
 
-  @Column({ default: 0 })
+  @Column()
   emoji3: number;
 
-  @Column({ default: 0 })
+  @Column()
   emoji4: number;
 
-  @Column({ default: 0 })
+  @Column()
   emoji5: number;
 
-  @Column({ default: 0 })
+  @Column()
   emoji6: number;
 
   @ManyToOne(() => User)

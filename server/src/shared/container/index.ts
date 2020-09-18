@@ -30,6 +30,9 @@ import TagsRepository from '@modules/tags/infra/typeorm/repositories/TagsReposit
 import ICommentsRepository from '@modules/comments/repositories/ICommentsRepository';
 import CommentsRepository from '@modules/comments/infra/typeorm/repositories/CommentsRepository';
 
+import ITestimonialsRepository from '@modules/testimonials/repositories/ITestimonialsRepository';
+import TestimonialsRepository from '@modules/testimonials/infra/typeorm/repositories/TestimonialsRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -70,4 +73,9 @@ container.registerSingleton<ITagsRepository>('TagsRepository', TagsRepository);
 container.registerSingleton<ICommentsRepository>(
   'CommentsRepository',
   CommentsRepository,
+);
+
+container.registerSingleton<ITestimonialsRepository>(
+  'TestimonialsRepository',
+  TestimonialsRepository,
 );
