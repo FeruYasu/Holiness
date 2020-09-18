@@ -9,6 +9,6 @@ const testimonialsController = new TestimonialsController();
 
 testimonialsRouter.use(ensureAuthentication);
 testimonialsRouter.post('/', testimonialsController.create);
-// testimonialsRouter.get('/', testimonialsController.index);
+testimonialsRouter.get('/', testimonialsController.index);
 
 export default testimonialsRouter;

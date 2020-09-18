@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
 import ITestimonialsRepository from '../repositories/ITestimonialsRepository';
 
 import ICreateTestimonialDTO from '../dtos/ICreateTestimonialDTO';
@@ -9,6 +10,9 @@ class CreateTestimonialService {
   constructor(
     @inject('TestimonialsRepository')
     private testimonialRepository: ITestimonialsRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
   public async execute(data: ICreateTestimonialDTO): Promise<Testimonial> {
