@@ -40,6 +40,7 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
 
   const [comments, setComments] = useState();
   const [showCommentInput, setShowCommentInput] = useState(false);
+  const [reply, setReply] = useState('none');
   const [newComment, setNewComment] = useState();
 
   useEffect(() => {
@@ -49,28 +50,46 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
   }, [sermonId]);
 
   const handleShowCommentInput = useCallback(() => {
+    setReply('none');
     setShowCommentInput(!showCommentInput);
   }, [showCommentInput]);
+
+  const handleShowAnswerInput = useCallback((id) => {
+    setReply(id);
+    setShowCommentInput(!showCommentInput);
+  }, []);
 
   useEffect(() => {
     commentInputRef.current?.focus();
   }, [showCommentInput]);
 
-  const sendComment = useCallback(async () => {
-    const newCommentary = await api.post('comments', {
-      content: newComment,
-    });
+  const sendComment = useCallback(
+    async (replyId) => {
+      let newCommentary;
 
-    await api.put('sermons/comments', {
-      sermonId,
-      commentId: newCommentary.data.id,
-    });
+      if (replyId === 'none') {
+        newCommentary = await api.post('comments', {
+          content: newComment,
+        });
+      } else {
+        newCommentary = await api.post('comments', {
+          content: newComment,
+          reply_of: replyId,
+        });
+      }
 
-    api.get(`sermons/comments/${sermonId}`).then((response) => {
-      setComments(response.data);
-    });
-    setShowCommentInput(!showCommentInput);
-  }, [newComment, sermonId, showCommentInput]);
+      await api.put('sermons/comments', {
+        sermonId,
+        commentId: newCommentary.data.id,
+      });
+
+      api.get(`sermons/comments/${sermonId}`).then((response) => {
+        setComments(response.data);
+      });
+      setShowCommentInput(!showCommentInput);
+    },
+    [newComment, sermonId, showCommentInput]
+  );
 
   return (
     <>
@@ -97,7 +116,11 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
                       </TopContent>
                       <CommentActions>
                         <LikesCounter>1 curtida</LikesCounter>
-                        <AnswerActions>
+                        <AnswerActions
+                          onPress={() => {
+                            handleShowAnswerInput(comment.id);
+                          }}
+                        >
                           <AnswerActionsText>responder</AnswerActionsText>
                         </AnswerActions>
                       </CommentActions>
@@ -123,7 +146,11 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
                           </TopContent>
                           <CommentActions>
                             <LikesCounter>1 curtida</LikesCounter>
-                            <AnswerActions>
+                            <AnswerActions
+                              onPress={() => {
+                                handleShowAnswerInput(comment.id);
+                              }}
+                            >
                               <AnswerActionsText>responder</AnswerActionsText>
                             </AnswerActions>
                           </CommentActions>
@@ -147,13 +174,17 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
           <CommentInputContainer>
             <OwnerPicture source={{ uri: user.avatar_url }} />
             <CommentInput
-              placeholder={`Comentar como ${user.name}...`}
+              placeholder={`Comentar como  ${user.name}...`}
               ref={commentInputRef}
               onChangeText={(text) => {
                 setNewComment(text);
               }}
             />
-            <SendCommentButton onPress={sendComment}>
+            <SendCommentButton
+              onPress={() => {
+                sendComment(reply);
+              }}
+            >
               <Icon name="send" size={20} color={theme.colors.text} />
             </SendCommentButton>
           </CommentInputContainer>
