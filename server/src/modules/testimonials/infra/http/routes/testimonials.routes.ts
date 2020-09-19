@@ -6,11 +6,13 @@ import uploadConfig from '@config/upload';
 
 import TestimonialsController from '../controllers/TestimonialsController';
 import TestimonialsPhotosController from '../controllers/TestimonialsPhotosController';
+import EmojisController from '../controllers/EmojisController';
 
 const testimonialsRouter = Router();
 
 const testimonialsController = new TestimonialsController();
 const testimonialsPhotosController = new TestimonialsPhotosController();
+const emojisController = new EmojisController();
 
 const upload = multer(uploadConfig.multer);
 
@@ -24,5 +26,7 @@ testimonialsRouter.patch(
   upload.single('photo'),
   testimonialsPhotosController.update,
 );
+
+testimonialsRouter.put('/emoji/:id', emojisController.update);
 
 export default testimonialsRouter;
