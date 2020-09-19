@@ -17,6 +17,7 @@ const upload = multer(uploadConfig.multer);
 testimonialsRouter.use(ensureAuthentication);
 testimonialsRouter.post('/', testimonialsController.create);
 testimonialsRouter.get('/', testimonialsController.index);
+testimonialsRouter.put('/:id', testimonialsController.update);
 
 testimonialsRouter.patch(
   '/photo/:id',

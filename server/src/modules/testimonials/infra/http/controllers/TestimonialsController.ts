@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
+
 import CreateTestimonialService from '@modules/testimonials/services/CreateTestimonialService';
 import ListTestimonialsService from '@modules/testimonials/services/ListTestimonialsService';
-import { classToClass } from 'class-transformer';
+import UpdateTestimonialService from '@modules/testimonials/services/UpdateTestimonialService';
 
 export default class TestimonialController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -30,5 +32,21 @@ export default class TestimonialController {
     const testimonials = await listTestimonials.execute();
 
     return response.json(classToClass(testimonials));
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { title, content, ministry_id } = request.body;
+    const { id } = request.params;
+
+    const updateTestimonial = container.resolve(UpdateTestimonialService);
+
+    const testimonial = await updateTestimonial.execute({
+      testimonialId: id,
+      title,
+      content,
+      ministry_id,
+    });
+
+    return response.json(testimonial);
   }
 }
