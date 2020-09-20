@@ -10,6 +10,15 @@ interface IRequest {
   userId: string;
 }
 
+interface IEmojiKeys {
+  emoji1: string[];
+  emoji2: string[];
+  emoji3: string[];
+  emoji4: string[];
+  emoji5: string[];
+  emoji6: string[];
+}
+
 @injectable()
 class ToogleEmojiOfTestimonialService {
   constructor(
@@ -27,17 +36,20 @@ class ToogleEmojiOfTestimonialService {
     );
 
     if (!testimonial) {
-      throw new AppError('User not found');
+      throw new AppError('Testimonial not found');
     }
 
-    if (emoji === 1) {
-      const index = testimonial.emoji1.findIndex(value => value === userId);
+    for (let key = 1; key <= 6; key += 1) {
+      const emojiKey: keyof IEmojiKeys = `emoji${key}`;
+
+      const index = testimonial[emojiKey].findIndex(value => value === userId);
       if (index !== -1) {
-        testimonial.emoji1.splice(index, 1);
-      } else {
-        testimonial.emoji1.push(userId);
+        testimonial[emojiKey].splice(index, 1);
       }
     }
+
+    const newKey: keyof IEmojiKeys = `emoji${emoji}`;
+    testimonial[newKey].push(userId);
 
     const updateTestimonial = await this.testimonialsRepository.save(
       testimonial,

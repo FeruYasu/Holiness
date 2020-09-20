@@ -38,20 +38,20 @@ class Testimonial {
   @Column('simple-array')
   emoji1: string[];
 
-  @Column('varchar', { array: true })
-  emoji2: string;
+  @Column('simple-array')
+  emoji2: string[];
 
-  @Column('varchar', { array: true })
-  emoji3: string;
+  @Column('simple-array')
+  emoji3: string[];
 
-  @Column('varchar', { array: true })
-  emoji4: string;
+  @Column('simple-array')
+  emoji4: string[];
 
-  @Column('varchar', { array: true })
-  emoji5: string;
+  @Column('simple-array')
+  emoji5: string[];
 
-  @Column('varchar', { array: true })
-  emoji6: string;
+  @Column('simple-array')
+  emoji6: string[];
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })

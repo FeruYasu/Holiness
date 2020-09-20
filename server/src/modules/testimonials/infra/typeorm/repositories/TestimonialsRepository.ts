@@ -27,7 +27,12 @@ class TestimonialsRepository implements ITestimonialRepository {
       photo,
       user_id,
       ministry_id,
-      emoji1: ['123', '456'],
+      emoji1: [],
+      emoji2: [],
+      emoji3: [],
+      emoji4: [],
+      emoji5: [],
+      emoji6: [],
     });
 
     await this.ormRepository.save(testimonial);
