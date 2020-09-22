@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
@@ -125,17 +125,13 @@ const SingleEvent: React.FC = () => {
       <ContentContainer>
         <InfoContainer>
           <Info>
-            <Icon
-              name="map-outline"
-              size={26}
-              color={theme.colors.darkerGreyText}
-            />
+            <Icon name="map" size={26} color={theme.colors.darkerGreyText} />
             <InfoText>{event.local}</InfoText>
           </Info>
           <Separator />
           <Info>
             <Icon
-              name="calendar-outline"
+              name="calendar"
               size={26}
               color={theme.colors.darkerGreyText}
             />
@@ -146,11 +142,7 @@ const SingleEvent: React.FC = () => {
           </Info>
           <Separator />
           <Info>
-            <Icon
-              name="time-outline"
-              size={26}
-              color={theme.colors.darkerGreyText}
-            />
+            <Icon name="clock" size={26} color={theme.colors.darkerGreyText} />
             <InfoText>09:00 até as 16:00</InfoText>
           </Info>
           <Separator />

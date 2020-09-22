@@ -5,7 +5,7 @@ import { Form } from '@unform/mobile';
 
 import { BorderlessButton } from 'react-native-gesture-handler';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 
 import { FormHandles } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
@@ -126,7 +126,7 @@ const SignIn: React.FC = () => {
           </SignInButton>
           <OrText>ou</OrText>
           <GoogleButton>
-            <Icon name="logo-google" size={26} color="#fff" />
+            <Icon name="github" size={26} color="#fff" />
             <GoogleButtonText>Continuar com Google</GoogleButtonText>
           </GoogleButton>
         </ButtonsContainer>

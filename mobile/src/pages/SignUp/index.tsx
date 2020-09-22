@@ -4,7 +4,7 @@ import { Form } from '@unform/mobile';
 
 import { format } from 'date-fns';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 import { FormHandles } from '@unform/core';
@@ -137,11 +137,11 @@ const SignUp: React.FC = () => {
             onSubmitEditing={() => {
               passwordInputRef.current.focus();
             }}
-            inputRight={(
+            inputRight={
               <BorderlessButton onPress={showDatepicker}>
                 <Icon name="calendar" size={26} color="#6360EB" />
               </BorderlessButton>
-            )}
+            }
           />
 
           {show && (

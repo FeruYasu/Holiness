@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 import { Sermon } from '../Sermons';
 import VideoPlayer from '../../components/VideoPlayer';
 import Comments from '../../components/Comments';
@@ -29,12 +29,8 @@ const SingleSermon: React.FC = () => {
       <VideoHeaderContainer>
         <HeaderTopContent>
           <VideoTitle>{sermon.title} </VideoTitle>
-          <Icon name="heart-outline" size={26} color={theme.colors.text} />
-          <Icon
-            name="share-social-outline"
-            size={26}
-            color={theme.colors.text}
-          />
+          <Icon name="heart" size={26} color={theme.colors.text} />
+          <Icon name="share-2" size={26} color={theme.colors.text} />
         </HeaderTopContent>
         <OwnerName>Pregação: </OwnerName>
 

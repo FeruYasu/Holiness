@@ -4,7 +4,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 import { useAuth } from '../hooks/auth';
 
 import Ministries from '../pages/Ministries';
@@ -15,6 +15,7 @@ import Events from '../pages/Events';
 import SingleEvent from '../pages/SingleEvent';
 import EventParticipants from '../pages/EventParticipants';
 import Announcements from '../pages/Announcements';
+import Testimonials from '../pages/Testimonials';
 import Home from '../pages/Home';
 import Sermons from '../pages/Sermons';
 import SingleSermon from '../pages/SingleSermon';
@@ -36,6 +37,7 @@ const HomeRoutes: React.FC = () => {
       <Stack.Screen name="Ministry" component={Ministry} />
       <Stack.Screen name="MinistryMembers" component={MinistryMembers} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Testimonials" component={Testimonials} />
     </Stack.Navigator>
   );
 };
@@ -86,7 +88,7 @@ const AppRoutes: React.FC = () => {
           tabBarIcon: ({ size, focused }) => {
             return (
               <Icon
-                name="caret-forward-circle"
+                name="tv"
                 size={size}
                 color={
                   focused ? theme.colors.accent : theme.colors.tabButtonText
@@ -104,7 +106,7 @@ const AppRoutes: React.FC = () => {
           tabBarIcon: ({ size, focused }) => {
             return (
               <Icon
-                name="chatbubbles"
+                name="message-circle"
                 size={size}
                 color={
                   focused ? theme.colors.accent : theme.colors.tabButtonText
@@ -114,7 +116,7 @@ const AppRoutes: React.FC = () => {
           },
         }}
         name="caret-forward-circle"
-        component={Ministries}
+        component={Testimonials}
       />
       <Tab.Screen
         options={{

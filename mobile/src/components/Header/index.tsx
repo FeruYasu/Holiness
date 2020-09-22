@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
 import logo from '../../assets/logonew.png';
@@ -31,7 +31,7 @@ const Header: React.FC = ({ title, back }) => {
             }}
           >
             <Icon
-              name="ios-chevron-back"
+              name="chevron-left"
               size={30}
               color={theme.colors.darkerGreyText}
             />
@@ -46,7 +46,7 @@ const Header: React.FC = ({ title, back }) => {
 
       <HeaderRightContainer>
         <Icon
-          name="notifications-outline"
+          name="bell"
           size={30}
           color={theme.colors.darkerGreyText}
           onPress={signOut}

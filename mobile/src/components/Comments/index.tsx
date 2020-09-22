@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
@@ -126,7 +126,7 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
                       </CommentActions>
                     </ContentContainer>
                     <Icon
-                      name="thumbs-up-outline"
+                      name="thumbs-up"
                       size={20}
                       color={theme.colors.text}
                     />
@@ -156,7 +156,7 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
                           </CommentActions>
                         </ContentContainer>
                         <Icon
-                          name="thumbs-up-outline"
+                          name="thumbs-up"
                           size={20}
                           color={theme.colors.text}
                         />
