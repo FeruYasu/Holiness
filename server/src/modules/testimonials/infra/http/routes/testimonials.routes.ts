@@ -28,5 +28,6 @@ testimonialsRouter.patch(
 );
 
 testimonialsRouter.put('/emoji/:id', emojisController.update);
+testimonialsRouter.delete('/emoji/:id', emojisController.destroy);
 
 export default testimonialsRouter;
