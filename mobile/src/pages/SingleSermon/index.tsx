@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 
+import YouTube from 'react-native-youtube';
+
+import { YOUTUBE_API_KEY } from '@env';
+
 import Icon from 'react-native-vector-icons/Feather';
 import { Sermon } from '../Sermons';
-import VideoPlayer from '../../components/VideoPlayer';
 import Comments from '../../components/Comments';
 
 import { useAuth } from '../../hooks/auth';
@@ -25,7 +28,13 @@ const SingleSermon: React.FC = () => {
 
   return (
     <Container>
-      <VideoPlayer videoUrl={sermon.video_url} />
+      <YouTube
+        apiKey={YOUTUBE_API_KEY}
+        videoId={sermon.video_url}
+        play
+        loop
+        style={{ alignSelf: 'stretch', height: 300 }}
+      />
       <VideoHeaderContainer>
         <HeaderTopContent>
           <VideoTitle>{sermon.title} </VideoTitle>
