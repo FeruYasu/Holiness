@@ -18,6 +18,7 @@ interface User {
   email: string;
   avatar_url: string;
   birthdate: string;
+  initials: string;
 }
 
 interface AuthState {
@@ -85,6 +86,15 @@ const AuthProvider: React.FC = ({ children }) => {
     });
 
     const { token, user } = response.data;
+
+    user.initials = user.name.match(/\b\w/g) || [].join('');
+
+    if (user.initials.length > 2) {
+      user.initials = [
+        user.initials[0],
+        user.initials[user.initials.length - 1],
+      ];
+    }
 
     await AsyncStorage.multiSet([
       ['@IEHC:token', token],

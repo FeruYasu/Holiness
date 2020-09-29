@@ -25,6 +25,8 @@ import {
   Title,
   UserAvatarButton,
   UserAvatar,
+  UserInitialButton,
+  UserInitialsText,
   ChangePasswordText,
   SwitchesContainer,
   DarkThemeContainer,
@@ -192,9 +194,16 @@ const Profile: React.FC = () => {
         <Title>Configurações</Title>
       </Header>
       <Container>
-        <UserAvatarButton onPress={handleUpdateAvatar}>
-          <UserAvatar source={{ uri: user.avatar_url }} />
-        </UserAvatarButton>
+        {user.avatar_url ? (
+          <UserAvatarButton onPress={handleUpdateAvatar}>
+            <UserAvatar source={{ uri: user.avatar_url }} />
+          </UserAvatarButton>
+        ) : (
+          <UserInitialButton onPress={handleUpdateAvatar}>
+            <UserInitialsText>{user.initials}</UserInitialsText>
+          </UserInitialButton>
+        )}
+
         <Form initialData={user} ref={formRef} onSubmit={handleSubmit}>
           <Input
             ref={nameInputRef}

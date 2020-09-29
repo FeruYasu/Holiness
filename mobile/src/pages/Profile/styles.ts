@@ -43,6 +43,22 @@ export const UserAvatar = styled.Image`
   align-self: center;
 `;
 
+export const UserInitialButton = styled.TouchableOpacity`
+  margin-top: 10px;
+  width: 146px;
+  height: 146px;
+  border-radius: 73px;
+  background-color: #ff545d;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const UserInitialsText = styled.Text`
+  font-size: 56px;
+  color: #fff;
+  font-family: 'SourceSansPro-Bold';
+`;
+
 export const ChangePasswordText = styled.Text`
   color: ${(props) => props.theme.colors.accent};
   font-family: 'SourceSansPro-SemiBold';

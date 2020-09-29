@@ -16,7 +16,6 @@ import SingleEvent from '../pages/SingleEvent';
 import EventParticipants from '../pages/EventParticipants';
 import Announcements from '../pages/Announcements';
 import Testimonials from '../pages/Testimonials';
-import Home from '../pages/Home';
 import Sermons from '../pages/Sermons';
 import SingleSermon from '../pages/SingleSermon';
 import Menu from '../pages/Menu';
@@ -31,7 +30,7 @@ const HomeRoutes: React.FC = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Announcements" component={Announcements} />
       <Stack.Screen name="SingleEvent" component={SingleEvent} />
       <Stack.Screen name="EventParticipants" component={EventParticipants} />
       <Stack.Screen name="Ministry" component={Ministry} />

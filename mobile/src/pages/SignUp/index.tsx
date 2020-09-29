@@ -42,6 +42,9 @@ const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const birthdayInputRef = useRef<TextInput>(null);
+  const emailInputRef = useRef<TextInput>(null);
+  const confirmPasswordInputRef = useRef<TextInput>(null);
+
   const navigation = useNavigation();
 
   const [date, setDate] = useState(new Date(1598051730000));
@@ -55,45 +58,55 @@ const SignUp: React.FC = () => {
     setBirthday(format(date, 'dd/MM/yyyy'));
     birthdayInputRef.current.value(format(date, 'dd/MM/yyyy'));
     birthdayInputRef.current.filled();
+    passwordInputRef.current.focus();
   };
 
-  const handleSignUp = useCallback(async (data: SignUpFormData) => {
-    try {
-      formRef.current?.setErrors({});
-      // const schema = Yup.object().shape({
-      //   name: Yup.string().required('Nome obrigatório'),
-      //   email: Yup.string()
-      //     .required('E-mail obrigatório')
-      //     .email('Digite um e-mail válido'),
-      //   birthday: Yup.date().required('Data obrigatória'),
-      //   password: Yup.string().required('Senha obrigatória'),
-      //   confirmPassword: Yup.string().required('Senha obrigatória'),
-      // });
+  const handleSignUp = useCallback(
+    async (data: SignUpFormData) => {
+      try {
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatório'),
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
+          birthday: Yup.string().required('Data obrigatória'),
+          password: Yup.string().required('Senha obrigatória'),
+          confirmpassword: Yup.string().oneOf(
+            [Yup.ref('password'), null],
+            'As senhas não são iguais'
+          ),
+        });
 
-      // await schema.validate(data, { abortEarly: false });
+        await schema.validate(data, { abortEarly: false });
 
-      const response = await api.post('/users', {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      });
+        await api.post('/users', {
+          name: data.name,
+          email: data.email,
+          birthdate: data.birthday,
+          password: data.password,
+        });
 
-      navigation.goBack();
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        Alert.alert('Usuário criado com sucesso');
 
-        formRef.current?.setErrors(errors);
+        navigation.goBack();
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        return;
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
+        Alert.alert(
+          'Erro na criação de usuário ',
+          'Ocorreu um erro ao criar seu usuário.'
+        );
       }
-
-      Alert.alert(
-        'Erro na autenticação',
-        'Ocorreu um erro ao fazer login, cheque as credencias.'
-      );
-    }
-  }, []);
+    },
+    [navigation]
+  );
 
   const showDatepicker = useCallback(() => {
     setShow(true);
@@ -107,16 +120,16 @@ const SignUp: React.FC = () => {
         <Form ref={formRef} onSubmit={handleSignUp}>
           <Input
             autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="email-address"
+            autoCapitalize="words"
             name="name"
             placeholder="Nome completo"
             returnKeyType="next"
             onSubmitEditing={() => {
-              passwordInputRef.current.focus();
+              emailInputRef.current.focus();
             }}
           />
           <Input
+            ref={emailInputRef}
             autoCorrect={false}
             autoCapitalize="none"
             keyboardType="email-address"
@@ -124,7 +137,7 @@ const SignUp: React.FC = () => {
             name="email"
             returnKeyType="next"
             onSubmitEditing={() => {
-              passwordInputRef.current.focus();
+              showDatepicker();
             }}
           />
           <Input
@@ -162,8 +175,12 @@ const SignUp: React.FC = () => {
             autoCapitalize="none"
             placeholder="Senha"
             name="password"
+            onSubmitEditing={() => {
+              confirmPasswordInputRef.current.focus();
+            }}
           />
           <Input
+            ref={confirmPasswordInputRef}
             secureTextEntry
             autoCorrect={false}
             autoCapitalize="none"

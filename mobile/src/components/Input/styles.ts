@@ -24,6 +24,13 @@ export const Container = styled.View<ContainerProps>`
       border-bottom-color: ${props.theme.colors.secondary};
       border-bottom-width: 1px;
     `}
+
+  ${(props) =>
+    props.isErrored &&
+    css`
+      border-bottom-color: #c53030;
+      border-bottom-width: 1px;
+    `}
 `;
 
 export const HeaderContainer = styled.View`
@@ -64,6 +71,7 @@ export const InputText = styled.Text`
   font-size: 14px;
   font-family: 'SourceSansPro-Regular';
 
+
   ${(props) =>
     props.isFocused &&
     css`
@@ -71,6 +79,15 @@ export const InputText = styled.Text`
       color: ${props.theme.colors.secondary};
       font-weight: bold;
     `}
+
+  ${(props) =>
+    props.isErrored &&
+    css`
+      color: #c53030;
+      font-weight: bold;
+    `}
+
+
 
   ${(props) =>
     props.isFilled &&

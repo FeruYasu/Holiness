@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,6 +14,8 @@ import {
   HeaderRightContainer,
   ProfileButton,
   ProfilePicture,
+  ProfileInitialsContainer,
+  ProfileInitialsText,
   Title,
 } from './styles';
 
@@ -56,7 +58,17 @@ const Header: React.FC = ({ title, back }) => {
             navigation.navigate('Profile');
           }}
         >
-          <ProfilePicture source={{ uri: user.avatar_url }} />
+          {user.avatar_url ? (
+            <ProfilePicture source={{ uri: user.avatar_url }} />
+          ) : (
+            <ProfileInitialsContainer
+              onPress={() => {
+                navigation.navigate('Profile');
+              }}
+            >
+              <ProfileInitialsText>{user.initials}</ProfileInitialsText>
+            </ProfileInitialsContainer>
+          )}
         </ProfileButton>
       </HeaderRightContainer>
     </Container>

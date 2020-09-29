@@ -54,10 +54,13 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
     setShowCommentInput(!showCommentInput);
   }, [showCommentInput]);
 
-  const handleShowAnswerInput = useCallback((id) => {
-    setReply(id);
-    setShowCommentInput(!showCommentInput);
-  }, []);
+  const handleShowAnswerInput = useCallback(
+    (id) => {
+      setReply(id);
+      setShowCommentInput(!showCommentInput);
+    },
+    [showCommentInput]
+  );
 
   useEffect(() => {
     commentInputRef.current?.focus();

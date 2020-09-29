@@ -8,7 +8,7 @@ interface LikeButtonProps {
 }
 
 export const TestimonialContainer = styled.View`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.headerBackground};
   margin-bottom: 36px;
 `;
 
@@ -21,11 +21,13 @@ export const TestimonialTitle = styled.Text`
   margin-top: 8px;
   font-size: 18px;
   font-family: 'SourceSansPro-BoldItalic';
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const Content = styled.Text`
   font-size: 16px;
   font-family: 'SourceSansPro-Regular';
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const TestimonialImage = styled.Image`
@@ -58,6 +60,7 @@ export const ColumnContainer = styled.View`
 export const Name = styled.Text`
   font-family: 'SourceSansPro-Bold';
   font-size: 18px;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const RightArrow = styled.Text`
@@ -69,11 +72,13 @@ export const RightArrow = styled.Text`
 export const TestimonialMinistry = styled.Text`
   font-family: 'SourceSansPro-BoldItalic';
   font-size: 18px;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const Date = styled.Text`
   margin-top: -2px;
   font-size: 12px;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const CommentsButton = styled.TouchableOpacity`
@@ -159,15 +164,15 @@ export const CommentButtonText = styled.Text`
 export const LikeContainer = styled.View`
   flex-direction: row;
   position: absolute;
-  bottom: 40px;
+  bottom: 38px;
   width: ${Dimensions.get('window').width - 32}px;
   justify-content: space-between;
   border-radius: 26px;
   margin-left: 16px;
   margin-right: 16px;
   elevation: 1;
-  background-color: ${(props) => props.theme.colors.cardBackground};
-  padding: 16px;
+  background-color: ${(props) => props.theme.colors.headerBackground};
+  padding: 8px;
 `;
 
 export const EmojiButton = styled(Pressable)``;

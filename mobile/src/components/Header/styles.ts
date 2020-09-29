@@ -42,3 +42,19 @@ export const ProfilePicture = styled.Image`
   border-radius: 25px;
   margin: 0 20px;
 `;
+
+export const ProfileInitialsContainer = styled.TouchableOpacity`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 0 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff545d;
+`;
+
+export const ProfileInitialsText = styled.Text`
+  color: #fff;
+  font-size: 24px;
+  font-family: 'SourceSansPro-SemiBold';
+`;

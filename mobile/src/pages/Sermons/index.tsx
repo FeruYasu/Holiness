@@ -119,9 +119,9 @@ const Sermons: React.FC = () => {
                 <PreacherPicture source={{ uri: sermon.preacher.avatar_url }} />
                 <TextContent>
                   <Title>{sermon.title}</Title>
-                  <Description>{sermon.description}</Description>
                 </TextContent>
               </InfoContainer>
+
               <SermonPhoto source={{ uri: sermon.photoUrl }} />
             </SermonContainer>
             <TagsContainer>

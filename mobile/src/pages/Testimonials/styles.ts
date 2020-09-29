@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
 
 import { FlatList } from 'react-native';
 
@@ -7,6 +6,7 @@ import { ITestimonial } from './index';
 
 export const Container = styled.View`
   flex: 1;
+  background-color: ${(props) => props.theme.colors.cardBackground};
 `;
 
 export const TestimonialsList = styled(

@@ -82,11 +82,24 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     });
   }, [fieldName, registerField]);
 
+  const handlePress = useCallback(() => {
+    inputElementRef.current.focus();
+  }, []);
+
   return (
-    <Container isFocused={isFocused} isFilled={isFilled}>
+    <Container
+      isFocused={isFocused}
+      isFilled={isFilled}
+      isErrored={!!error}
+      onPress={handlePress}
+    >
       <PlaceHolderContainer>
         <HeaderContainer>
-          <InputText isFocused={isFocused} isFilled={isFilled}>
+          <InputText
+            isFocused={isFocused}
+            isFilled={isFilled}
+            isErrored={!!error}
+          >
             {placeholder}
           </InputText>
         </HeaderContainer>

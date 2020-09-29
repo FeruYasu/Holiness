@@ -2,9 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import prayingEmoji from '../../assets/prayingEmoji.png';
 import roundLike from '../../assets/roundLike.png';
 import roundHeart from '../../assets/roundHeart.png';
+import roundWow from '../../assets/roundWow.png';
+import roundHappy from '../../assets/roundHappy.png';
+import roundSad from '../../assets/roundSad.png';
+import roundAngry from '../../assets/roundAngry.png';
 
 import {
   TestimonialContainer,
@@ -73,7 +76,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
       avatar_url: 'none',
     },
   } as Testimonial);
-  const { user } = useAuth();
+  const { user, theme } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
   const [showEmojis, setShowEmojis] = useState('');
 
@@ -182,6 +185,18 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
               {testimonial.emoji2?.length > 0 && (
                 <EmojiImage source={roundHeart} />
               )}
+              {testimonial.emoji3?.length > 0 && (
+                <EmojiImage source={roundHappy} />
+              )}
+              {testimonial.emoji4?.length > 0 && (
+                <EmojiImage source={roundWow} />
+              )}
+              {testimonial.emoji5?.length > 0 && (
+                <EmojiImage source={roundSad} />
+              )}
+              {testimonial.emoji6?.length > 0 && (
+                <EmojiImage source={roundAngry} />
+              )}
               <Counter>{testimonial.likeCounter}</Counter>
             </>
           )}
@@ -212,28 +227,28 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
               toogleEmoji(testimonial.id, 3);
             }}
           >
-            <Emoji source={prayingEmoji} />
+            <Emoji source={roundHappy} />
           </EmojiButton>
           <EmojiButton
             onPress={() => {
               toogleEmoji(testimonial.id, 4);
             }}
           >
-            <Emoji source={prayingEmoji} />
+            <Emoji source={roundWow} />
           </EmojiButton>
           <EmojiButton
             onPress={() => {
               toogleEmoji(testimonial.id, 5);
             }}
           >
-            <Emoji source={prayingEmoji} />
+            <Emoji source={roundSad} />
           </EmojiButton>
           <EmojiButton
             onPress={() => {
               toogleEmoji(testimonial.id, 6);
             }}
           >
-            <Emoji source={prayingEmoji} />
+            <Emoji source={roundAngry} />
           </EmojiButton>
         </LikeContainer>
       )}
@@ -257,14 +272,22 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
             }}
           >
             <LikeButtonContainer>
-              <Icon name="thumbs-up" size={18} color="#000" />
+              <Icon
+                name="thumbs-up"
+                size={18}
+                color={theme.colors.headerBackground}
+              />
               <LikeButtonText isLiked={false}>Curtir</LikeButtonText>
             </LikeButtonContainer>
           </LikeButton>
         )}
 
         <CommentButton>
-          <Icon name="message-square" size={18} color="#000" />
+          <Icon
+            name="message-square"
+            size={18}
+            color={theme.colors.headerBackground}
+          />
           <CommentButtonText>Comentar</CommentButtonText>
         </CommentButton>
       </ButtonsContainer>
