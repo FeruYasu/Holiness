@@ -47,10 +47,11 @@ export const InfoContainer = styled.TouchableOpacity`
   align-items: center;
   margin: 8px 0;
   margin-left: 16px;
+  margin-right: 16px;
 `;
 
 export const Title = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   color: ${(props) => props.theme.colors.darkerGreyText};
   font-family: 'SourceSansPro-SemiBold';
 `;

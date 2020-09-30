@@ -143,7 +143,7 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
                         <ContentContainer>
                           <TopContent>
                             <CommentContent>
-                              <CommentName>Fernando Yasumoto </CommentName>
+                              <CommentName>{reply.user.name} </CommentName>
                               {reply.content}
                             </CommentContent>
                           </TopContent>

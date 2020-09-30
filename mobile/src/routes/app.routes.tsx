@@ -7,7 +7,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
 import { useAuth } from '../hooks/auth';
 
-import Ministries from '../pages/Ministries';
 import Ministry from '../pages/Ministry';
 import MinistryMembers from '../pages/MinistryMembers';
 import Profile from '../pages/Profile';
@@ -24,38 +23,6 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeRoutes: React.FC = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Announcements" component={Announcements} />
-      <Stack.Screen name="SingleEvent" component={SingleEvent} />
-      <Stack.Screen name="EventParticipants" component={EventParticipants} />
-      <Stack.Screen name="Ministry" component={Ministry} />
-      <Stack.Screen name="MinistryMembers" component={MinistryMembers} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Testimonials" component={Testimonials} />
-    </Stack.Navigator>
-  );
-};
-
-const SermonsRoutes: React.FC = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Sermons" component={Sermons} />
-      <Stack.Screen name="SingleSermon" component={SingleSermon} />
-      <Stack.Screen name="Profile" component={Profile} />
-    </Stack.Navigator>
-  );
-};
-
-const AppRoutes: React.FC = () => {
   const { theme } = useAuth();
 
   return (
@@ -97,7 +64,7 @@ const AppRoutes: React.FC = () => {
           },
         }}
         name="SermonsRoutes"
-        component={SermonsRoutes}
+        component={Sermons}
       />
       <Tab.Screen
         options={{
@@ -133,7 +100,7 @@ const AppRoutes: React.FC = () => {
           },
         }}
         name="Home"
-        component={HomeRoutes}
+        component={Announcements}
       />
       <Tab.Screen
         options={{
@@ -172,6 +139,40 @@ const AppRoutes: React.FC = () => {
         component={Menu}
       />
     </Tab.Navigator>
+  );
+};
+
+// const SermonsRoutes: React.FC = () => {
+//   return (
+//     <Stack.Navigator
+//       screenOptions={{
+//         headerShown: false,
+//       }}
+//     >
+//       <Stack.Screen name="Sermons" component={Sermons} />
+//       <Stack.Screen name="SingleSermon" component={SingleSermon} />
+//       <Stack.Screen name="Profile" component={Profile} />
+//     </Stack.Navigator>
+//   );
+// };
+
+const AppRoutes: React.FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="HomeRoutes" component={HomeRoutes} />
+      <Stack.Screen name="SingleEvent" component={SingleEvent} />
+      <Stack.Screen name="EventParticipants" component={EventParticipants} />
+      <Stack.Screen name="Ministry" component={Ministry} />
+      <Stack.Screen name="MinistryMembers" component={MinistryMembers} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Testimonials" component={Testimonials} />
+      <Stack.Screen name="Sermons" component={Sermons} />
+      <Stack.Screen name="SingleSermon" component={SingleSermon} />
+    </Stack.Navigator>
   );
 };
 

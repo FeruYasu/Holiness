@@ -105,7 +105,7 @@ export const ContentContainer = styled.View`
 
 export const CommentButtonContainer = styled.View`
   background-color: ${(props) => props.theme.colors.background};
-  padding: 16px;
+  padding: 0 16px 16px;
   flex-direction: row;
   align-items: center;
 `;

@@ -5,7 +5,7 @@ export const Container = styled.View`
 `;
 
 export const VideoHeaderContainer = styled.View`
-  padding: 8px 8px;
+  padding: 0 8px;
   background-color: ${(props) => props.theme.colors.background};
 `;
 

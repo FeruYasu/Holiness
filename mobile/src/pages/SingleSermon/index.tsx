@@ -38,12 +38,12 @@ const SingleSermon: React.FC = () => {
       <VideoHeaderContainer>
         <HeaderTopContent>
           <VideoTitle>{sermon.title} </VideoTitle>
-          <Icon name="heart" size={26} color={theme.colors.text} />
-          <Icon name="share-2" size={26} color={theme.colors.text} />
+          {/* <Icon name="heart" size={26} color={theme.colors.text} />
+          <Icon name="share-2" size={26} color={theme.colors.text} /> */}
         </HeaderTopContent>
-        <OwnerName>Pregação: </OwnerName>
-
-        <VideoDescription>{sermon.description}</VideoDescription>
+        <OwnerName>Pregação: {sermon.preacher.name} </OwnerName>
+        {/*
+        <VideoDescription>{sermon.description}</VideoDescription> */}
 
         <VideoSocialActionsContainer />
       </VideoHeaderContainer>
