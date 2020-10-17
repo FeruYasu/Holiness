@@ -9,7 +9,7 @@ interface IRequest {
   name: string;
   email: string;
   password: string;
-  birthdate: Date;
+  birthdate: string;
 }
 
 @injectable()
@@ -31,16 +31,24 @@ class CreateUserService {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
-      throw new AppError('Email address alread used.');
+      throw new AppError('Email address already used.');
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);
+
+    const [day, month, year] = birthdate.split('/');
+
+    const Datebirthdate = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+    );
 
     const user = this.usersRepository.create({
       name,
       email,
       password: hashedPassword,
-      birthdate,
+      birthdate: Datebirthdate,
     });
 
     return user;

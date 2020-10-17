@@ -9,14 +9,13 @@ interface IRequest {
   userId: string;
 }
 
-interface IEmojiKeys {
-  emoji1: string[];
-  emoji2: string[];
-  emoji3: string[];
-  emoji4: string[];
-  emoji5: string[];
-  emoji6: string[];
-}
+type EmojiKeys =
+  | 'emoji1'
+  | 'emoji2'
+  | 'emoji3'
+  | 'emoji4'
+  | 'emoji5'
+  | 'emoji6';
 
 @injectable()
 class RemoveEmojiOfTestimonialService {
@@ -38,7 +37,7 @@ class RemoveEmojiOfTestimonialService {
     }
 
     for (let key = 1; key <= 6; key += 1) {
-      const emojiKey: keyof IEmojiKeys = `emoji${key}`;
+      const emojiKey = `emoji${key}` as EmojiKeys;
 
       const index = testimonial[emojiKey].findIndex(value => value === userId);
       if (index !== -1) {
