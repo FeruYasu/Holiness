@@ -48,32 +48,35 @@ export interface Testimonial {
   content: string;
   photo_url: string;
   likeCounter: number;
-  user: { avatar_url: string };
+  user: { name: string; avatar_url: string };
   emoji1: string[];
   emoji2: string[];
   emoji3: string[];
   emoji4: string[];
   emoji5: string[];
   emoji6: string[];
+  ministry: { name: string };
 }
 
 interface TestimonialProps {
   data: Testimonial;
 }
 
-interface IEmojiKeys {
-  emoji1: string[];
-  emoji2: string[];
-  emoji3: string[];
-  emoji4: string[];
-  emoji5: string[];
-  emoji6: string[];
-}
+type IEmojiKeys =
+  | 'emoji1'
+  | 'emoji2'
+  | 'emoji3'
+  | 'emoji4'
+  | 'emoji5'
+  | 'emoji6';
 
 const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
   const [testimonial, setTestimonial] = useState<Testimonial>({
     user: {
       avatar_url: 'none',
+    },
+    ministry: {
+      name: '',
     },
   } as Testimonial);
   const { user, theme } = useAuth();
@@ -84,7 +87,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
     setTestimonial(data);
 
     for (let key = 1; key <= 6; key += 1) {
-      const emojiKey: keyof IEmojiKeys = `emoji${key}`;
+      const emojiKey = `emoji${key}` as IEmojiKeys;
       const foundEmoji = data[emojiKey].findIndex((element) => {
         return element === user.id;
       });
@@ -160,9 +163,11 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
           <OwnerPicture source={{ uri: testimonial.user.avatar_url }} />
           <ColumnContainer>
             <RowContainer>
-              <Name>Fernando Yasumoto</Name>
+              <Name>{testimonial.user.name}</Name>
               <RightArrow>▶</RightArrow>
-              <TestimonialMinistry>Minarai</TestimonialMinistry>
+              <TestimonialMinistry>
+                {testimonial.ministry.name}
+              </TestimonialMinistry>
             </RowContainer>
 
             <Date>05 de set de 2020 às 12:35</Date>

@@ -59,7 +59,7 @@ const Announcements: React.FC = () => {
                   <PostedAt>às 14h:15 do dia 05/06/2020</PostedAt>
                 </NameContainer>
               </UserContainer>
-              <Ministry>Minarai</Ministry>
+              <Ministry>{announcement.ministry.name}</Ministry>
             </HeaderContainer>
             <ContentContainer>
               <Title>{announcement.title}</Title>

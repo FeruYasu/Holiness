@@ -25,12 +25,13 @@ export const MainTitle = styled.Text`
 export const SermonsList = styled(FlatList as new () => FlatList<Sermon>)``;
 
 export const SermonContainer = styled.TouchableOpacity`
-  height: 280px;
+  flex: 1;
 `;
 
 export const SermonPhoto = styled.Image`
-  flex: 1;
   background-color: rgba(0, 0, 0, 0.4);
+  aspect-ratio: 1;
+  width: 100%;
 `;
 
 export const PreacherPicture = styled.Image`

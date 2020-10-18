@@ -21,10 +21,12 @@ describe('Toogle Testimonial emoji', () => {
       ministry_id: 'ministry1.id',
     });
 
+    testimonial.emoji1 = [];
+
     await toogleEmojiOfTestimonialService.execute({
       testimonialId: testimonial.id,
       emoji: 1,
-      userId: 'user.id',
+      userId: 'user1.id',
     });
 
     const updatedTestimonial = await toogleEmojiOfTestimonialService.execute({
@@ -33,6 +35,9 @@ describe('Toogle Testimonial emoji', () => {
       userId: 'user2.id',
     });
 
-    await expect(updatedTestimonial.emoji1).toBe(['user1.id', 'user2.id']);
+    await expect(updatedTestimonial.emoji1).toMatchObject([
+      'user1.id',
+      'user2.id',
+    ]);
   });
 });

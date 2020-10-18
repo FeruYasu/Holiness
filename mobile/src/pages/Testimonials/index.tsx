@@ -1,11 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
-import { Container, MainTitle, TestimonialsList } from './styles';
+import {
+  Container,
+  MainTitle,
+  TestimonialsList,
+  NewTestimonialContainer,
+  ProfileImage,
+  NewTestimonialButton,
+  NewTestimonialText,
+} from './styles';
 
 import Testionial from '../../components/Testimonial';
+import { useAuth } from '../../hooks/auth';
 
 export interface ITestimonial {
   id: string;
@@ -16,6 +26,9 @@ export interface ITestimonial {
 const Testimonials: React.FC = () => {
   const [testimonials, setTestimonials] = useState<ITestimonial[]>();
   const [scrollEnabled, setScrollEnabled] = useState(true);
+  const navigation = useNavigation();
+
+  const { user } = useAuth();
 
   const likeQuantity = useCallback(
     (emoji1, emoji2, emoji3, emoji4, emoji5, emoji6) => {
@@ -65,6 +78,10 @@ const Testimonials: React.FC = () => {
     setScrollEnabled(!scrollEnabled);
   }, [scrollEnabled]);
 
+  const handleNewTestimonial = useCallback(() => {
+    navigation.navigate('NewTestimonial');
+  }, [navigation]);
+
   return (
     <Container>
       <TestimonialsList
@@ -72,6 +89,15 @@ const Testimonials: React.FC = () => {
           <>
             <Header />
             <MainTitle>Compartilhar</MainTitle>
+
+            <NewTestimonialContainer>
+              <ProfileImage source={{ uri: user.avatar_url }} />
+              <NewTestimonialButton onPress={handleNewTestimonial}>
+                <NewTestimonialText>
+                  Gostaria de compartilhar algo hoje?
+                </NewTestimonialText>
+              </NewTestimonialButton>
+            </NewTestimonialContainer>
           </>
         }
         data={testimonials}

@@ -18,6 +18,7 @@ import Testimonials from '../pages/Testimonials';
 import Sermons from '../pages/Sermons';
 import SingleSermon from '../pages/SingleSermon';
 import Menu from '../pages/Menu';
+import NewTestimonial from '../pages/NewTestimonial';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -172,6 +173,7 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen name="Testimonials" component={Testimonials} />
       <Stack.Screen name="Sermons" component={Sermons} />
       <Stack.Screen name="SingleSermon" component={SingleSermon} />
+      <Stack.Screen name="NewTestimonial" component={NewTestimonial} />
     </Stack.Navigator>
   );
 };

@@ -28,6 +28,6 @@ describe('Remove Testimonial emoji', () => {
       userId: 'user.id',
     });
 
-    await expect(updatedTestimonial.emoji1).toBe([]);
+    await expect(updatedTestimonial.emoji1).toMatchObject([]);
   });
 });

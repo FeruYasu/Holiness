@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
-import { classToClass } from 'class-transformer';
 
 import CreateTestimonialService from '@modules/testimonials/services/CreateTestimonialService';
 import ListTestimonialsService from '@modules/testimonials/services/ListTestimonialsService';
 import UpdateTestimonialService from '@modules/testimonials/services/UpdateTestimonialService';
+
+import { classToClass } from 'class-transformer';
 
 export default class TestimonialController {
   public async create(request: Request, response: Response): Promise<Response> {

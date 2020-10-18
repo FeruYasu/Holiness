@@ -39,8 +39,8 @@ class RemoveEmojiOfTestimonialService {
     for (let key = 1; key <= 6; key += 1) {
       const emojiKey = `emoji${key}` as EmojiKeys;
 
-      const index = testimonial[emojiKey].findIndex(value => value === userId);
-      if (index !== -1) {
+      const index = testimonial[emojiKey]?.findIndex(value => value === userId);
+      if (index !== -1 && testimonial[emojiKey]) {
         testimonial[emojiKey].splice(index, 1);
       }
     }

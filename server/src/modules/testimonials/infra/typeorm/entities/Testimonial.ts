@@ -1,6 +1,9 @@
 import Ministry from '@modules/ministries/infra/typeorm/entities/Ministry';
 import User from '@modules/users/infra/typeorm/entities/User';
+import Comment from '@modules/comments/infra/typeorm/entities/Comment';
+
 import { Expose } from 'class-transformer';
+
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +11,8 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 import uploadConfig from '@config/upload';
@@ -66,6 +71,14 @@ class Testimonial {
 
   @CreateDateColumn()
   updated_at: Date;
+
+  @ManyToMany(() => Comment)
+  @JoinTable({
+    name: 'testimonials_comments',
+    joinColumns: [{ name: 'testimonial_id' }],
+    inverseJoinColumns: [{ name: 'comment_id' }],
+  })
+  comments: Comment[];
 
   @Expose({ name: 'photo_url' })
   getPhotoUrl(): string | null {

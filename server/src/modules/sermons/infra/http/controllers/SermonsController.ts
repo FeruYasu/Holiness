@@ -5,8 +5,8 @@ import { container } from 'tsyringe';
 import CreateSermonsService from '@modules/sermons/services/CreateSermonsService';
 import ListSermonsService from '@modules/sermons/services/ListSermonsService';
 import FilterSermonByTagSermon from '@modules/sermons/services/FilterSermonByTagService';
-
 import UpdateSermonsTagsService from '@modules/sermons/services/UpdateSermonsTagsService';
+
 import { classToClass } from 'class-transformer';
 
 export default class SermonsController {

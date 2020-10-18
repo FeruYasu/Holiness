@@ -49,7 +49,10 @@ class TestimonialsRepository implements ITestimonialRepository {
   }
 
   public async findById(id: string): Promise<Testimonial | undefined> {
-    const testimonial = await this.ormRepository.findOne({ where: { id } });
+    const testimonial = await this.ormRepository.findOne({
+      where: { id },
+      relations: ['comments'],
+    });
 
     return testimonial;
   }

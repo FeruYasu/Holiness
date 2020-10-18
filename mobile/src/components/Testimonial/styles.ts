@@ -32,7 +32,8 @@ export const Content = styled.Text`
 
 export const TestimonialImage = styled.Image`
   margin-top: 16px;
-  height: 300px;
+  aspect-ratio: 1;
+  width: 100%;
 `;
 
 export const TestimonialOwnerContainer = styled.View`
