@@ -10,6 +10,7 @@ import { classToClass } from 'class-transformer';
 export default class TestimonialsCommentsController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { testimonialId, commentId } = request.body;
+    const { io } = request;
 
     const updateTestimonialComments = container.resolve(
       UpdateTestimonialsCommentsService,
@@ -19,6 +20,8 @@ export default class TestimonialsCommentsController {
       testimonialId,
       commentId,
     });
+
+    io.sockets.emit('newTestimonialComment');
 
     return response.json(classToClass(testimonial));
   }

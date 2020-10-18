@@ -8,6 +8,8 @@ import RemoveEmojiOfTestimonialService from '@modules/testimonials/services/Remo
 export default class TestimonialController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { emoji } = request.body;
+    const { io } = request;
+
     const userId = request.user.id;
 
     const { id } = request.params;
@@ -19,6 +21,8 @@ export default class TestimonialController {
       emoji,
       userId,
     });
+
+    io.sockets.emit('emojiChange', { emoji, id, userId });
 
     return response.json(testimonial);
   }

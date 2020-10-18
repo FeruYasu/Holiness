@@ -11,6 +11,7 @@ import { classToClass } from 'class-transformer';
 export default class TestimonialController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { title, content, photo, ministry_id } = request.body;
+    const { io } = request;
 
     const user_id = request.user.id;
 
@@ -23,6 +24,8 @@ export default class TestimonialController {
       ministry_id,
       photo,
     });
+
+    io.sockets.emit('newTestimonial');
 
     return response.json(ministry);
   }

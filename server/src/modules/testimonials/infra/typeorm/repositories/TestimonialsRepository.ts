@@ -42,7 +42,7 @@ class TestimonialsRepository implements ITestimonialRepository {
 
   public async listAll(): Promise<Testimonial[]> {
     const testimonials = await this.ormRepository.find({
-      relations: ['user', 'ministry'],
+      relations: ['user', 'ministry', 'comments'],
     });
 
     return testimonials;
