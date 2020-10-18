@@ -1,4 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+
+import socketio from 'socket.io-client';
+
 import { TextInput } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
@@ -113,8 +122,31 @@ const Comments: React.FC<CommentsProps> = ({ sermonId, testimonialId }) => {
 
       setShowCommentInput(!showCommentInput);
     },
-    [newComment, sermonId, showCommentInput]
+    [newComment, sermonId, showCommentInput, testimonialId]
   );
+
+  const socket = useMemo(() => {
+    return socketio('http://192.168.86.24:3333', {
+      query: {
+        user_id: user.id,
+      },
+    });
+  }, [user.id]);
+
+  useEffect(() => {
+    socket.on('newTestimonialComment', () => {
+      if (sermonId) {
+        api.get(`sermons/comments/${sermonId}`).then((response) => {
+          setComments(response.data);
+        });
+      }
+      if (testimonialId) {
+        api.get(`testimonials/comments/${testimonialId}`).then((response) => {
+          setComments(response.data);
+        });
+      }
+    });
+  }, [socket, sermonId, testimonialId]);
 
   return (
     <>

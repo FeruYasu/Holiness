@@ -1,5 +1,13 @@
-import React, { useCallback, useState, ReactText } from 'react';
+import React, {
+  useCallback,
+  useState,
+  ReactText,
+  useMemo,
+  useEffect,
+} from 'react';
 import Icon from 'react-native-vector-icons/Feather';
+
+import socketio from 'socket.io-client';
 
 import 'react-native-get-random-values';
 
@@ -97,6 +105,29 @@ const NewTestimonial: React.FC = () => {
         api.patch(`/testimonials/photo/${response.data.id}`, imageData);
       });
   }, [testimonial, testimonialTitle.name, imageData]);
+
+  const socket = useMemo(() => {
+    return socketio('http://192.168.86.24:3333', {
+      query: {
+        user_id: user.id,
+      },
+    });
+  }, [user.id]);
+
+  useEffect(() => {
+    socket.on('newTestimonialComment', () => {
+      if (sermonId) {
+        api.get(`sermons/comments/${sermonId}`).then((response) => {
+          setComments(response.data);
+        });
+      }
+      if (testimonialId) {
+        api.get(`testimonials/comments/${testimonialId}`).then((response) => {
+          setComments(response.data);
+        });
+      }
+    });
+  }, [socket, sermonId, testimonialId]);
 
   return (
     <>

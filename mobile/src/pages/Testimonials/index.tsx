@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import socketio from 'socket.io-client';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
@@ -21,10 +22,15 @@ export interface ITestimonial {
   id: string;
   title: string;
   emoji1: string[];
+  emoji2: string[];
+  emoji3: string[];
+  emoji4: string[];
+  emoji5: string[];
+  emoji6: string[];
 }
 
 const Testimonials: React.FC = () => {
-  const [testimonials, setTestimonials] = useState<ITestimonial[]>();
+  const [testimonials, setTestimonials] = useState<ITestimonial[]>([]);
   const [scrollEnabled, setScrollEnabled] = useState(true);
   const navigation = useNavigation();
 
@@ -81,6 +87,66 @@ const Testimonials: React.FC = () => {
   const handleNewTestimonial = useCallback(() => {
     navigation.navigate('NewTestimonial');
   }, [navigation]);
+
+  const socket = useMemo(() => {
+    return socketio('http://192.168.86.24:3333', {
+      query: {
+        user_id: user.id,
+      },
+    });
+  }, [user.id]);
+
+  useEffect(() => {
+    socket.on('newTestimonial', () => {
+      api.get('testimonials').then((response) => {
+        const data = response.data.map((info) => ({
+          ...info,
+          likeCounter: likeQuantity(
+            info.emoji1,
+            info.emoji2,
+            info.emoji3,
+            info.emoji4,
+            info.emoji5,
+            info.emoji6
+          ),
+        }));
+
+        setTestimonials(data);
+      });
+    });
+  }, [socket, likeQuantity]);
+
+  useEffect(() => {
+    socket.on('emojiChange', ({ emoji, id, userId }) => {
+      const foundTestimonialIndex = testimonials?.findIndex(
+        (testimonial) => testimonial.id === id
+      );
+      if (foundTestimonialIndex !== -1) {
+        const updatedTestimonial = [...testimonials];
+
+        if (emoji === 1) {
+          updatedTestimonial[foundTestimonialIndex].emoji1.push(userId);
+        }
+        if (emoji === 2) {
+          updatedTestimonial[foundTestimonialIndex].emoji2.push(userId);
+        }
+        if (emoji === 3) {
+          updatedTestimonial[foundTestimonialIndex].emoji3.push(userId);
+        }
+        if (emoji === 4) {
+          updatedTestimonial[foundTestimonialIndex].emoji4.push(userId);
+        }
+        if (emoji === 5) {
+          updatedTestimonial[foundTestimonialIndex].emoji5.push(userId);
+        }
+        if (emoji === 6) {
+          updatedTestimonial[foundTestimonialIndex].emoji6.push(userId);
+        }
+
+        setTestimonials(updatedTestimonial);
+      }
+    });
+  }, [socket, testimonials]);
 
   return (
     <Container>

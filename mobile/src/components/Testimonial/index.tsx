@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import socketio from 'socket.io-client';
 
 import roundLike from '../../assets/roundLike.png';
 import roundHeart from '../../assets/roundHeart.png';
