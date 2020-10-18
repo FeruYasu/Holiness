@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import Video from 'react-native-video';
 import ProgressBar from 'react-native-progress/Bar';
 
@@ -8,7 +8,9 @@ export const Container = styled.View`
   width: 100%;
   height: 100%;
   flex: 1;
-  background-color: #000;
+  background-color: ${(props) => props.theme.colors.background};
+  position: relative;
+  padding-top: 8px;
 `;
 
 export const VideoHeaderContainer = styled.View`
@@ -108,6 +110,14 @@ export const CommentButtonContainer = styled.View`
   padding: 0 16px 16px;
   flex-direction: row;
   align-items: center;
+
+  ${(props) =>
+    props.testimonial &&
+    css`
+      position: absolute;
+      bottom: -5px;
+      z-index: 10;
+    `}
 `;
 
 export const CommentInputContainer = styled.View`

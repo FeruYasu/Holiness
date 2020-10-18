@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 
 import roundLike from '../../assets/roundLike.png';
 import roundHeart from '../../assets/roundHeart.png';
@@ -8,6 +9,9 @@ import roundWow from '../../assets/roundWow.png';
 import roundHappy from '../../assets/roundHappy.png';
 import roundSad from '../../assets/roundSad.png';
 import roundAngry from '../../assets/roundAngry.png';
+
+import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 
 import {
   TestimonialContainer,
@@ -39,8 +43,6 @@ import {
   LikeContainer,
   Emoji,
 } from './styles';
-import { useAuth } from '../../hooks/auth';
-import api from '../../services/api';
 
 export interface Testimonial {
   id: string;
@@ -56,6 +58,7 @@ export interface Testimonial {
   emoji5: string[];
   emoji6: string[];
   ministry: { name: string };
+  comments: string[];
 }
 
 interface TestimonialProps {
@@ -82,6 +85,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
   const { user, theme } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
   const [showEmojis, setShowEmojis] = useState('');
+  const { navigate } = useNavigation();
 
   useEffect(() => {
     setTestimonial(data);
@@ -156,6 +160,10 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
     [testimonial, user.id]
   );
 
+  const handleComment = useCallback(() => {
+    navigate('TestimonialsComments', { testimonial });
+  }, [navigate, testimonial]);
+
   return (
     <TestimonialContainer>
       <HeaderContainer>
@@ -207,7 +215,11 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
           )}
         </EmojisContainer>
 
-        <CommentsText>7 comentários</CommentsText>
+        {data.comments.length > 0 && (
+          <CommentButton onPress={handleComment}>
+            <CommentsText>{data.comments.length} comentários</CommentsText>
+          </CommentButton>
+        )}
       </CommentsButton>
       <Separator />
 
@@ -287,7 +299,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ data }) => {
           </LikeButton>
         )}
 
-        <CommentButton>
+        <CommentButton onPress={handleComment}>
           <Icon
             name="message-square"
             size={18}

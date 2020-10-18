@@ -31,10 +31,11 @@ import {
 } from './styles';
 
 interface CommentsProps {
-  sermonId: string;
+  sermonId?: string;
+  testimonialId?: string;
 }
 
-const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
+const Comments: React.FC<CommentsProps> = ({ sermonId, testimonialId }) => {
   const { theme, user } = useAuth();
   const commentInputRef = useRef<TextInput>(null);
 
@@ -44,10 +45,17 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
   const [newComment, setNewComment] = useState();
 
   useEffect(() => {
-    api.get(`sermons/comments/${sermonId}`).then((response) => {
-      setComments(response.data);
-    });
-  }, [sermonId]);
+    if (sermonId) {
+      api.get(`sermons/comments/${sermonId}`).then((response) => {
+        setComments(response.data);
+      });
+    }
+    if (testimonialId) {
+      api.get(`testimonials/comments/${testimonialId}`).then((response) => {
+        setComments(response.data);
+      });
+    }
+  }, [sermonId, testimonialId]);
 
   const handleShowCommentInput = useCallback(() => {
     setReply('none');
@@ -81,14 +89,28 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
         });
       }
 
-      await api.put('sermons/comments', {
-        sermonId,
-        commentId: newCommentary.data.id,
-      });
+      if (sermonId) {
+        await api.put('sermons/comments', {
+          sermonId,
+          commentId: newCommentary.data.id,
+        });
 
-      api.get(`sermons/comments/${sermonId}`).then((response) => {
-        setComments(response.data);
-      });
+        api.get(`sermons/comments/${sermonId}`).then((response) => {
+          setComments(response.data);
+        });
+      }
+
+      if (testimonialId) {
+        await api.put('testimonials/comments', {
+          testimonialId,
+          commentId: newCommentary.data.id,
+        });
+
+        api.get(`testimonials/comments/${testimonialId}`).then((response) => {
+          setComments(response.data);
+        });
+      }
+
       setShowCommentInput(!showCommentInput);
     },
     [newComment, sermonId, showCommentInput]
@@ -97,7 +119,7 @@ const Comments: React.FC<CommentsProps> = ({ sermonId }) => {
   return (
     <>
       <Container>
-        <CommentButtonContainer>
+        <CommentButtonContainer testimonial={!!testimonialId}>
           <OwnerPicture source={{ uri: user.avatar_url }} />
           <CommentButton onPress={handleShowCommentInput}>
             <CommentButtonText>Comentar como {user.name}</CommentButtonText>
