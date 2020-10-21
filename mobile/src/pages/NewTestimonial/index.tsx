@@ -106,7 +106,9 @@ const NewTestimonial: React.FC = () => {
         ministry_id: 'ff250781-0f51-429c-bbfa-11d354c7a85c',
       })
       .then((response) => {
-        api.patch(`/testimonials/photo/${response.data.id}`, imageData);
+        if (imageData) {
+          api.patch(`/testimonials/photo/${response.data.id}`, imageData);
+        }
       });
   }, [testimonial, testimonialTitle.name, imageData]);
 

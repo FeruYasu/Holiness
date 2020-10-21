@@ -45,12 +45,15 @@ export const OrText = styled.Text`
   font-size: 12px;
 `;
 
-export const GoogleLogo = styled.Image``;
+export const GoogleLogo = styled.Image`
+  max-height: 42px;
+  max-width: 42px;
+`;
 
 export const GoogleButton = styled(BaseButton)`
   height: 46px;
   border-radius: 21px;
-  background-color: #bf2525;
+  background-color: #fff;
   align-items: center;
   justify-content: center;
   flex-direction: row;
@@ -62,7 +65,7 @@ export const GoogleButton = styled(BaseButton)`
 export const GoogleButtonText = styled.Text`
   font-weight: bold;
   font-size: 16px;
-  color: #fff;
+  color: #bf2525;
   margin-left: 20px;
 `;
 
@@ -83,4 +86,5 @@ export const CreateAccountButton = styled.TouchableOpacity``;
 export const CreateAccountButtonText = styled.Text`
   font-size: 16px;
   color: #bf2525;
+  padding-left: 5px;
 `;

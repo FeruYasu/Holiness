@@ -31,7 +31,6 @@ export const SermonContainer = styled.TouchableOpacity`
 export const SermonPhoto = styled.Image`
   background-color: rgba(0, 0, 0, 0.4);
   aspect-ratio: 1;
-  width: 100%;
 `;
 
 export const PreacherPicture = styled.Image`
@@ -74,7 +73,7 @@ export const TagsContainer = styled.View`
 `;
 
 export const Tag = styled.TouchableOpacity`
-  background-color: #dfdfdf;
+  background-color: ${(props) => props.theme.colors.tabBorder};
   margin-right: 16px;
   border-radius: 18px;
   padding: 6px;

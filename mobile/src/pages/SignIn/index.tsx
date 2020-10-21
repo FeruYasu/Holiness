@@ -5,8 +5,6 @@ import { Form } from '@unform/mobile';
 
 import { BorderlessButton } from 'react-native-gesture-handler';
 
-import Icon from 'react-native-vector-icons/Feather';
-
 import { FormHandles } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';

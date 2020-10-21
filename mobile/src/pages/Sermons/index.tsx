@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-community/picker';
 import api from '../../services/api';
 
+import { useAuth } from '../../hooks/auth';
+
 import Header from '../../components/Header';
 
 import {
@@ -49,6 +51,7 @@ const Sermons: React.FC = () => {
   const { navigate } = useNavigation();
   const [tags, setTags] = useState<Tag[]>([{ name: '' }]);
   const [tagFilter, setTagFilter] = useState<Filter>({ filter: '' });
+  const { theme } = useAuth();
 
   useEffect(() => {
     api.get('sermons').then((response) => {
@@ -60,17 +63,22 @@ const Sermons: React.FC = () => {
     });
   }, []);
 
-  const handleFilterChange = useCallback((itemValue) => {
-    api
-      .get('sermons', {
-        params: {
-          tag: itemValue,
-        },
-      })
-      .then((response) => {
-        setSermons(response.data);
-      });
-  }, []);
+  const handleFilterChange = useCallback(
+    (itemValue) => {
+      console.log(sermons.tags);
+
+      api
+        .get('sermons', {
+          params: {
+            tag: itemValue,
+          },
+        })
+        .then((response) => {
+          setSermons(response.data);
+        });
+    },
+    [sermons]
+  );
 
   return (
     <Container>
@@ -89,6 +97,7 @@ const Sermons: React.FC = () => {
                   width: 200,
                   marginRight: 16,
                   textAlign: 'right',
+                  color: theme.colors.text,
                 }}
                 onValueChange={(itemValue) => {
                   setTagFilter({ filter: itemValue });
@@ -122,7 +131,10 @@ const Sermons: React.FC = () => {
                 </TextContent>
               </InfoContainer>
 
-              <SermonPhoto source={{ uri: sermon.photoUrl }} />
+              <SermonPhoto
+                source={{ uri: sermon.photoUrl }}
+                styles={{ aspectRatio: 3 / 2 }}
+              />
             </SermonContainer>
             <TagsContainer>
               {sermon.tags.map((tag) => (

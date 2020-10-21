@@ -88,7 +88,7 @@ const HomeRoutes: React.FC = () => {
       />
       <Tab.Screen
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Avisos',
           tabBarIcon: ({ size, focused }) => {
             return (
               <Icon
