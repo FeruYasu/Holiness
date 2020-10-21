@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components/native';
 import Video from 'react-native-video';
 import ProgressBar from 'react-native-progress/Bar';
 
+import { getBottomSpace } from 'react-native-iphone-x-helper';
+
 import { Dimensions } from 'react-native';
 
 export const Container = styled.View`
@@ -110,6 +112,8 @@ export const CommentButtonContainer = styled.View`
   padding: 0 16px 16px;
   flex-direction: row;
   align-items: center;
+  padding-bottom: ${getBottomSpace() - 8}px;
+
 
   ${(props) =>
     props.testimonial &&
@@ -127,7 +131,8 @@ export const CommentInputContainer = styled.View`
   bottom: 0;
   left: 0;
   padding: 0 16px;
-
+  padding-bottom: ${getBottomSpace() - 10 }px;
+  padding-top: ${ 10 }px;
   background-color: ${(props) => props.theme.colors.background};
 `;
 
@@ -136,7 +141,8 @@ export const CommentInput = styled.TextInput`
   flex: 1;
 `;
 
-export const CommentButton = styled.TouchableOpacity``;
+export const CommentButton = styled.TouchableOpacity`
+`;
 
 export const CommentButtonText = styled.Text`
   color: ${(props) => props.theme.colors.greyText};

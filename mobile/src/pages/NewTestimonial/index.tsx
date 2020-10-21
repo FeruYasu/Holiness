@@ -48,7 +48,7 @@ interface Filter {
 
 const NewTestimonial: React.FC = () => {
   const navigation = useNavigation();
-  const [testimonial, setNewTestimonial] = useState('Testemunho');
+  const [testimonial, setNewTestimonial] = useState('');
   const [testimonialImage, setTestimonialImage] = useState();
   const [title, setTitle] = useState([
     { name: 'Testemunho' },
@@ -58,7 +58,7 @@ const NewTestimonial: React.FC = () => {
   const [imageData, setImageData] = useState();
 
   const [testimonialTitle, setTestimonialTitle] = useState<Filter>({
-    name: '',
+    name: 'Testemunho',
   });
 
   const { theme, user } = useAuth();
@@ -169,7 +169,7 @@ const NewTestimonial: React.FC = () => {
             <ColumnContainer>
               <RowContainer>
                 <Name>{user.name}</Name>
-                <Picker
+                {/* <Picker
                   selectedValue={testimonialTitle.name}
                   style={{
                     height: 20,
@@ -182,7 +182,7 @@ const NewTestimonial: React.FC = () => {
                   {title.map((t) => (
                     <Picker.Item key={t.name} label={t.name} value={t.name} />
                   ))}
-                </Picker>
+                </Picker> */}
               </RowContainer>
             </ColumnContainer>
           </TestimonialOwnerContainer>
@@ -192,6 +192,7 @@ const NewTestimonial: React.FC = () => {
             onChangeText={(text) => {
               setNewTestimonial(text);
             }}
+            placeholderTextColor={theme.colors.greyText}
           />
         </ContentContainer>
         <TestimonialImage source={{ uri: testimonialImage }} />

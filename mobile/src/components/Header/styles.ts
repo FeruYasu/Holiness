@@ -5,7 +5,8 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   elevation: 8;
 `;
 

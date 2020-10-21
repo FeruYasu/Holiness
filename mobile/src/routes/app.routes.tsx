@@ -3,6 +3,8 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
+
 
 import Icon from 'react-native-vector-icons/Feather';
 import { useAuth } from '../hooks/auth';
@@ -31,16 +33,16 @@ const HomeRoutes: React.FC = () => {
     <Tab.Navigator
       tabBarOptions={{
         style: {
-          height: 50,
+          height: getBottomSpace() + 40,
           backgroundColor: theme.colors.headerBackground,
           borderTopWidth: 1,
           borderTopColor: theme.colors.tabBorder,
-          paddingBottom: 4,
+          paddingBottom: getBottomSpace() - 10 ,
         },
         iconStyle: {
           flex: 0,
           width: 20,
-          height: 20,
+          height: 24,
         },
         labelStyle: {
           fontFamily: 'SourceSansPro-Regular',

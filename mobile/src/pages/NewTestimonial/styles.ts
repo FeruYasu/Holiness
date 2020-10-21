@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components/native';
+import { getStatusBarHeight, getBottomSpace } from 'react-native-iphone-x-helper';
 
 interface buttonProps {
   isDisabled: boolean;
@@ -17,6 +18,8 @@ export const Header = styled.View`
   align-items: center;
   padding: 16px 8px;
   elevation: 8;
+;
+
 `;
 
 export const LeftContainer = styled.View`
@@ -30,6 +33,7 @@ export const Title = styled.Text`
   font-family: 'SourceSansPro-Regular';
   font-size: 20px;
   margin-left: 8px;
+  color: ${(props) => props.theme.colors.darkerGreyText};
 `;
 
 export const PublishButton = styled.TouchableOpacity<buttonProps>`
@@ -46,6 +50,7 @@ export const PublishButtonText = styled.Text`
   font-family: 'SourceSansPro-SemiBold';
   font-size: 20px;
   margin-right: 8px;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const ContentContainer = styled.View`
@@ -84,6 +89,7 @@ export const Name = styled.Text`
 export const TestimonialInput = styled.TextInput`
   padding-left: 8px;
   font-size: 20px;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const TestimonialImage = styled.Image`
@@ -94,6 +100,7 @@ export const TestimonialImage = styled.Image`
 export const ButtonsContainer = styled.View`
   flex-direction: column;
   padding: 8px;
+  padding-bottom: ${getBottomSpace() + 8}px;
 `;
 
 export const PhotoButton = styled.TouchableOpacity`
@@ -106,4 +113,5 @@ export const PhotoButtonText = styled.Text`
   margin-left: 8px;
   font-size: 16px;
   font-family: 'SourceSansPro-SemiBold';
+  color: ${(props) => props.theme.colors.text};
 `;

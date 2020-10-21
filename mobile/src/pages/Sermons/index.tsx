@@ -90,7 +90,7 @@ const Sermons: React.FC = () => {
             <TitleContainer>
               <MainTitle>Pregações</MainTitle>
 
-              <Picker
+              {/* <Picker
                 selectedValue={tagFilter.filter}
                 style={{
                   marginTop: 16,
@@ -111,7 +111,7 @@ const Sermons: React.FC = () => {
                     value={tag.name}
                   />
                 ))}
-              </Picker>
+              </Picker> */}
             </TitleContainer>
           </>
         }

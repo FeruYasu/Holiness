@@ -25,6 +25,7 @@
 		97C3F3EE62DC4A08B3B0C519 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BBE19FF71414A21978402F8 /* SourceSansPro-Light.ttf */; };
 		A475E9E9C14349199767D482 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A43DAB232E1040F2969717E1 /* SourceSansPro-Bold.ttf */; };
 		C3043F84086F4083AEFCE935 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B40420701F5249B7A37D96CC /* SourceSansPro-Regular.ttf */; };
+		CB60CE72253FF04200BC6F87 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = CB60CE71253FF04200BC6F87 /* main.jsbundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		0078C3F9CC4F4E5FB6EB44EE /* NEXTART-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NEXTART-Thin.otf"; path = "../assets/fonts/NEXTART-Thin.otf"; sourceTree = "<group>"; };
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* iehcappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iehcappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* iehcappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iehcappTests.m; sourceTree = "<group>"; };
@@ -102,6 +102,7 @@
 		B16C4A4514A5E1F1D81D0162 /* Pods-iehcapp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iehcapp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-iehcapp-tvOS/Pods-iehcapp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B40420701F5249B7A37D96CC /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Regular.ttf"; path = "../assets/fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		B4E7A4157DE5F8D98C42634E /* Pods-iehcapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iehcapp.debug.xcconfig"; path = "Target Support Files/Pods-iehcapp/Pods-iehcapp.debug.xcconfig"; sourceTree = "<group>"; };
+		CB60CE71253FF04200BC6F87 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		D9548FF959E0F72133C09155 /* libPods-iehcapp-iehcappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iehcapp-iehcappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E46B0C8F8328E837D6FACB63 /* Pods-iehcapp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iehcapp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-iehcapp-tvOSTests/Pods-iehcapp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA7403DA8A3C4AC99F3E647E /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -167,7 +168,7 @@
 		13B07FAE1A68108700A75B9A /* iehcapp */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				CB60CE71253FF04200BC6F87 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -380,6 +381,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 7MGFRWXX48;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -433,6 +435,7 @@
 				97C3F3EE62DC4A08B3B0C519 /* SourceSansPro-Light.ttf in Resources */,
 				C3043F84086F4083AEFCE935 /* SourceSansPro-Regular.ttf in Resources */,
 				8E35119BEA8C43129F19FFBA /* SourceSansPro-SemiBold.ttf in Resources */,
+				CB60CE72253FF04200BC6F87 /* main.jsbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,15 +818,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7MGFRWXX48;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = iehcapp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.appreact.iehcapp;
 				PRODUCT_NAME = iehcapp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -838,14 +843,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7MGFRWXX48;
 				INFOPLIST_FILE = iehcapp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.appreact.iehcapp;
 				PRODUCT_NAME = iehcapp;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1009,7 +1016,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -1062,7 +1069,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
