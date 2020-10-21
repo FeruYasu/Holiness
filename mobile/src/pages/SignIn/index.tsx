@@ -18,6 +18,7 @@ import {
   Container,
   FormContainer,
   LogoImage,
+  GoogleLogo,
   GoogleButton,
   GoogleButtonText,
   ForgotText,
@@ -31,6 +32,8 @@ import {
 } from './styles';
 
 import logo from '../../assets/logo.png';
+import googleLogo from '../../assets/google-logo.png';
+
 
 import Input from '../../components/Input';
 
@@ -126,7 +129,7 @@ const SignIn: React.FC = () => {
           </SignInButton>
           <OrText>ou</OrText>
           <GoogleButton>
-            <Icon name="github" size={26} color="#fff" />
+             <GoogleLogo source={googleLogo} />
             <GoogleButtonText>Continuar com Google</GoogleButtonText>
           </GoogleButton>
         </ButtonsContainer>

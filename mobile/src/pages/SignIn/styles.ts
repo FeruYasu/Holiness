@@ -45,6 +45,8 @@ export const OrText = styled.Text`
   font-size: 12px;
 `;
 
+export const GoogleLogo = styled.Image``;
+
 export const GoogleButton = styled(BaseButton)`
   height: 46px;
   border-radius: 21px;

@@ -126,7 +126,7 @@ const Comments: React.FC<CommentsProps> = ({ sermonId, testimonialId }) => {
   );
 
   const socket = useMemo(() => {
-    return socketio('http://192.168.86.24:3333', {
+    return socketio('http://157.245.249.184', {
       query: {
         user_id: user.id,
       },

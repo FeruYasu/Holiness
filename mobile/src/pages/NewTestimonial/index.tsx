@@ -70,6 +70,10 @@ const NewTestimonial: React.FC = () => {
         cancelButtonTitle: 'Cancelar',
         takePhotoButtonTitle: 'Usar câmera',
         chooseFromLibraryButtonTitle: 'Escolher da galeria',
+        maxWidth: 1000,
+        maxHeight: 600,
+        quality: 1,
+        allowsEditing: true,
       },
       (response) => {
         if (response.didCancel) {
@@ -99,7 +103,7 @@ const NewTestimonial: React.FC = () => {
       .post('/testimonials', {
         title: testimonialTitle.name,
         content: testimonial,
-        ministry_id: 'b515040d-70a4-4efb-ade8-48c277273e1f',
+        ministry_id: 'ff250781-0f51-429c-bbfa-11d354c7a85c',
       })
       .then((response) => {
         api.patch(`/testimonials/photo/${response.data.id}`, imageData);
@@ -107,27 +111,27 @@ const NewTestimonial: React.FC = () => {
   }, [testimonial, testimonialTitle.name, imageData]);
 
   const socket = useMemo(() => {
-    return socketio('http://192.168.86.24:3333', {
+    return socketio('http://157.245.249.184', {
       query: {
         user_id: user.id,
       },
     });
   }, [user.id]);
 
-  useEffect(() => {
-    socket.on('newTestimonialComment', () => {
-      if (sermonId) {
-        api.get(`sermons/comments/${sermonId}`).then((response) => {
-          setComments(response.data);
-        });
-      }
-      if (testimonialId) {
-        api.get(`testimonials/comments/${testimonialId}`).then((response) => {
-          setComments(response.data);
-        });
-      }
-    });
-  }, [socket, sermonId, testimonialId]);
+  // useEffect(() => {
+  //   socket.on('newTestimonialComment', () => {
+  //     if (sermonId) {
+  //       api.get(`sermons/comments/${sermonId}`).then((response) => {
+  //         setComments(response.data);
+  //       });
+  //     }
+  //     if (testimonialId) {
+  //       api.get(`testimonials/comments/${testimonialId}`).then((response) => {
+  //         setComments(response.data);
+  //       });
+  //     }
+  //   });
+  // }, [socket, sermonId, testimonialId]);
 
   return (
     <>

@@ -96,6 +96,10 @@ const Profile: React.FC = () => {
         cancelButtonTitle: 'Cancelar',
         takePhotoButtonTitle: 'Usar câmera',
         chooseFromLibraryButtonTitle: 'Escolher da galeria',
+        maxWidth: 200,
+        maxHeight: 200,
+        quality: 1,
+        allowsEditing: true,
       },
       (response) => {
         if (response.didCancel) {
